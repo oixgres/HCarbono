@@ -1,0 +1,17 @@
+/* css propios */
+.page-settings{
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.navbar-settings{
+  /*background-color: rgb(91,155,213);*/
+}
+
+.button-settings{
+  /*background-color: rgb(91,155,213);*/
+  border: 1px solid rgba(0, 0, 0, 2.5);
+}
+/* css modificados */
+.navbar-brand{
+  color: white;
+}
