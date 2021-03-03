@@ -18,12 +18,21 @@
   <body class="page-settings">
 
     <!-- Navegador de la pagina -->
-    <nav class="navbar navbar-expand bg-primary">
+      <nav class="navbar navbar-expand navbar-settings bg-primary">
         <a class="navbar-brand" href="#">NOMBRE-SISTEMA</a>
-        <a class="btn btn-primary button-settings mr-2" href="prueba.html">Iniciar Sesion</a>
-        <a class="btn btn-primary button-settings mr-5" href="prueba.html">Registrarse</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+          </ul>
+          <form class="form-inline my-2 my-lg-0" action="" method="post">
+            <p>Usuario</p>
+            <input class="mr-1" type="text" placeholder="Usuario">
+            <p>Contraseña</p>
+            <input class="mr-1" type="password" placeholder="Contraseña">
+            <button class="btn btn-primary button-settings ml-1" type="submit">Iniciar Sesion</button>
+          </form>
 
-
-    </nav>
+          <a class="btn btn-primary button-settings ml-2" href="prueba.html">Registrarse</a>
+        </div>
+      </nav>
   </body>
 </html>
