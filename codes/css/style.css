@@ -17,9 +17,21 @@ p{
 
 .button-settings{
   /*background-color: rgb(91,155,213);*/
+  height: 30px;
+  width: 100px;
   border: 1px solid rgba(0, 0, 0, 2.5);
+  margin-left: 1rem;
+}
+
+.hide-overflow{
+  overflow: hidden;
 }
 /* css modificados */
 .navbar-brand{
   color: white;
+}
+
+.auto-width{
+  height: 100%;
+  width: auto;
 }
