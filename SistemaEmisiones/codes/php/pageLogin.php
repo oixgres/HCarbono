@@ -15,7 +15,7 @@ if($connection)
 
   if($nr == 1)
   {
-    header("Location: prueba.html");
+    header("Location: ../html/prueba.html");
     exit;
   }
   else
