@@ -1,3 +1,7 @@
+h1{
+  color: rgb(25,96,178);
+}
+
 p{
   color: white;
   margin-left: 1rem;
@@ -34,4 +38,13 @@ p{
 .auto-width{
   height: 100%;
   width: auto;
+}
+
+.form-small{
+  min-width: 325px;
+  max-width: 500px;
+}
+
+.col-small{
+  width: 175px;
 }
