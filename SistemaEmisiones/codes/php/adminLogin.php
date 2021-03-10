@@ -9,13 +9,12 @@ if($connection)
   $name = $_POST["username"];
   $pass = $_POST["userpass"];
 
-  //$query = mysqli_query($connection, "SELECT * FROM Admisnistrador WHERE Username = '".$name."' and Password = '".$pass"'");
   $query = mysqli_query($connection, "SELECT * FROM Administrador WHERE Username = '".$name."' and Password = '".$pass."'");
   $nr = mysqli_num_rows($query);
 
   if($nr == 1)
   {
-    header("Location: ../html/prueba.html");
+    header("Location: adminPage.php");
     exit;
   }
   else
