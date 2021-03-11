@@ -24,7 +24,7 @@ CREATE TABLE Usuario (
   Ciudad VARCHAR(20) NOT NULL,
   Correo VARCHAR(45) NOT NULL,
   Telefono VARCHAR(45) NOT NULL,
-  Aprobado BOOLEAN,
+  Aprobado VARCHAR(45) NOT NULL DEFAULT 'No Aprobado',
   Empresa_idEmpresa INT,
   FOREIGN KEY (Empresa_idEmpresa)
   REFERENCES Empresa(idEmpresa),

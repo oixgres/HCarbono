@@ -15,7 +15,7 @@ if($connection)
   if($nr == 1)
   {
     header("Location: adminPage.php");
-    exit;
+    exit();
   }
   else
   {

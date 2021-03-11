@@ -20,20 +20,20 @@
         <a class="btn btn-primary btn-sm button-settings "href="../../index.html">Regresar</a>
       </div>
     </nav>
-
+    <!-- 29:13 https://www.youtube.com/watch?v=3xRMUDC74Cw&ab_channel=CleverTechie -->
     <section>
       <?php
-        include "../php/dataBaseLogin.php";
+        require_once "processCRUD.php";
+        include "dataBaseLogin.php";
         $connection = mysqli_connect($host, $user, $password, $bd);
         $result = mysqli_query($connection, "SELECT * FROM Usuario");
       ?>
 
-      <div class="ms-5 d-flex justify-content-center">
+      <div class="mx-1 d-flex justify-content-center">
         <table class="table">
           <!--Cabeza de la tabla-->
           <thead>
             <tr>
-              <th>ID</th>
               <th>Usuario</th>
               <th>Contraseña</th>
               <th>Nombre</th>
@@ -42,12 +42,31 @@
               <th>Telefono</th>
               <th>Estado</th>
               <th>Empresa</th>
+              <th>Accion</th>
             </tr>
           </thead>
 
           <?php while($row = mysqli_fetch_assoc($result)): ?>
             <tr>
-              <td><?php echo $row['idUsuario']; ?></td>
+              <td><?php echo $row['Username']; ?></td>
+              <td><?php echo $row['Password']; ?></td>
+              <td><?php echo $row['Nombre']; ?></td>
+              <td><?php echo $row['Ciudad']; ?></td>
+              <td><?php echo $row['Correo']; ?></td>
+              <td><?php echo $row['Telefono']; ?></td>
+              <td><?php echo $row['Aprobado']; ?></td>
+              <td><?php echo $row['Empresa_idEmpresa']; ?></td>
+              <td>
+                <a
+                  href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
+                  class="btn btn-info">Edit
+                </a>
+                <a
+                  href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
+                  class="btn btn-danger">Del
+                </a>
+
+              </td>
             </tr>
           <?php endwhile; ?>
         </table>
