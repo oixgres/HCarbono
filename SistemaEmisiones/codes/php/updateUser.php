@@ -26,7 +26,10 @@
       <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
 
       <div class="container-fluid  mt-5">
-        <form class="" action="../php/registration.php" method="post">
+        <form class="" action="updateUserDB.php" method="post">
+
+          <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
+
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
               <label for="userSection" class="">Usuario:</label>
@@ -52,11 +55,10 @@
                 class="form-control form-control-sm"
                 id="passSection"
                 name="pass"
-                value="Chinocochino"
+                value="<?php echo $_SESSION['Password']; ?>"
                 >
             </div>
           </div>
-
 
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
@@ -78,7 +80,13 @@
               <label for="companySection" class="">Compañia:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="companySection" name="company">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="companySection"
+                name="company"
+                value="<?php echo $_SESSION['Empresa']; ?>"
+              >
             </div>
           </div>
 
@@ -87,7 +95,13 @@
               <label for="citySection" class="">Ciudad:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="citySection" name="city">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="citySection"
+                name="city"
+                value="<?php echo $_SESSION['Ciudad']; ?>"
+              >
             </div>
           </div>
 
@@ -96,7 +110,13 @@
               <label for="emailSection" class="">Correo de contacto:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="emailSection" name="email">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="emailSection"
+                name="email"
+                value="<?php echo $_SESSION['Correo']; ?>"
+              >
             </div>
           </div>
 
@@ -105,7 +125,13 @@
               <label for="phoneSection" class="">Telefono:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="phoneSection" name="phone">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="phoneSection"
+                name="phone"
+                value="<?php echo $_SESSION['Telefono']; ?>"
+              >
             </div>
           </div>
 
@@ -116,13 +142,20 @@
             <div class="col-auto form-small">
               <!--<input type="text" class="form-control form-control-sm" id="statusSection" name="name">-->
               <div class="input-group-text">
-                  <input class="form-check-input mt-0" type="checkbox">
+                <input
+                  class="form-check-input mt-0"
+                  type="checkbox"
+                  value="good"
+                  name="admitted"
+                  <?php if($_SESSION['Aprobado'] != "No Aprobado") ?>
+                    checked
+                >
               </div>
             </div>
           </div>
 
           <div class="mt-5 ms-5 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
           </div>
         </form>
       </div>

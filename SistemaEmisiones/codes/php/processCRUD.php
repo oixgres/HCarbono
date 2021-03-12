@@ -18,13 +18,9 @@ if($connection)
     $result = mysqli_query($connection, "SELECT * FROM Usuario WHERE idUsuario='".$id."'");
 
     if(count($result) == 1)
-    {/*
-      $username = $row['Username'];
-      $pass = $row['Password'];
-      $city = $row[]
-      */
-
+    {
       $row = $result->fetch_array();
+      $_SESSION['Id']=$row['idUsuario'];
       $_SESSION['Username']=$row['Username'];
       $_SESSION['Password']=$row['Password'];
       $_SESSION['Nombre']=$row['Nombre'];
@@ -33,8 +29,7 @@ if($connection)
       $_SESSION['Telefono']=$row['Telefono'];
       $_SESSION['Aprobado']=$row['Aprobado'];
       $_SESSION['Empresa']=$row['Empresa_idEmpresa'];
-      //echo $_SESSION['Nombre'];
-      header("Location: editUser.php");
+      header("Location: updateUser.php");
       exit();
     }
   }
