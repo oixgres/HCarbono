@@ -28,7 +28,7 @@ if($connection)
       $_SESSION['Correo']=$row['Correo'];
       $_SESSION['Telefono']=$row['Telefono'];
       $_SESSION['Aprobado']=$row['Aprobado'];
-      $_SESSION['Empresa']=$row['Empresa_idEmpresa'];
+      $_SESSION['IdEmpresa']=$row['Empresa_idEmpresa'];
       header("Location: updateUser.php");
       exit();
     }
@@ -36,6 +36,6 @@ if($connection)
 }
 else
 {
-  die("No hay conexion: ".mysqli_connect_error());
+  echo "No hay conexion";
 }
 ?>

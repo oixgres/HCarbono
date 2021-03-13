@@ -28,8 +28,8 @@
         $connection = mysqli_connect($host, $user, $password, $bd);
         $result = mysqli_query($connection, "SELECT * FROM Usuario");
       ?>
-
-      <div class="mx-1 d-flex justify-content-center">
+      <!-- Tabla para mostrar los usuarios registrados -->
+      <div class="mx-1 d-flex justify-content-center table-responsive">
         <table class="table">
           <!--Cabeza de la tabla-->
           <thead>
@@ -55,17 +55,26 @@
               <td><?php echo $row['Correo']; ?></td>
               <td><?php echo $row['Telefono']; ?></td>
               <td><?php echo $row['Aprobado']; ?></td>
-              <td><?php echo $row['Empresa_idEmpresa']; ?></td>
+
+              <!-- Obtenemos el nombre de la empresa -->
+              <?php
+                $res_company = mysqli_query($connection, "SELECT Nombre FROM Empresa WHERE idEmpresa='".$row['Empresa_idEmpresa']."'");
+                $res_company = $res_company->fetch_array();
+                $company = $res_company[0];
+              ?>
+              <td><?php echo  $company?></td>
               <td>
+                <!-- Redireccion a pagina para editar el usuaro -->
                 <a
                   href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
                   class="btn btn-info">Edit
                 </a>
+                <!-- Se elimina el usuario en automatico -->
+                <!-- AGREGAR WARN ANTES DE ELIMINAR -->
                 <a
                   href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
                   class="btn btn-danger">Del
                 </a>
-
               </td>
             </tr>
           <?php endwhile; ?>

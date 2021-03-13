@@ -15,8 +15,8 @@ if ($connection)
   if(!empty($name) || !empty($company) || !empty($city) || !empty($email) || !empty($phone))
   {
     /*Verificamos que no se repita la empresa*/
-    $query = "SELECT * FROM Empresa WHERE Nombre = '".$company."'";
-    $res_query = mysqli_connect($connection, $query);
+    $query = "SELECT * FROM Empresa WHERE Nombre='".$company."'";
+    $res_query = mysqli_query($connection, $query);
     $nr = mysqli_num_rows($res_query);
 
     /*Si no existe la empresa la registramos*/

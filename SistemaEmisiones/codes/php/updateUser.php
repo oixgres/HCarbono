@@ -29,6 +29,15 @@
         <form class="" action="updateUserDB.php" method="post">
 
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
+          <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
+          <?php
+            include "dataBaseLogin.php";
+
+            $connection = mysqli_connect($host, $user, $password, $bd);
+            $query = mysqli_query($connection, "SELECT Nombre FROM Empresa WHERE idEmpresa='".$_SESSION['IdEmpresa']."'");
+            $query = $query->fetch_array();
+            $company = $query[0];
+          ?>
 
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
@@ -85,7 +94,7 @@
                 class="form-control form-control-sm"
                 id="companySection"
                 name="company"
-                value="<?php echo $_SESSION['Empresa']; ?>"
+                value="<?php echo $company; ?>"
               >
             </div>
           </div>
