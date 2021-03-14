@@ -29,9 +29,25 @@ if($connection)
       $_SESSION['Telefono']=$row['Telefono'];
       $_SESSION['Aprobado']=$row['Aprobado'];
       $_SESSION['IdEmpresa']=$row['Empresa_idEmpresa'];
+      $_SESSION['Button'] = "Update";
       header("Location: updateUser.php");
       exit();
     }
+  }
+
+  if(isset($_GET['create']))
+  {
+    $_SESSION['Username']=NULL;
+    $_SESSION['Password']=NULL;
+    $_SESSION['Nombre']=NULL;
+    $_SESSION['Ciudad']=NULL;
+    $_SESSION['Correo']=NULL;
+    $_SESSION['Telefono']=NULL;
+    $_SESSION['Aprobado']=NULL;
+    $_SESSION['IdEmpresa']=NULL;
+    $_SESSION['Button'] = "Create";
+    header("Location: updateUser.php");
+    exit();
   }
 }
 else

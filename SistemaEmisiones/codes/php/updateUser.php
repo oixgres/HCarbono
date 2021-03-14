@@ -18,7 +18,7 @@
         <a class="navbar-brand" href="#">SISTEMA</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-primary btn-sm button-settings "href="../../index.html">Regresar</a>
+        <a class="btn btn-primary btn-sm button-settings "href="adminPage.php">Regresar</a>
       </div>
     </nav>
 
@@ -30,6 +30,7 @@
 
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
+          <input type="hidden" name="operation" value="<?php echo $_SESSION['Button'] ?>">
           <?php
             include "dataBaseLogin.php";
 
@@ -156,15 +157,16 @@
                   type="checkbox"
                   value="good"
                   name="admitted"
-                  <?php if($_SESSION['Aprobado'] != "No Aprobado") ?>
+                  <?php if($_SESSION['Aprobado'] != "No Aprobado"): ?>
                     checked
+                  <?php endif; ?>
                 >
               </div>
             </div>
           </div>
 
           <div class="mt-5 ms-5 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button type="submit" class="btn btn-primary"><?php echo $_SESSION['Button']; ?></button>
           </div>
         </form>
       </div>

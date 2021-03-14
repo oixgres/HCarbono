@@ -29,7 +29,8 @@
         $result = mysqli_query($connection, "SELECT * FROM Usuario");
       ?>
       <!-- Tabla para mostrar los usuarios registrados -->
-      <div class="mx-1 d-flex justify-content-center table-responsive">
+      <!-- <div class="mx-1 d-flex justify-content-center table-responsive"> -->
+      <div class="mx-1 table-responsive">
         <table class="table">
           <!--Cabeza de la tabla-->
           <thead>
@@ -67,13 +68,13 @@
                 <!-- Redireccion a pagina para editar el usuaro -->
                 <a
                   href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
-                  class="btn btn-info">Edit
+                  class="btn btn-info">Editar
                 </a>
                 <!-- Se elimina el usuario en automatico -->
                 <!-- AGREGAR WARN ANTES DE ELIMINAR -->
                 <a
                   href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
-                  class="btn btn-danger">Del
+                  class="btn btn-danger">Borrar
                 </a>
               </td>
             </tr>
@@ -81,5 +82,13 @@
         </table>
       </div>
     </section>
+
+    <!-- Boton para crear usuarios -->
+    <div class="d-grid d-md-flex justify-content-md-end">
+      <a
+        href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
+        class="btn btn-info button-small mt-5 me-5">Nuevo
+      </a>
+    </div>
   </body>
 </html>
