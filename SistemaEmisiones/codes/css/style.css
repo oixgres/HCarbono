@@ -3,10 +3,11 @@ h1{
 }
 
 p{
-  color: white;
+  color: black;
   margin-left: 1rem;
   margin-top: 1rem;
-  margin-right: 0.5rem
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* css propios */
@@ -51,4 +52,14 @@ p{
 
 .col-small{
   width: 175px;
+}
+
+.carousel-config{
+  max-height: 400px;
+  display:flex;
+  align-items:center;
+}
+
+.card-config{
+  border: none;
 }
