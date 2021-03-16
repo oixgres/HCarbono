@@ -2,12 +2,20 @@ h1{
   color: rgb(25,96,178);
 }
 
+h2{
+  color: rgb(25,96,178);
+  font-size: 25px;
+  padding: 1rem;
+}
+
 p{
   color: black;
   margin-left: 1rem;
   margin-top: 1rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  align: justify;
+  text-align: justify;
 }
 
 /* css propios */
@@ -55,11 +63,19 @@ p{
 }
 
 .carousel-config{
-  max-height: 400px;
+  height: 400px;
   display:flex;
   align-items:center;
 }
 
+.carousel-items-config{
+  min-height: 400px;
+  height: auto;
+  width: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
 .card-config{
-  border: none;
+  min-width: 15rem;
 }
