@@ -11,7 +11,7 @@ if($connection)
 
   /*Buscamos si existe usuario*/
   $query = mysqli_query($connection, "SELECT * From Usuario WHERE Username='".$name."' and Password='".$pass."'");
-  $hr = mysqli_num_rows($query);
+  $nr = mysqli_num_rows($query);
 
   if($nr == 1)
   {
