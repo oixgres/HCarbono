@@ -20,7 +20,7 @@
         <a class="btn btn-primary btn-sm button-settings "href="../../index.html">Regresar</a>
       </div>
     </nav>
-    <!-- 29:13 https://www.youtube.com/watch?v=3xRMUDC74Cw&ab_channel=CleverTechie -->
+    
     <section>
       <?php
         require_once "processCRUD.php";

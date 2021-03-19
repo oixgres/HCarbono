@@ -44,4 +44,28 @@ CREATE TABLE Administrador (
   PRIMARY KEY (idAdministrador)
   ) ;
 
+-- -----------------------------------------------------
+-- Niveles Emisiones
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS Estadisticas;
+CREATE TABLE Estadisticas(
+  idEmisiones INT NOT NULL AUTO_INCREMENT,
+  Fecha DATE NOT NULL,
+  Humedad INT,
+  Temperatura INT,
+  CO INT,
+  CO2 INT,
+  O2 INT,
+  Velocidad INT,
+  Usuario_idUsuario INT,
+  Empresa_idEmpresa INT,
+  FOREIGN KEY (Usuario_idUsuario)
+  REFERENCES Usuario(idUsuario),
+  FOREIGN KEY (Empresa_idEmpresa)
+  REFERENCES Empresa(idEmpresa),
+  PRIMARY KEY (idEmisiones)
+) ;
+
+ALTER TABLE Estadisticas AUTO_INCREMENT=1000;
+
 SET FOREIGN_KEY_CHECKS = 1;

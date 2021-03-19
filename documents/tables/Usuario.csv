@@ -1,0 +1,10 @@
+﻿idUsuario,Username,Password,Nombre,Ciudad,Correo,Telefono,Aprobado,Empresa_idEmpresa
+1000,a1252816,1234,Sergio Guerra,TIJUANA,axmoroigres@gmail.com,+526643060042,Aprobado,1000
+1011,Luchita77,1234,DoÃ±a Lucha,CDMX,lucha@hotmail.com,6647777777,No Aprobado,1012
+1012,Doncito,1234,Don Lucha,CDMX,donlucha@hotmail.com,6647777778,Aprobado,1010
+1013,Paco,1234,Veronica,Tijuana,escuelita@hotmail.com,6228218,Aprobado,1012
+1015,a1252818,1234,Pepe,TIJUANA,pepes@gmail.com,+526643060042,Aprobado,1000
+1016,1252819,1234,Sergio Enrique Guerra Cervantes,Tijuana,a1252819@uabc.edu.mx,6643060042,Aprobado,1014
+1017,a1252819,a,a,a,a,a,Aprobado,1015
+1018,,,Omar Eduardo,Mexicali,omar@uabc.edu.mx,6228219,No Aprobado,1016
+1019,,,SergioCel,Tijuas,correoPrueba@gmail.com,6641087777,No Aprobado,1017

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include "dataBaseLogin.php";
 
 $connection = mysqli_connect($host, $user, $password, $bd);
@@ -15,7 +17,13 @@ if($connection)
 
   if($nr == 1)
   {
-    header("Location: ../html/userPage.html");
+    /* Si existe el usuario obtenemos el ID y lo guardamos*/
+    $query = "SELECT idUsuario FROM Usuario WHERE Username = '".$name."'";
+    $res_query = mysqli_query($connection, $query);
+    $res_query = $res_query->fetch_array();
+    $_SESSION['idUsuario'] = intval($res_query[0]);
+
+    header("Location: userPage.php");
     exit();
   }
 
