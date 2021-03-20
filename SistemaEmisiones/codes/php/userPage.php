@@ -5,6 +5,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+
     <title>Sistema Emisiones (Nombre en desarrollo)</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -18,10 +23,37 @@
   <body class="page-settings">
     <?php
       include "dataBaseLogin.php";
-
+        /* https://www.youtube.com/watch?v=xHbmHY9lJu4&t=71s&ab_channel=FacultadAutodidacta 3:43*/
       $connection = mysqli_connect($host, $user, $password, $bd);
-      /* https://www.youtube.com/watch?v=xHbmHY9lJu4&t=71s&ab_channel=FacultadAutodidacta 3:43*/
 
+      $result = mysqli_query($connection, "SELECT Fecha, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_SESSION['idUsuario']."' ORDER BY Fecha");
+
+      $date=array();
+      $hum=array();
+      $temp=array();
+      $CO=array();
+      $CO2=array();
+      $O2=array();
+      $vel=array();
+
+      while($row=mysqli_fetch_row($result))
+      {
+        $date[]=$row[0];
+        $hum[]=$row[1];
+        $temp[]=$row[2];
+        $CO[]=$row[3];
+        $CO2[]=$row[4];
+        $O2[]=$row[5];
+        $vel[]=$row[6];
+      }
+
+      $dataX=json_encode($date);
+      $traceHum=json_encode($hum);
+      $traceTem=json_encode($temp);
+      $traceCO=json_encode($CO);
+      $traceCO2=json_encode($CO2);
+      $traceO2=json_encode($O2);
+      $traceVel=json_encode($vel);
     ?>
 
     <nav class="navbar navbar-dark bg-primary">
@@ -33,24 +65,110 @@
       </div>
     </nav>
 
-    <form id="form-param">
-      <div class="container">
-        <div>
-          <input type="text" class="parametro" placeholder="parametro"><input type="number" class="valor" placeholder="valor">
+    <div class="row">
+      <div class="col">
+        <!-- Lista de checkbox -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="hum">
+          <label class="form-check-label" for="hum">Humedad de las emisiones</label>
         </div>
-        <div>
-          <input type="text" class="parametro" placeholder="parametro"><input type="number" class="valor" placeholder="valor">
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="tem">
+          <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
         </div>
-      </div>
-      <div class="">
-        <button type="button" class="addParam">Agregar parametro</button>
-        <button type="button" class="showResults">Mostrar Resultados</button>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="co">
+          <label class="form-check-label" for="tem">CO</label>
+        </div>
+
+
+        <button type="button" class="showGraphic">Graficar</button>
+        <!--<input type="button" class="btn btn-primary" value="Graficar" onclick="showGraphic();" id="graphButton">-->
       </div>
 
-      <?php echo $_SESSION['idUsuario']; ?>
+      <div class="col">
+        <div id="grafico"></div>
+      </div>
 
-      <div id="grafico"></div>
-      <script src="../js/graph.js"></script>
-    </form>
+    </div>
+
+    <script type="text/javascript">
+      function createJSString(json){
+        var parsed = JSON.parse(json);
+        var arr = [];
+        for(var x in parsed){
+          arr.push(parsed[x]);
+        }
+        return arr;
+      }
+    </script>
+
+    <script type="text/javascript">
+      //document.getElementById("graphButton").onclick = showGraphic;
+
+      document.querySelector(".showGraphic").addEventListener("click",showGraphic);
+
+      function showGraphic()
+      {
+        axisX = createJSString('<?php echo $dataX ?>');
+        axisY1 = createJSString('<?php echo $traceHum ?>');
+        axisY2 = createJSString('<?php echo $traceTem ?>');
+        axisY3 = createJSString('<?php echo $traceCO ?>');
+        axisY4 = createJSString('<?php echo $traceCO2 ?>');
+        axisY5 = createJSString('<?php echo $traceO2 ?>');
+        axisY6 = createJSString('<?php echo $traceVel ?>');
+
+        var data1 = {
+          x: axisX,
+          y: axisY1,
+          name: 'Humedad',
+          type: "scatter"
+        };
+
+        var data2 = {
+          x: axisX,
+          y: axisY2,
+          name: 'Temperatura',
+          type: "scatter"
+        };
+
+        var data3 = {
+          x: axisX,
+          y: axisY3,
+          name: 'CO',
+          type: "scatter"
+        };
+
+        var data4 = {
+          x: axisX,
+          y: axisY4,
+          name: 'CO2',
+          type: "scatter"
+        };
+
+        var data5 = {
+          x: axisX,
+          y: axisY5,
+          name: 'O2',
+          type: "scatter"
+        };
+
+        var data6 = {
+          x: axisX,
+          y: axisY6,
+          name: 'Velocidad',
+          type: "scatter"
+        };
+
+
+        var data = [data1, data2, data3, data4, data5, data6];
+
+      Plotly.newPlot('grafico', data);
+    }
+    </script>
+
+  <!--  <script src="../js/graph.js"></script> -->
   </body>
 </html>
