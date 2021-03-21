@@ -31,23 +31,26 @@
     <div class="row">
       <div class="col">
         <!-- Lista de checkbox -->
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="hum">
-          <label class="form-check-label" for="hum">Humedad de las emisiones</label>
-        </div>
+        <form class="" action="" method="post">
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="tem">
-          <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
-        </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="hum">
+            <label class="form-check-label" for="hum">Humedad de las emisiones</label>
+          </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="co">
-          <label class="form-check-label" for="tem">CO</label>
-        </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="tem">
+            <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
+          </div>
 
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="co">
+            <label class="form-check-label" for="tem">CO</label>
+          </div>
 
-        <button type="button" class="showGraphic">Graficar</button>
+          <input type="submit" class="showGraphic">Graficar</input>
+        </form>
+
         <!--<input type="button" class="btn btn-primary" value="Graficar" onclick="showGraphic();" id="graphButton">-->
       </div>
 
@@ -79,9 +82,48 @@
           name: 'Humedad',
           type: "scatter"
         };
-        var data = [data1];
 
-        Plotly.newPlot('grafico', data);
+        var data2 = {
+          x: ['a','b', 'c', 'd'],
+          y: [10,21,13,24],
+          name: 'A',
+          type: "scatter"
+        };
+
+        var data3 = {
+          x: ['a','b', 'c', 'd'],
+          y: [1,2,3,4],
+          name: 'Humedad',
+          type: "scatter"
+        };
+
+        var data4 = {
+          x: ['a','b', 'c', 'd'],
+          y: [10,21,13,24],
+          name: 'A',
+          type: "scatter"
+        };
+
+        var data6 = {
+          x: ['a','b', 'c', 'd'],
+          y: [1,2,3,4],
+          name: 'Humedad',
+          type: "scatter"
+        };
+
+        var data5 = {
+          x: ['a','b', 'c', 'd'],
+          y: [10,21,13,24],
+          name: 'A',
+          type: "scatter"
+        };
+
+        var fullData = [data1, data2, data3, data4, data5, data6];
+        var data = [];
+
+        data.push(fullData[0]);
+
+        Plotly.newPlot('grafico', fullData);
       }
 
     </script>
@@ -89,3 +131,15 @@
   <!--  <script src="../js/graph.js"></script> -->
   </body>
 </html>
+
+
+<!--
+
+<?php if(!empty($hum)): ?>
+  data.push(data1);
+<?php endif; ?>
+
+<?php if(!empty($tem)): ?>
+  data.push(data2);
+<?php endif; ?>
+-->

@@ -157,7 +157,7 @@
                   type="checkbox"
                   value="good"
                   name="admitted"
-                  <?php if($_SESSION['Aprobado'] != "No Aprobado"): ?>
+                  <?php if($_SESSION['Aprobado'] == "Aprobado"): ?>
                     checked
                   <?php endif; ?>
                 >

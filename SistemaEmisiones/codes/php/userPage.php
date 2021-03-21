@@ -47,6 +47,10 @@
         $vel[]=$row[6];
       }
 
+      /* Usaremos este arreglo para obtener los datos */
+      $row = array($hum, $temp, $CO, $CO2, $O2, $vel);
+      $auxRow  = $row;
+
       $dataX=json_encode($date);
       $traceHum=json_encode($hum);
       $traceTem=json_encode($temp);
@@ -65,33 +69,47 @@
       </div>
     </nav>
 
-    <div class="row">
+    <div class="row mt-5 mx-5">
       <div class="col">
         <!-- Lista de checkbox -->
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="hum">
-          <label class="form-check-label" for="hum">Humedad de las emisiones</label>
-        </div>
+        <form class="" action="" method="post">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="hum">
+            <label class="form-check-label" for="hum">Humedad de las emisiones</label>
+          </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="tem">
-          <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
-        </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="tem">
+            <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
+          </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="co">
-          <label class="form-check-label" for="tem">CO</label>
-        </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="co">
+            <label class="form-check-label" for="co">CO</label>
+          </div>
 
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="co2">
+            <label class="form-check-label" for="co2">CO2</label>
+          </div>
 
-        <button type="button" class="showGraphic">Graficar</button>
-        <!--<input type="button" class="btn btn-primary" value="Graficar" onclick="showGraphic();" id="graphButton">-->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="o2">
+            <label class="form-check-label" for="o2">O2</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="vel">
+            <label class="form-check-label" for="vel">Velocidad</label>
+          </div>
+        </form>
+
+        <button class="showGraphic" name="submitGraph">Graficar</button>
       </div>
 
       <div class="col">
         <div id="grafico"></div>
       </div>
-
     </div>
 
     <script type="text/javascript">
@@ -106,9 +124,9 @@
     </script>
 
     <script type="text/javascript">
-      //document.getElementById("graphButton").onclick = showGraphic;
 
       document.querySelector(".showGraphic").addEventListener("click",showGraphic);
+      var checks = document.getElementsByClassName('form-check-input');
 
       function showGraphic()
       {
@@ -162,10 +180,26 @@
           type: "scatter"
         };
 
+        var fullData = [data1, data2, data3, data4, data5, data6];
+        var data = [];
+        var i = 0;
 
-        var data = [data1, data2, data3, data4, data5, data6];
+
+        <?php for($i = 0; $i <= count($row); $i++): ?>
+          <?php if(!empty($row[$i])): ?>
+                  if(checks[i].checked === true){
+                    data.push(fullData[i]);
+                  }
+          <?php endif; ?>
+                i++;
+        <?php endfor;
+              $row = $auxRow;
+        ?>
+
+        //var data = [data1, data2, data3, data4, data5, data6];
 
       Plotly.newPlot('grafico', data);
+
     }
     </script>
 
