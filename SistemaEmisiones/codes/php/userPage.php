@@ -71,8 +71,31 @@
 
     <div class="row mt-5 mx-5">
       <div class="col">
+        <!-- Calendario -->
+        <!-- Fecha inicial -->
+        <label for="startDate">Fecha Inicial: </label>
+        <input
+          type="date"
+          id="startDate"
+          value="<?php echo $date[0]; ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+          class="myDate"
+        >
+
+        <!-- Fecha final -->
+        <label for="endDate">Fecha Final: </label>
+        <input
+          type="date"
+          id="endDate"
+          value="<?php echo date('Y-m-d'); ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+          class="myDate"
+        >
+
         <!-- Lista de checkbox -->
-        <form class="" action="" method="post">
+        <div class="">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="hum">
             <label class="form-check-label" for="hum">Humedad de las emisiones</label>
@@ -102,14 +125,20 @@
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="vel">
             <label class="form-check-label" for="vel">Velocidad</label>
           </div>
-        </form>
-
+        </div>
         <button class="showGraphic" name="submitGraph">Graficar</button>
       </div>
 
       <div class="col">
         <div id="grafico"></div>
       </div>
+    </div>
+
+    <div class="row">
+      <form action="export.php" method="post">
+        <input type="submit" name="export" value="Exportar datos">
+
+      </form>
     </div>
 
     <script type="text/javascript">
@@ -127,9 +156,13 @@
 
       document.querySelector(".showGraphic").addEventListener("click",showGraphic);
       var checks = document.getElementsByClassName('form-check-input');
+      Plotly.newPlot('grafico', []);
 
       function showGraphic()
       {
+        var edDate = document.getElementById('endDate').value;
+        var stDate = document.getElementById('startDate').value;
+
         axisX = createJSString('<?php echo $dataX ?>');
         axisY1 = createJSString('<?php echo $traceHum ?>');
         axisY2 = createJSString('<?php echo $traceTem ?>');
@@ -137,6 +170,22 @@
         axisY4 = createJSString('<?php echo $traceCO2 ?>');
         axisY5 = createJSString('<?php echo $traceO2 ?>');
         axisY6 = createJSString('<?php echo $traceVel ?>');
+
+        /* Funcion para seleccionar unicamente los datos de fecha por el usuario */
+        for(var i = 0; i < axisX.length; i++)
+        {
+          if(axisX[i] < stDate)
+          {
+            axisX.splice(i, 1);
+            i--;
+          }
+          else
+            if(axisX[i] > edDate)
+            {
+              axisX.splice(i, 1);
+              i--;
+            }
+        }
 
         var data1 = {
           x: axisX,
@@ -184,10 +233,11 @@
         var data = [];
         var i = 0;
 
-
+        /* Funcion para solo mostrar los datos seleccionados por el usuario */
         <?php for($i = 0; $i <= count($row); $i++): ?>
           <?php if(!empty($row[$i])): ?>
-                  if(checks[i].checked === true){
+                  if(checks[i].checked === true)
+                  {
                     data.push(fullData[i]);
                   }
           <?php endif; ?>
