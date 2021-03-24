@@ -11,68 +11,90 @@
     <link rel="stylesheet" href="codes/css/pageStyle.css">
   </head>
 
-  <body class="page-settings">
+  <body class="background-color">
+
     <!-- Navegador de la pagina --->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SISTEMA</a>
-        <button class="mb-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.html">SISTEMA</a>
+        <button class="mb-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="navbar-nav me-auto justify-content-end">
           </ul>
 
           <form class="d-inline-flex" method="post" action="codes/php/pageLogin.php">
-            <div class="d-flex flex-row">
+            <div class="d-flex">
               <div class="mt-1" style="color:white;">Usuario</div>
-              <input class="form-control form-control-sm mx-1" type="text" placeholder="Ingresar Usuario" aria-label="Ingresar Usuario" name="username">
+              <input class="form-control form-control-sm mx-2" type="text" placeholder="Ingresar Usuario" aria-label="Ingresar Usuario" name="username">
             </div>
-            <div class="d-flex flex-row">
+
+            <div class="d-flex">
               <div class="mt-1" style="color:white;">Contraseña</div>
-              <input class="form-control form-control-sm mx-1" type="password" placeholder="Ingrear Contraseña" aria-label="Ingrear Contraseña" name=userpass>
+              <input class="form-control form-control-sm mx-1" type="password" placeholder="Ingresar Contraseña" aria-label="Ingrear Contraseña" name=userpass>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm button-settings hide-overflow">Iniciar Sesión</button>
-            <a class="btn btn-primary btn-sm button-settings "href="codes/html/register.html">Registrarse</a>
+
+            <!-- Boton de inicio de sesion y registro de usuario-->
+            <button
+              type="submit"
+              class="btn btn-sm config-button-navbar hide-overflow mx-2"
+            >Iniciar Sesión</button>
+
+            <a
+              class="btn btn-sm config-button-navbar"
+              href="codes/html/register.html"
+            >Registrarse</a>
+
           </form>
         </div>
       </div>
     </nav>
 
-    <!-- Slider de imagenes -->
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <!-- Slider -->
+    <div id="carouselControl" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
 
-      <div class="carousel-inner carousel-config">
-        <div class="carousel-item active ">
-          <img src="images/prueba3.jpg" class="carousel-items-config align-self-center" alt="...">
+      <div class="carousel-inner config-carousel">
+        <div class="carousel-item active" data-bs-interval="2000">
+          <div
+            class=" config-image"
+            style="background-image:url(images/prueba1.jpg);"
+          ></div>
+
         </div>
-        <div class="carousel-item ">
-          <img src="images/prueba1.jpg" class="carousel-items-config align-self-center" alt="...">
+        <div class="carousel-item" data-bs-interval="2000">
+          <div
+            class=" config-image"
+            style="background-image:url(images/prueba2.jpg);"
+          ></div>
         </div>
-        <div class="carousel-item  ">
-          <img src="images/prueba2.jpg" class="carousel-items-config align-self-center" alt="...">
+        <div class="carousel-item" data-bs-interval="2000">
+          <div
+            class=" config-image"
+            style="background-image:url(images/prueba3.jpg);"
+          ></div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselControl"  data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselControl"  data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
 
-    <!--- Cartas de la pagina -->
+    <!-- Cartas de la pagina -->
     <section>
       <div class="card card-group mx-3" style="border: 0;">
         <div class="col">
-          <div class="card mt-5 mx-3 card-config">
+          <div class="card mt-5 mx-3 config-card">
             <div class="cardbody">
               <h2 class="card-title">Objetivo</h2>
               <p class="card-text">
@@ -83,7 +105,7 @@
         </div>
 
         <div class="col">
-          <div class="card mt-5 mx-3 card-config">
+          <div class="card mt-5 mx-3 config-card">
             <div class="cardbody">
               <h2 class="card-title">Alcance y Funcionalidad</h2>
               <p class="card-text">
@@ -94,7 +116,7 @@
         </div>
 
         <div class="col">
-          <div class="card mt-5 mx-3 card-config">
+          <div class="card mt-5 mx-3 config-card">
             <div class="cardbody">
               <h2 class="card-title">Acerca de</h2>
               <p class="card-text">
@@ -105,7 +127,7 @@
         </div>
 
         <div class="col">
-          <div class="card mt-5 mx-3 card-config">
+          <div class="card mt-5 mx-3 config-card">
             <div class="cardbody">
               <h2 class="card-title">Como obtengo información?</h2>
               <p class="card-text">

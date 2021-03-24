@@ -9,7 +9,7 @@ if ($connection)
   $username = $_POST['user'];
   $pass = $_POST['pass'];
   $name = $_POST["name"];
-  $company = $_POST["company"];
+  $company = $_POST["company"];//revisar que pedo con idCompany
   $city = $_POST["city"];
   $email = $_POST["email"];
   $phone = $_POST["phone"];

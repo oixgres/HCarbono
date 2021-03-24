@@ -1,9 +1,8 @@
-h1{
+h1, h2{
   color: rgb(25,96,178);
 }
 
 h2{
-  color: rgb(25,96,178);
   font-size: 25px;
   padding: 1rem;
 }
@@ -18,39 +17,65 @@ p{
   text-align: justify;
 }
 
-/* css propios */
-.page-settings{
+/*Color para el fondo de pantalla*/
+.background-color{
   background-color: rgba(255, 255, 255, 1);
 }
 
-.navbar-settings{
-  height: 50px;
-  /*background-color: rgb(91,155,213);*/
+/*Color base para la pagina*/
+.config-color, .config-button, .config-button-navbar{
+  background-color: rgb(91,155,213);
 }
 
-.button-settings{
-  /*background-color: rgb(91,155,213);*/
+/*Boton para la pagina de usuario y demas*/
+.config-button, .config-button-navbar{
+  border: 1px solid rgb(0,77,141);
+  color: rgba(255, 255, 255, 1);
+}
+
+/*Botones para el navbar*/
+.config-button-navbar{
   height: 30px;
   width: 100px;
-  border: 1px solid rgba(0, 0, 0, 2.5);
-  margin-left: 1rem;
 }
 
-.button-small{
-  width: 100px;
+/*Cambiar color del borde al fijar*/
+.config-button-navbar:hover{
+  color: rgba(255, 255, 255, 1);
+  background-color: rgb(0,77,141);
 }
 
+/*Configuracion para imagen reescalable*/
+.config-image{
+  height: 400px;
+  width: 100%;
+  padding-top: 56.25%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* Medidas del carrusel */
+.config-carousel{
+  height: 400px;
+  display:flex;
+  align-items:center;
+}
+
+/*Selecciono el tamaño minimo de la carta*/
+.config-card{
+  min-width: 15rem;
+}
+
+/*Evito el overflow*/
 .hide-overflow{
   overflow: hidden;
 }
-/* css modificados */
-.navbar-brand{
-  color: white;
-}
 
-.auto-width{
-  height: 100%;
-  width: auto;
+/*************************Revision****************************/
+
+.button-small{
+  width: 100px;
 }
 
 .form-small{
@@ -60,22 +85,4 @@ p{
 
 .col-small{
   width: 175px;
-}
-
-.carousel-config{
-  height: 400px;
-  display:flex;
-  align-items:center;
-}
-
-.carousel-items-config{
-  min-height: 400px;
-  height: auto;
-  width: 100%;
-  overflow-x: visible;
-  overflow-y: visible;
-}
-
-.card-config{
-  min-width: 15rem;
 }

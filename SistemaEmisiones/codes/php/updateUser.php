@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="../css/pageStyle.css">
   </head>
 
-  <body class="page-settings">
-    <nav class="navbar navbar-dark bg-primary">
+  <body class="background-color">
+    <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">SISTEMA</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-primary btn-sm button-settings "href="adminPage.php">Regresar</a>
+        <a class="btn btn-sm config-button-navbar "href="adminPage.php">Regresar</a>
       </div>
     </nav>
 

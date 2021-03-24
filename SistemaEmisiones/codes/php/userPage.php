@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../css/pageStyle.css">
   </head>
 
-  <body class="page-settings">
+  <body class="background-color">
     <?php
       include "dataBaseLogin.php";
         /* https://www.youtube.com/watch?v=xHbmHY9lJu4&t=71s&ab_channel=FacultadAutodidacta 3:43*/
@@ -60,19 +60,20 @@
       $traceVel=json_encode($vel);
     ?>
 
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">SISTEMA</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-primary btn-sm button-settings "href="../../index.html">Salir</a>
+        <a class="btn btn-sm config-button-navbar "href="../../index.html">Salir</a>
       </div>
     </nav>
 
-    <div class="row mt-5 mx-5">
-      <div class="col">
+    <div class="row mx-5">
+      <div class="col-6 mt-5">
         <!-- Calendario -->
         <!-- Fecha inicial -->
+
         <label for="startDate">Fecha Inicial: </label>
         <input
           type="date"
@@ -80,64 +81,79 @@
           value="<?php echo $date[0]; ?>"
           min="<?php echo $date[0]; ?>"
           max="<?php echo date('Y-m-d'); ?>"
-          class="myDate"
         >
 
         <!-- Fecha final -->
-        <label for="endDate">Fecha Final: </label>
+        <label class="ms-2" for="endDate">Fecha Final: </label>
         <input
           type="date"
           id="endDate"
           value="<?php echo date('Y-m-d'); ?>"
           min="<?php echo $date[0]; ?>"
           max="<?php echo date('Y-m-d'); ?>"
-          class="myDate"
         >
 
         <!-- Lista de checkbox -->
         <div class="">
-          <div class="form-check">
+          <div class="form-check mt-3">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="hum">
             <label class="form-check-label" for="hum">Humedad de las emisiones</label>
           </div>
 
-          <div class="form-check">
+          <div class="form-check mt-3">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="tem">
             <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
           </div>
 
-          <div class="form-check">
+          <div class="form-check mt-3">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="co">
             <label class="form-check-label" for="co">CO</label>
           </div>
 
-          <div class="form-check">
+          <div class="form-check mt-3">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="co2">
             <label class="form-check-label" for="co2">CO2</label>
           </div>
 
-          <div class="form-check">
+          <div class="form-check mt-3">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="o2">
             <label class="form-check-label" for="o2">O2</label>
           </div>
 
-          <div class="form-check">
+          <div class="form-check mt-3">
             <input class="form-check-input" type="checkbox" value="" name="graph[]" id="vel">
             <label class="form-check-label" for="vel">Velocidad</label>
           </div>
         </div>
-        <button class="showGraphic" name="submitGraph">Graficar</button>
+        <button class="showGraphic btn btn-primary config-button hide-overflow mt-5">Graficar</button>
       </div>
 
-      <div class="col">
+      <div class="col-6 mt-2">
         <div id="grafico"></div>
       </div>
     </div>
 
-    <div class="row">
-      <form action="export.php" method="post">
-        <input type="submit" name="export" value="Exportar datos">
-
+    <!-- Descargar CSV -->
+    <div class="row mt-3 me-5">
+      <form action="export.php" method="post" class="d-flex justify-content-end">
+        <input
+          type="date"
+          name="startDateCSV"
+          value="<?php echo $date[0]; ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+          class="me-3"
+        >
+        <input
+          type="date"
+          name="endDateCSV"
+          value="<?php echo date('Y-m-d'); ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+          class="me-3"
+        >
+        <input class="btn btn-primary config-button btn-sm hide-overflow" type="submit" name="export" value="Exportar datos">
+        <!--<button class="btn btn-info" type="submit" name="export">Exportar Datos</button>-->
       </form>
     </div>
 
@@ -177,13 +193,23 @@
           if(axisX[i] < stDate)
           {
             axisX.splice(i, 1);
-            i--;
+            axisY1.splice(i, 1);
+            axisY2.splice(i, 1);
+            axisY3.splice(i, 1);
+            axisY4.splice(i, 1);
+            axisY5.splice(i, 1);
+            axisY6.splice(i, 1);
           }
           else
             if(axisX[i] > edDate)
             {
               axisX.splice(i, 1);
-              i--;
+              axisY1.splice(i, 1);
+              axisY2.splice(i, 1);
+              axisY3.splice(i, 1);
+              axisY4.splice(i, 1);
+              axisY5.splice(i, 1);
+              axisY6.splice(i, 1);
             }
         }
 
