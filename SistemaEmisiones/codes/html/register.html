@@ -1,3 +1,5 @@
+<!-- Creado por: Sergio Enrique Guerra Cervantes -->
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -5,16 +7,18 @@
     <meta charset="utf-8">
     <title>Sistema Emisiones (Nombre en desarrollo)</title>
 
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
+    <!-- Mis diseños -->
     <link rel="stylesheet" href="../css/pageStyle.css">
   </head>
 
   <body class="background-color">
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SISTEMA</a>
+        <a class="navbar-brand" href="../../index.html">SISTEMA</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
         <a class="btn btn-sm config-button-navbar "href="../../index.html">Regresar</a>
@@ -25,13 +29,21 @@
       <h1 class="mt-5 ms-5 d-flex justify-content-center">REGISTRO</h1>
 
       <div class="container-fluid  mt-5">
-        <form class="" action="../php/registration.php" method="post">
+        <form class="needs-validation" action="../php/registration.php" method="post">
+
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
-            <div class="col-auto col-small d-flex justify-content-end">
+            <div class="col-small d-flex justify-content-end">
               <label for="nameSection" class="">Nombre Completo:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="nameSection" name="name">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="nameSection"
+                name="name"
+                placeholder="Ingrese su nombre completo"
+                required
+              >
             </div>
           </div>
 
@@ -40,7 +52,14 @@
               <label for="companySection" class="">Compañia:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="companySection" name="company">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="companySection"
+                name="company"
+                placeholder="Ingrese la compañia en que labora"
+                required
+              >
             </div>
           </div>
 
@@ -49,7 +68,14 @@
               <label for="citySection" class="">Ciudad:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="citySection" name="city">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="citySection"
+                name="city"
+                placeholder="Ingrese la ciudad en que reside"
+                required
+              >
             </div>
           </div>
 
@@ -58,7 +84,14 @@
               <label for="emailSection" class="">Correo de contacto:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="emailSection" name="email">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="emailSection"
+                name="email"
+                placeholder="Ingrese su correo electronico"
+                required
+              >
             </div>
           </div>
 
@@ -67,11 +100,18 @@
               <label for="phoneSection" class="">Telefono:</label>
             </div>
             <div class="col-auto form-small">
-              <input type="text" class="form-control form-control-sm" id="phoneSection" name="phone">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="phoneSection"
+                name="phone"
+                placeholder="Ingrese su numero telefonico"
+                required
+              >
             </div>
           </div>
           <div class="mt-5 ms-5 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn config-button">Registrar</button>
           </div>
         </form>
       </div>

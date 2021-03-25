@@ -1,3 +1,5 @@
+<!-- Creado por: Sergio Enrique Guerra Cervantes -->
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -5,9 +7,11 @@
     <meta charset="utf-8">
     <title>Sistema Emisiones (Nombre en desarrollo)</title>
 
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
+    <!-- Mis diseños -->
     <link rel="stylesheet" href="codes/css/pageStyle.css">
   </head>
 
@@ -17,6 +21,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">SISTEMA</a>
+
+        <!-- Boton para desglosar el contenido -->
         <button class="mb-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,27 +31,29 @@
           </ul>
 
           <form class="d-inline-flex" method="post" action="codes/php/pageLogin.php">
+            <!-- Campo para ingresar username -->
             <div class="d-flex">
               <div class="mt-1" style="color:white;">Usuario</div>
               <input class="form-control form-control-sm mx-2" type="text" placeholder="Ingresar Usuario" aria-label="Ingresar Usuario" name="username">
             </div>
 
+            <!-- Campo para ingresar contraseña-->
             <div class="d-flex">
               <div class="mt-1" style="color:white;">Contraseña</div>
               <input class="form-control form-control-sm mx-1" type="password" placeholder="Ingresar Contraseña" aria-label="Ingrear Contraseña" name=userpass>
             </div>
 
-            <!-- Boton de inicio de sesion y registro de usuario-->
+            <!-- Boton de inicio de sesion-->
             <button
               type="submit"
               class="btn btn-sm config-button-navbar hide-overflow mx-2"
             >Iniciar Sesión</button>
 
+            <!-- Boton de registro de usuario -->
             <a
               class="btn btn-sm config-button-navbar"
               href="codes/html/register.html"
             >Registrarse</a>
-
           </form>
         </div>
       </div>
@@ -53,26 +61,29 @@
 
     <!-- Slider -->
     <div id="carouselControl" class="carousel slide" data-bs-ride="carousel">
+      <!-- Botones para navegar en el slider -->
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
 
+      <!-- Contenido del slider -->
       <div class="carousel-inner config-carousel">
         <div class="carousel-item active" data-bs-interval="2000">
           <div
             class=" config-image"
             style="background-image:url(images/prueba1.jpg);"
           ></div>
-
         </div>
+
         <div class="carousel-item" data-bs-interval="2000">
           <div
             class=" config-image"
             style="background-image:url(images/prueba2.jpg);"
           ></div>
         </div>
+
         <div class="carousel-item" data-bs-interval="2000">
           <div
             class=" config-image"
@@ -80,6 +91,8 @@
           ></div>
         </div>
       </div>
+
+      <!-- Botones para avanzar y retroceder dentro del slider -->
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselControl"  data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>

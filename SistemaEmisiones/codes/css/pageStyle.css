@@ -40,7 +40,7 @@ p{
 }
 
 /*Cambiar color del borde al fijar*/
-.config-button-navbar:hover{
+.config-button:hover,.config-button-navbar:hover{
   color: rgba(255, 255, 255, 1);
   background-color: rgb(0,77,141);
 }

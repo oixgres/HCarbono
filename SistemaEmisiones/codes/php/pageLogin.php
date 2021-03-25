@@ -23,7 +23,7 @@ if($connection)
     $res_query = $res_query->fetch_array();
     $_SESSION['idUsuario'] = intval($res_query[0]);
 
-    header("Location: userPage.php");
+    header("Location: userPage");
     exit();
   }
 
@@ -33,7 +33,7 @@ if($connection)
 
   if($nr == 1)
   {
-    header("Location: adminPage.php");
+    header("Location: adminPage");
     exit();
   }
   else
