@@ -1,8 +1,6 @@
 <?php
 
-include "dataBaseLogin.php";
-
-$connection = mysqli_connect($host, $user, $password, $bd);
+require_once "dataBaseLogin.php";
 
 if ($connection)
 {
@@ -12,20 +10,16 @@ if ($connection)
   $email = $_POST["email"];
   $phone = $_POST["phone"];
 
+  /* Verificamos que todos los campos esten llenos */
   if(!empty($name) || !empty($company) || !empty($city) || !empty($email) || !empty($phone))
   {
     /*Verificamos que no se repita la empresa*/
-    $query = "SELECT * FROM Empresa WHERE Nombre='".$company."'";
-    $res_query = mysqli_query($connection, $query);
-    $nr = mysqli_num_rows($res_query);
+    $query = mysqli_query($connection, "SELECT * FROM Empresa WHERE Nombre='".$company."'");
+    $nr = mysqli_num_rows($query);
 
     /*Si no existe la empresa la registramos*/
     if($nr == 0)
-    {
-      /*Registramos compañia*/
-      $query = "INSERT INTO Empresa(Nombre) VALUES ('$company')";
-      mysqli_query($connection, $query);
-    }
+      mysqli_query($connection, "INSERT INTO Empresa(Nombre) VALUES ('$company')");
 
     /*Obtenemos el ID de la compañia */
     $query = "SELECT idEmpresa FROM Empresa WHERE Nombre = '".$company."'";
@@ -37,8 +31,8 @@ if ($connection)
     $query = "INSERT INTO Usuario(Nombre, Ciudad, Correo, Telefono, Empresa_idEmpresa) VALUES ('$name', '$city', '$email', '$phone', '$id_company')";
     mysqli_query($connection, $query);
 
-
-    echo "Registro completo";
+    header("Location: ../html/registerResult.html");
+    exit();
   }
   else
   {
@@ -49,6 +43,5 @@ else
 {
   echo "No se logro conectar al servidor";
 }
-
 
 ?>

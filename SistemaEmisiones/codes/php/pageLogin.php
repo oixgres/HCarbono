@@ -1,10 +1,7 @@
 <?php
-
 session_start();
 
-include "dataBaseLogin.php";
-
-$connection = mysqli_connect($host, $user, $password, $bd);
+require_once "dataBaseLogin.php";
 
 if($connection)
 {
@@ -39,8 +36,6 @@ if($connection)
   else
   {
     echo "Usuario o contraseña incorrectos";
-    echo " ".$name;
-    echo " ".$pass;
   }
 }
 else
