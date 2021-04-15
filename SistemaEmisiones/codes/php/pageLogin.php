@@ -2,6 +2,7 @@
 session_start();
 
 require_once "dataBaseLogin.php";
+require_once "phpFunctions.php";
 
 if($connection)
 {
@@ -15,12 +16,9 @@ if($connection)
   if($nr == 1)
   {
     /* Si existe el usuario obtenemos el ID y lo guardamos*/
-    $query = "SELECT idUsuario FROM Usuario WHERE Username = '".$name."'";
-    $res_query = mysqli_query($connection, $query);
-    $res_query = $res_query->fetch_array();
-    $_SESSION['idUsuario'] = intval($res_query[0]);
+    $_SESSION['idUsuario'] = intval(getFromTable($connection, "Usuario", "idUsuario", "Username", $name));
 
-    header("Location: userPage");
+    header("Location: userPage.php");
     exit();
   }
 
@@ -30,7 +28,7 @@ if($connection)
 
   if($nr == 1)
   {
-    header("Location: adminPage");
+    header("Location: adminPage.php");
     exit();
   }
   else

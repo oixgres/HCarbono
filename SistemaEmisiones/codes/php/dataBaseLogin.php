@@ -1,10 +1,9 @@
 <?php
 
-$host = "localhost";
-$user = "omdprofx_guerra-c";
-$password="Gue1870";
-$bd="omdprofx_guerra-c-ordinario";
+$host = "localhost:3306";
+$user = "hcarbono_a1252819";
+$password="1094346";
+$bd="hcarbono_BD";
 
 $connection = mysqli_connect($host, $user, $password, $bd);
-
  ?>

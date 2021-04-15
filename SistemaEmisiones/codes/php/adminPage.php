@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -14,23 +15,24 @@
   <body class="background-color">
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SISTEMA</a>
+        <a class="navbar-brand" href="../../index.html">SISTEMA</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-sm config-button-navbar "href="../../index.html">Regresar</a>
+        <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
       </div>
     </nav>
-    
+
     <section>
       <?php
+        require_once "dataBaseLogin.php";
         require_once "processCRUD.php";
-        include "dataBaseLogin.php";
-        $connection = mysqli_connect($host, $user, $password, $bd);
+        require_once "phpFunctions.php";
+
         $result = mysqli_query($connection, "SELECT * FROM Usuario");
       ?>
       <!-- Tabla para mostrar los usuarios registrados -->
       <!-- <div class="mx-1 d-flex justify-content-center table-responsive"> -->
-      <div class="mx-1 table-responsive">
+      <div class="mx-5 mt-5 table-responsive">
         <table class="table">
           <!--Cabeza de la tabla-->
           <thead>
@@ -59,22 +61,21 @@
 
               <!-- Obtenemos el nombre de la empresa -->
               <?php
-                $res_company = mysqli_query($connection, "SELECT Nombre FROM Empresa WHERE idEmpresa='".$row['Empresa_idEmpresa']."'");
-                $res_company = $res_company->fetch_array();
-                $company = $res_company[0];
+                $company = getFromTable($connection, "Empresa", "Nombre", "idEmpresa", $row['Empresa_idEmpresa']);
               ?>
+
               <td><?php echo  $company?></td>
               <td>
                 <!-- Redireccion a pagina para editar el usuaro -->
                 <a
                   href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
-                  class="btn btn-info">Editar
+                  class="btn config-button">Editar
                 </a>
                 <!-- Se elimina el usuario en automatico -->
                 <!-- AGREGAR WARN ANTES DE ELIMINAR -->
                 <a
                   href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
-                  class="btn btn-danger">Borrar
+                  class="btn config-button-danger">Borrar
                 </a>
               </td>
             </tr>
@@ -87,7 +88,7 @@
     <div class="d-grid d-md-flex justify-content-md-end">
       <a
         href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
-        class="btn btn-info button-small mt-5 me-5">Nuevo
+        class="btn config-button mt-5 me-5">Nuevo
       </a>
     </div>
   </body>

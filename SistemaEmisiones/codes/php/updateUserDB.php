@@ -39,7 +39,7 @@ if ($connection)
   $nrc = mysqli_num_rows($query);
 
   /*Si el username no esta registrado y si es diferente de si mismo*/
-  if($nru > 0 && $username != $selfUser)
+  if($nru > 0 && $username != $selfUser && $username!='')
   {
     echo "Usuario ya utilizado, ingrese otro";
   }

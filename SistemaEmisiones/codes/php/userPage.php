@@ -5,10 +5,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-
+    <!--
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
+    -->
 
     <title>Sistema Emisiones (Nombre en desarrollo)</title>
 
@@ -23,7 +24,7 @@
   <body class="background-color">
     <?php
       include "dataBaseLogin.php";
-        /* https://www.youtube.com/watch?v=xHbmHY9lJu4&t=71s&ab_channel=FacultadAutodidacta 3:43*/
+
       $connection = mysqli_connect($host, $user, $password, $bd);
 
       $result = mysqli_query($connection, "SELECT Fecha, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_SESSION['idUsuario']."' ORDER BY Fecha");
@@ -65,7 +66,7 @@
         <a class="navbar-brand" href="#">SISTEMA</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-sm config-button-navbar "href="../../index.html">Salir</a>
+        <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
       </div>
     </nav>
 

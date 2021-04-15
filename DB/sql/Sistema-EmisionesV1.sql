@@ -7,11 +7,11 @@ DROP TABLE IF EXISTS Empresa;
 CREATE TABLE Empresa (
   idEmpresa INT NOT NULL AUTO_INCREMENT,
   Nombre VARCHAR(45) NULL,
-  Telefono VARCHAR(45) NULL,
-  Correo VARCHAR(45) NULL,
   PRIMARY KEY (idEmpresa)
-  ) ;
+);
+
 ALTER TABLE Empresa AUTO_INCREMENT = 1000;
+
 -- -----------------------------------------------------
 -- Usuario
 -- -----------------------------------------------------
@@ -27,9 +27,10 @@ CREATE TABLE Usuario (
   Aprobado VARCHAR(45) NOT NULL DEFAULT 'No Aprobado',
   Empresa_idEmpresa INT,
   FOREIGN KEY (Empresa_idEmpresa)
-  REFERENCES Empresa(idEmpresa),
+  REFERENCES Empresa(idEmpresa)
+  ON DELETE CASCADE,
   PRIMARY KEY (idUsuario)
-  ) ;
+);
 
 ALTER TABLE Usuario AUTO_INCREMENT = 1000;
 
@@ -38,11 +39,13 @@ ALTER TABLE Usuario AUTO_INCREMENT = 1000;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Administrador;
 CREATE TABLE Administrador (
-  idAdministrador INT NOT NULL,
+  idAdministrador INT NOT NULL AUTO_INCREMENT,
   Username VARCHAR(45) NOT NULL,
   Password VARCHAR(45) NOT NULL,
   PRIMARY KEY (idAdministrador)
-  ) ;
+);
+
+ALTER TABLE Administrador AUTO_INCREMENT = 1000;
 
 -- -----------------------------------------------------
 -- Niveles Emisiones
@@ -60,11 +63,13 @@ CREATE TABLE Estadisticas(
   Usuario_idUsuario INT,
   Empresa_idEmpresa INT,
   FOREIGN KEY (Usuario_idUsuario)
-  REFERENCES Usuario(idUsuario),
+  REFERENCES Usuario(idUsuario)
+  ON DELETE CASCADE,
   FOREIGN KEY (Empresa_idEmpresa)
-  REFERENCES Empresa(idEmpresa),
+  REFERENCES Empresa(idEmpresa)
+  ON DELETE CASCADE,
   PRIMARY KEY (idEmisiones)
-) ;
+);
 
 ALTER TABLE Estadisticas AUTO_INCREMENT=1000;
 

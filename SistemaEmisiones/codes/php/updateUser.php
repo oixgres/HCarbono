@@ -147,26 +147,23 @@
 
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
-              <label for="statusSection" class="">Estado:</label>
+              <label for="statusSection" class="">Aprobado:</label>
             </div>
             <div class="col-auto form-small">
-              <!--<input type="text" class="form-control form-control-sm" id="statusSection" name="name">-->
-              <div class="input-group-text">
-                <input
-                  class="form-check-input mt-0"
-                  type="checkbox"
-                  value="good"
-                  name="admitted"
-                  <?php if($_SESSION['Aprobado'] == "Aprobado"): ?>
-                    checked
-                  <?php endif; ?>
-                >
-              </div>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="good"
+                name="admitted"
+                <?php if($_SESSION['Aprobado'] == "Aprobado"): ?>
+                  checked
+                <?php endif; ?>
+              >
             </div>
           </div>
 
           <div class="mt-5 ms-5 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary"><?php echo $_SESSION['Button']; ?></button>
+            <button type="submit" class="btn config-button"><?php echo $_SESSION['Button']; ?></button>
           </div>
         </form>
       </div>

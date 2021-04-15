@@ -29,8 +29,9 @@ if($connection)
       $_SESSION['Telefono']=$row['Telefono'];
       $_SESSION['Aprobado']=$row['Aprobado'];
       $_SESSION['IdEmpresa']=$row['Empresa_idEmpresa'];
-      $_SESSION['Button'] = "Update";
-      header("Location: updateUser.php");
+      $_SESSION['Button'] = "Actualizar";
+      //header("Location: updateUser.php");
+      echo '<script>window.location="updateUser.php"</script>';
       exit();
     }
   }
@@ -45,8 +46,9 @@ if($connection)
     $_SESSION['Telefono']=NULL;
     $_SESSION['Aprobado']=NULL;
     $_SESSION['IdEmpresa']=NULL;
-    $_SESSION['Button'] = "Create";
-    header("Location: updateUser.php");
+    $_SESSION['Button'] = "Crear";
+    //header("Location: updateUser.php");
+    echo '<script>window.location="updateUser.php"</script>';
     exit();
   }
 }
