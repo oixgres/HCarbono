@@ -44,7 +44,7 @@ if ($connection)
     echo "Usuario ya utilizado, ingrese otro";
   }
   else
-    if ($operation == "Create")
+    if ($operation == "Crear")
     {
       /*Verificamos que no se repita la empresa*/
       $query = "SELECT * FROM Empresa WHERE Nombre='".$company."'";
@@ -77,7 +77,7 @@ if ($connection)
         echo "La compañia no existe";
       }
       else
-        if($operation == "Update")
+        if($operation == "Actualizar")
         {
           /*Obtenemos el ID de la compañia */
           $query = "SELECT idEmpresa FROM Empresa WHERE Nombre = '".$company."'";
