@@ -38,6 +38,7 @@ if($connection)
 
   if(isset($_GET['create']))
   {
+    $_SESSION['Id']=NULL;
     $_SESSION['Username']=NULL;
     $_SESSION['Password']=NULL;
     $_SESSION['Nombre']=NULL;
