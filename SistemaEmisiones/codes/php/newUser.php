@@ -15,9 +15,8 @@ if ($connection)
   /* Verificamos que el correo no se encuentre ya registrado */
   $checkmail = mysqli_query($connection, "SELECT * FROM Usuario WHERE Correo='".$email."'");
 
-  if(mysqli_num_rows($connection, $checkmail) == 0)
+  if(mysqli_num_rows($checkmail) == 0)
   {
-
     /*Verificamos que no se repita la empresa*/
     $query = mysqli_query($connection, "SELECT * FROM Empresa WHERE Nombre='".$company."'");
     $nr = mysqli_num_rows($query);
@@ -27,12 +26,6 @@ if ($connection)
       mysqli_query($connection, "INSERT INTO Empresa(Nombre) VALUES ('$company')");
 
     /* Obtenemos el ID de la compañia */
-    /*
-    $query = "SELECT idEmpresa FROM Empresa WHERE Nombre = '".$company."'";
-    $res_query = mysqli_query($connection, $query);
-    $res_query = $res_query->fetch_array();
-    $id_company = intval($res_query[0]);
-    */
     $id_company = getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company);
 
     /* Registramos al usuario */
@@ -51,7 +44,7 @@ if ($connection)
   }
   else
   {
-    echo "Correo invalido";
+    echo "Correo ya utilizado";
   }
 }
 else
