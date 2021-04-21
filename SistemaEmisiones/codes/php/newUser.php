@@ -15,7 +15,7 @@ if ($connection)
   /* Verificamos que el correo no se encuentre ya registrado */
   $checkmail = mysqli_query($connection, "SELECT * FROM Usuario WHERE Correo='".$email."'");
 
-  if(mysqli_num_rows($connection, $checkmail) > 0)
+  if(mysqli_num_rows($connection, $checkmail) == 0)
   {
 
     /*Verificamos que no se repita la empresa*/
@@ -44,9 +44,14 @@ if ($connection)
 
     /* Registramos el dispositivo */
     $query = "INSERT INTO Dispositivo(Nombre,Usuario_idUsuario) VALUES ('$device', '$id_user')";
+    mysqli_query($connection, $query);
 
     header("Location: ../html/registerResult.html");
     exit();
+  }
+  else
+  {
+    echo "Correo invalido";
   }
 }
 else
