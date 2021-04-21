@@ -33,6 +33,7 @@
           <input type="hidden" name="operation" value="<?php echo $_SESSION['Button'] ?>">
           <?php
             require_once "dataBaseLogin.php";
+            require_once "phpFunctions.php";
 
             $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $_SESSION['IdEmpresa']);
             $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $_SESSION['Id'])
@@ -82,6 +83,7 @@
                 id="nameSection"
                 name="name"
                 value="<?php  echo $_SESSION['Nombre']; ?>"
+                required
               >
             </div>
           </div>
@@ -98,6 +100,7 @@
                 id="companySection"
                 name="company"
                 value="<?php echo $company; ?>"
+                required
               >
             </div>
           </div>
@@ -114,6 +117,7 @@
                 id="deviceSection"
                 name="device"
                 value="<?php echo $device; ?>"
+                required
               >
             </div>
           </div>
@@ -130,6 +134,7 @@
                 id="citySection"
                 name="city"
                 value="<?php echo $_SESSION['Ciudad']; ?>"
+                required
               >
             </div>
           </div>
@@ -146,6 +151,7 @@
                 id="emailSection"
                 name="email"
                 value="<?php echo $_SESSION['Correo']; ?>"
+                required
               >
             </div>
           </div>
@@ -162,6 +168,7 @@
                 id="phoneSection"
                 name="phone"
                 value="<?php echo $_SESSION['Telefono']; ?>"
+                required
               >
             </div>
           </div>

@@ -1,7 +1,6 @@
 <?php
-include "dataBaseLogin.php";
-
-$connection = mysqli_connect($host, $user, $password, $bd);
+require_once "dataBaseLogin.php";
+require_once "phpFunctions.php";
 
 if ($connection)
 {
@@ -24,6 +23,8 @@ if ($connection)
 
   /*Recuperamos el anterior Username del usuario*/
   $pastUsername = getFirstQueryElement($connection, "Usuario", "Username", "idUsuario", $id);
+  $pastPassword = getFirstQueryElement($connection, "Usuario", "Password", "idUsuario", $id);
+  $pastAdmitted = getFirstQueryElement($connection, "Usuario", "Aprobado", "idUsuario", $id);
 
   /* Verificamos que el username no este registrado*/
   $query = "SELECT * FROM Usuario WHERE Username='".$username."'";
@@ -70,6 +71,19 @@ if ($connection)
       /* Creamos el dispositivo */
       mysqli_query($connection, "INSERT INTO Dispositivo(Nombre,Usuario_idUsuario) VALUES('$device', '$id')");
 
+      /* Enviamos correo */
+      if($username != '' && $pass != '' && $admitted == "Aprobado")
+      {
+        $message = "Bienvenido a hcarbono \n\r\n\r";
+        $message.= "Se ha creado una cuenta en hcarbono.com \n\r";
+        $message.= "Su username es: ".$username."\n\r";
+        $message.= "Su contraseña es: ".$pass."\n\r";
+
+        sendMail($email, "Nueva Cuenta hcarbono", $message);
+      }
+
+
+
       header("Location: adminPage.php");
       exit();
     }
@@ -93,6 +107,28 @@ if ($connection)
 
           /* Actualizamos dispositivo */
           mysqli_query($connection, "UPDATE Dispositivo SET Nombre='".$device."'");
+
+          /* Enviamos correo cuando se cambia nombre o contraseña */
+          if($username != '' && $pass != '' && $admitted == "Aprobado" && ($username!=$pastUsername || $pass != $pastPassword))
+          {
+            $message = "Saludos de parte de hcarbono \n\r\n\r";
+            $message.= "Se han realizado modificaciones a sus datos \n\r";
+            $message.= "Su username actualizado es: ".$username."\n\r";
+            $message.= "Su contraseña actualizada es: ".$pass."\n\r";
+
+            sendMail($email, "Cambio de datos hcarbono", $message);
+          }
+          else
+            /* Enviamos correo si la cuenta es autorizada */
+            if($username != '' && $pass != '' && $pastAdmitted = "No Aprobado" && $admitted=="Aprobado")
+            {
+              $message = "Saludos de parte de hcarbono \n\r\n\r";
+              $message.= "Se han realizado modificaciones a sus datos \n\r";
+              $message.= "Su username actualizado es: ".$username."\n\r";
+              $message.= "Su contraseña actualizada es: ".$pass."\n\r";
+
+              sendMail($email, "Cambio de datos hcarbono", $message);
+            }
 
           header("Location: adminPage.php");
           exit();
