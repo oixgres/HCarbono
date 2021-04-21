@@ -30,7 +30,8 @@
 
       <div class="container-fluid  mt-5">
         <!-- Formulario de registro de usuario -->
-        <form class="needs-validation" action="../php/registration.php" method="post">
+        <form class="needs-validation" action="../php/newUser.php" method="post">
+          <!-- Nombre Completo -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="nameSection" class="">Nombre Completo:</label>
@@ -47,6 +48,7 @@
             </div>
           </div>
 
+          <!-- Compañia -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="companySection" class="">Compañia:</label>
@@ -57,12 +59,30 @@
                 class="form-control form-control-sm"
                 id="companySection"
                 name="company"
-                placeholder="Ingrese la compañia en que labora"
+                placeholder="Ingrese compañia en la que labora"
                 required
               >
             </div>
           </div>
 
+          <!-- Dispositivo -->
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+            <div class="col-small d-flex justify-content-end">
+              <label for="deviceSection" class="">Dispositivo:</label>
+            </div>
+            <div class="col-auto form-small">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="deviceSection"
+                name="device"
+                placeholder="Ingrese dispositivo a registrar"
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Ciudad -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="citySection" class="">Ciudad:</label>
@@ -73,12 +93,13 @@
                 class="form-control form-control-sm"
                 id="citySection"
                 name="city"
-                placeholder="Ingrese la ciudad en que reside"
+                placeholder="Ingrese ciudad de residencia"
                 required
               >
             </div>
           </div>
 
+          <!-- Correo -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="emailSection" class="">Correo de contacto:</label>
@@ -95,6 +116,7 @@
             </div>
           </div>
 
+          <!-- Telefono -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="phoneSection" class="">Telefono:</label>

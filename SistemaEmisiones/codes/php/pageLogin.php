@@ -16,7 +16,7 @@ if($connection)
   if($nr == 1)
   {
     /* Si existe el usuario obtenemos el ID y lo guardamos*/
-    $_SESSION['idUsuario'] = intval(getFromTable($connection, "Usuario", "idUsuario", "Username", $name));
+    $_SESSION['idUsuario'] = intval(getFirstQueryElement($connection, "Usuario", "idUsuario", "Username", $name));
 
     header("Location: userPage.php");
     exit();

@@ -13,6 +13,23 @@ CREATE TABLE Empresa (
 ALTER TABLE Empresa AUTO_INCREMENT = 1000;
 
 -- -----------------------------------------------------
+-- Dispositivo
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS Dispositivo;
+
+CREATE TABLE Dispositivo(
+  idDispositivo INT NOT NULL AUTO_INCREMENT,
+  Nombre VARCHAR(45) NOT NULL,
+  Usuario_idUsuario INT NOT NULL,
+  PRIMARY KEY (idDispositivo),
+  FOREIGN KEY (Usuario_idUsuario)
+  REFERENCES Usuario(idUsuario)
+  ON DELETE CASCADE
+);
+
+ALTER TABLE Dispositivo AUTO_INCREMENT=1000;
+
+-- -----------------------------------------------------
 -- Usuario
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Usuario;
@@ -28,7 +45,7 @@ CREATE TABLE Usuario (
   Empresa_idEmpresa INT,
   FOREIGN KEY (Empresa_idEmpresa)
   REFERENCES Empresa(idEmpresa)
-  ON DELETE CASCADE,
+  ON DELETE SET NULL,
   PRIMARY KEY (idUsuario)
 );
 
@@ -62,12 +79,16 @@ CREATE TABLE Estadisticas(
   Velocidad INT,
   Usuario_idUsuario INT,
   Empresa_idEmpresa INT,
+  Dispositivo_idDispositivo INT,
   FOREIGN KEY (Usuario_idUsuario)
   REFERENCES Usuario(idUsuario)
   ON DELETE CASCADE,
   FOREIGN KEY (Empresa_idEmpresa)
   REFERENCES Empresa(idEmpresa)
-  ON DELETE CASCADE,
+  ON DELETE SET NULL,
+  FOREIGN KEY (Dispositivo_idDispositivo)
+  REFERENCES Dispositivo(idDispositivo)
+  ON DELETE SET NULL,
   PRIMARY KEY (idEmisiones)
 );
 

@@ -3,12 +3,12 @@
 /*
 $connection = la conexion
 $table = el nombre de la tabla
-$selected = el campo que se selecciona
+$element = el campo que se selecciona
 $where = donde se cumpla la caracteristica
-$id = la caracteristica
+$coincidence = la caracteristica
 */
-function getFromTable($connection, $table, $selected, $where, $id){
-  $query = "SELECT $selected FROM $table WHERE $where='".$id."'";
+function getFirstQueryElement($connection, $table, $element, $where, $coincidence){
+  $query = "SELECT $element FROM $table WHERE $where='".$coincidence."'";
   $result = mysqli_query($connection, $query);
   $result = $result->fetch_array();
 

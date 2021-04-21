@@ -61,7 +61,7 @@
 
               <!-- Obtenemos el nombre de la empresa -->
               <?php
-                $company = getFromTable($connection, "Empresa", "Nombre", "idEmpresa", $row['Empresa_idEmpresa']);
+                $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $row['Empresa_idEmpresa']);
               ?>
 
               <td><?php echo  $company?></td>
