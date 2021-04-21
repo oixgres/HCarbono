@@ -32,14 +32,13 @@
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
           <input type="hidden" name="operation" value="<?php echo $_SESSION['Button'] ?>">
           <?php
-            include "dataBaseLogin.php";
+            require_once "dataBaseLogin.php";
 
-            $connection = mysqli_connect($host, $user, $password, $bd);
-            $query = mysqli_query($connection, "SELECT Nombre FROM Empresa WHERE idEmpresa='".$_SESSION['IdEmpresa']."'");
-            $query = $query->fetch_array();
-            $company = $query[0];
+            $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $_SESSION['IdEmpresa']);
+            $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $_SESSION['Id'])
           ?>
 
+          <!-- Usuario -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
               <label for="userSection" class="">Usuario:</label>
@@ -55,6 +54,7 @@
             </div>
           </div>
 
+          <!-- Contraseña -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
               <label for="passSection" class="">Contraseña:</label>
@@ -70,6 +70,7 @@
             </div>
           </div>
 
+          <!-- Nombre -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
               <label for="nameSection" class="">Nombre Completo:</label>
@@ -85,6 +86,7 @@
             </div>
           </div>
 
+          <!-- Compañia -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="companySection" class="">Compañia:</label>
@@ -100,6 +102,23 @@
             </div>
           </div>
 
+          <!-- Dispositivo -->
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+            <div class="col-small d-flex justify-content-end">
+              <label for="$deviceSection" class="">Dispositivo:</label>
+            </div>
+            <div class="col-auto form-small">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="deviceSection"
+                name="device"
+                value="<?php echo $device; ?>"
+              >
+            </div>
+          </div>
+
+          <!-- Ciudad -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="citySection" class="">Ciudad:</label>
@@ -115,6 +134,7 @@
             </div>
           </div>
 
+          <!-- Correo -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="emailSection" class="">Correo de contacto:</label>
@@ -130,6 +150,7 @@
             </div>
           </div>
 
+          <!-- Telefono -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="phoneSection" class="">Telefono:</label>
@@ -145,6 +166,7 @@
             </div>
           </div>
 
+          <!-- Estatus -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
               <label for="statusSection" class="">Aprobado:</label>
