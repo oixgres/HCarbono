@@ -39,6 +39,22 @@
             $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $_SESSION['Id'])
           ?>
 
+          <!-- Correo al usuario -->
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+            <div class="col-auto col-small d-flex justify-content-end">
+              <label for="sendMailSection" class="">¿Enviar correo?</label>
+            </div>
+            <div class="col-auto form-small">
+              <input
+                class="form-check-input"
+                id="sendMailSection"
+                type="checkbox"
+                value="good"
+                name="sendMail"
+              >
+            </div>
+          </div>
+
           <!-- Usuario -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">

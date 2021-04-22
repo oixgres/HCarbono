@@ -1,15 +1,17 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require_once "phpFunctions.php";
+
+checkSession();
+?>
+
+
 
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <!--
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-    -->
 
     <title>Sistema Emisiones (Nombre en desarrollo)</title>
 
@@ -23,9 +25,7 @@
 
   <body class="background-color">
     <?php
-      include "dataBaseLogin.php";
-
-      $connection = mysqli_connect($host, $user, $password, $bd);
+      require_once "dataBaseLogin.php";
 
       $result = mysqli_query($connection, "SELECT Fecha, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_SESSION['idUsuario']."' ORDER BY Fecha");
 

@@ -24,4 +24,18 @@ function sendMail($email, $issue, $message)
 
   @mail($email, $issue, $message, $header);
 }
+
+function createToken()
+{
+  return sha1(uniqid(rand(10000000,99999999), true));
+}
+
+function checkSession($redirecPage)
+{
+  if($_COOKIE["token"] != $_SESSION["token"] || !isset($_SESSION["token"]))
+  {
+    header("Location: ".$redirecPage);
+    exit();
+  }
+}
 ?>

@@ -88,7 +88,7 @@
     <div class="d-grid d-md-flex justify-content-md-end">
       <a
         href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
-        class="btn config-button mt-5 me-5">Nuevo
+        class="btn config-button mt-5 me-5 mb-5">Nuevo
       </a>
     </div>
   </body>
