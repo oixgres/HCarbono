@@ -2,10 +2,8 @@
 session_start();
 require_once "phpFunctions.php";
 
-checkSession();
+checkSession("../../index.html");
 ?>
-
-
 
 <!DOCTYPE html>
 
@@ -27,7 +25,7 @@ checkSession();
     <?php
       require_once "dataBaseLogin.php";
 
-      $result = mysqli_query($connection, "SELECT Fecha, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_SESSION['idUsuario']."' ORDER BY Fecha");
+      $result = mysqli_query($connection, "SELECT Fecha, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha");
 
       $date=array();
       $hum=array();
