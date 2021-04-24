@@ -1,0 +1,13 @@
+.config-input[data-error]{
+  border-color: #c92345;
+  color: #c92345;
+}
+
+.config-input[data-error]::after{
+  content: attr(data-error);
+  font-size: 0.85em;
+  border: 0px solid;
+  color: #c92345;
+  display: block;
+  margin-top: 0;
+}
