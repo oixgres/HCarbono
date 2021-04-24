@@ -35,6 +35,8 @@ if($connection)
   if($nr == 1)
   {
     /* Si el admin existe creamos cookies y token de sesion */
+    $token = createToken();
+
     $_SESSION["token"] = $token;
     setcookie("token", $token, time()+(60*60*24*15), "/");
     setcookie("idUsuario",intval(getFirstQueryElement($connection, "Usuario", "idUsuario", "Username", $name)) , time()+(60*60*24*15), "/");

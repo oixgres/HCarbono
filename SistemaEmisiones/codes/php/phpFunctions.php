@@ -32,7 +32,8 @@ function createToken()
 
 function checkSession($redirecPage)
 {
-  if($_COOKIE["token"] != $_SESSION["token"] || !isset($_SESSION["token"]))
+  session_start();
+  if(($_COOKIE["token"] != $_SESSION["token"]) || !isset($_SESSION["token"]))
   {
     header("Location: ".$redirecPage);
     exit();
