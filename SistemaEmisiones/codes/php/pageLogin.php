@@ -15,10 +15,7 @@ if($connection)
 
   if($nr == 1)
   {
-    /* Si existe el usuario obtenemos el ID y lo guardamos*/
-    //$_SESSION['idUsuario'] = intval(getFirstQueryElement($connection, "Usuario", "idUsuario", "Username", $name));
-
-    /* Si el id existe creamos cookies y token de sesion */
+    /* Si el usuario existe creamos cookies y token de sesion */
     $token = createToken();
 
     $_SESSION["token"] = $token;
@@ -37,6 +34,13 @@ if($connection)
 
   if($nr == 1)
   {
+    /* Si el admin existe creamos cookies y token de sesion */
+    $_SESSION["token"] = $token;
+    setcookie("token", $token, time()+(60*60*24*15), "/");
+    setcookie("idUsuario",intval(getFirstQueryElement($connection, "Usuario", "idUsuario", "Username", $name)) , time()+(60*60*24*15), "/");
+    setcookie("Nombre", getFirstQueryElement($connection, "Usuario", "Nombre", "Username", $name), time()+(60*60*24*15), "/");
+    setcookie("Correo", getFirstQueryElement($connection, "Usuario", "Correo", "Username", $name), time()+(60*60*24*15), "/");
+
     header("Location: adminPage.php");
     exit();
   }

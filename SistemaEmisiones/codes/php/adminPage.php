@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+require_once "phpFunctions.php";
+
+checkSession("../../index.html");
+
+?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -45,6 +50,7 @@
               <th>Telefono</th>
               <th>Estado</th>
               <th>Empresa</th>
+              <th>Dispositivo</th>
               <th>Accion</th>
             </tr>
           </thead>
@@ -63,8 +69,14 @@
               <?php
                 $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $row['Empresa_idEmpresa']);
               ?>
-
               <td><?php echo  $company?></td>
+
+              <?php
+                $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $row["idUsuario"])
+              ?>
+              <td><?php echo $device; ?></td>
+
+
               <td>
                 <!-- Redireccion a pagina para editar el usuaro -->
                 <a
@@ -72,7 +84,6 @@
                   class="btn config-button">Editar
                 </a>
                 <!-- Se elimina el usuario en automatico -->
-                <!-- AGREGAR WARN ANTES DE ELIMINAR -->
                 <a
                   href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
                   class="btn config-button-danger">Borrar

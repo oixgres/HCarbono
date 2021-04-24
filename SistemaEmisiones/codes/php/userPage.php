@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "phpFunctions.php";
 
 checkSession("../../index.html");

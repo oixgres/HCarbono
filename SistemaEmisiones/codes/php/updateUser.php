@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+require_once "phpFunctions.php";
+
+checkSession("../../index.html");
+?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
