@@ -1,5 +1,4 @@
 <!-- Creado por: Sergio Enrique Guerra Cervantes -->
-
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -31,40 +30,24 @@
 
       <div class="container-fluid  mt-5">
         <!-- Formulario de registro de usuario -->
-        <form class="needs-validation" action="../php/newUser.php" method="post">
+        <form id="form" class="needs-validation" action="" method="get">
           <!-- Nombre Completo -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-small d-flex justify-content-end">
               <label for="nameSection" class="">Nombre Completo:</label>
             </div>
             <div class="col-auto form-small">
-                <!--
                 <input
                   type="text"
-                  class="form-control form-control-sm config-input"
-                  data error
+                  class="form-control form-control-sm error"
                   id="nameSection"
                   name="name"
                   placeholder="Ingrese su nombre completo"
                   value="prueba"
-                  required
                 >
-
-              -->
-              <input
-                type="text"
-                class="form-control form-control-sm"
-                id="nameSection"
-                name="name"
-                placeholder="Ingrese su nombre completo"
-                required
-              >
             </div>
-            <!--
-            <div class="d-flex ms-5 justify-content-center config-input" data-error="Este campo debe ser llenado" >
+            <div class="d-flex ms-5 justify-content-center error" data-error="Este campo debe ser llenado" >
             </div>
-          -->
-
           </div>
 
           <!-- Compañia -->
@@ -75,12 +58,14 @@
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm error"
                 id="companySection"
                 name="company"
                 placeholder="Ingrese compañia en la que labora"
-                required
+
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center error" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -92,12 +77,14 @@
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm error"
                 id="deviceSection"
                 name="device"
                 placeholder="Ingrese dispositivo a registrar"
-                required
+
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center error" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -109,12 +96,14 @@
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm error"
                 id="citySection"
                 name="city"
                 placeholder="Ingrese ciudad de residencia"
-                required
+
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center error" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -126,12 +115,14 @@
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm error"
                 id="emailSection"
                 name="email"
                 placeholder="Ingrese su correo electronico"
-                required
+
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center error" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -143,12 +134,14 @@
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm error"
                 id="phoneSection"
                 name="phone"
                 placeholder="Ingrese su numero telefonico"
-                required
+
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center error" data-error="Este campo debe ser llenado" >
             </div>
           </div>
           <div class="mt-5 ms-5 d-flex justify-content-center">
@@ -156,6 +149,7 @@
           </div>
         </form>
       </div>
+      <script src="../js/inputEmpty.js"></script>
     </section>
   </body>
 </html>

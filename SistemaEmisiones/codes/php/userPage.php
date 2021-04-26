@@ -14,7 +14,6 @@ checkSession("../../index.html");
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <link rel="stylesheet" href="../css/pageStyle.css">
@@ -123,7 +122,7 @@ checkSession("../../index.html");
             <label class="form-check-label" for="vel">Velocidad</label>
           </div>
         </div>
-        <button class="showGraphic btn btn-primary config-button hide-overflow mt-5">Graficar</button>
+        <button class="displayGraph btn btn-primary config-button hide-overflow mt-5">Graficar</button>
       </div>
 
       <div class="col-6 mt-2">
@@ -151,10 +150,12 @@ checkSession("../../index.html");
           class="me-3"
         >
         <input class="btn btn-primary config-button btn-sm hide-overflow" type="submit" name="export" value="Exportar datos">
-        <!--<button class="btn btn-info" type="submit" name="export">Exportar Datos</button>-->
       </form>
     </div>
+    <script src="../js/phpToJs.js" charset="utf-8"></script>
+    <script src="../js/graph.js" charset="utf-8"></script>
 
+    <!--
     <script type="text/javascript">
       function createJSString(json){
         var parsed = JSON.parse(json);
@@ -165,25 +166,28 @@ checkSession("../../index.html");
         return arr;
       }
     </script>
+  -->
 
-    <script type="text/javascript">
 
-      document.querySelector(".showGraphic").addEventListener("click",showGraphic);
+    <!-- <script type="text/javascript">
+
+      document.querySelector(".displayGraph").addEventListener("click",displayGraph);
       var checks = document.getElementsByClassName('form-check-input');
       Plotly.newPlot('grafico', []);
-
-      function showGraphic()
+-->
+<!--
+      function displayGraph()
       {
         var edDate = document.getElementById('endDate').value;
         var stDate = document.getElementById('startDate').value;
 
-        axisX = createJSString('<?php echo $dataX ?>');
-        axisY1 = createJSString('<?php echo $traceHum ?>');
-        axisY2 = createJSString('<?php echo $traceTem ?>');
-        axisY3 = createJSString('<?php echo $traceCO ?>');
-        axisY4 = createJSString('<?php echo $traceCO2 ?>');
-        axisY5 = createJSString('<?php echo $traceO2 ?>');
-        axisY6 = createJSString('<?php echo $traceVel ?>');
+        axisX = createJSString(' <?php /*echo $dataX*/ ?>');
+        axisY1 = createJSString('<?php/* echo $traceHum */?>');
+        axisY2 = createJSString('<?php// echo $traceTem ?>');
+        axisY3 = createJSString('<?php// echo $traceCO ?>');
+        axisY4 = createJSString('<?php// echo $traceCO2 ?>');
+        axisY5 = createJSString('<?php// echo $traceO2 ?>');
+        axisY6 = createJSString('<?php //echo $traceVel ?>');
 
         /* Funcion para seleccionar unicamente los datos de fecha por el usuario */
         for(var i = 0; i < axisX.length; i++)
@@ -258,16 +262,16 @@ checkSession("../../index.html");
         var i = 0;
 
         /* Funcion para solo mostrar los datos seleccionados por el usuario */
-        <?php for($i = 0; $i <= count($row); $i++): ?>
-          <?php if(!empty($row[$i])): ?>
+        <?php //for($i = 0; $i <= count($row); $i++): ?>
+          <?php //if(!empty($row[$i])): ?>
                   if(checks[i].checked === true)
                   {
                     data.push(fullData[i]);
                   }
-          <?php endif; ?>
+          <?php //endif; ?>
                 i++;
-        <?php endfor;
-              $row = $auxRow;
+        <?php //endfor;
+            //  $row = $auxRow;
         ?>
 
         //var data = [data1, data2, data3, data4, data5, data6];
@@ -276,7 +280,26 @@ checkSession("../../index.html");
 
     }
     </script>
+  -->
+  <script type="text/javascript">
+    document.querySelector(".displayGraph").addEventListener("click",displayGraph);
 
+    function displayGraph(){
+      var fullData = prepareGraphic(<?php echo $dataX; ?>,<?php echo $traceHum; ?>,<?php echo $traceTem; ?>, <?php echo $traceCO; ?>, <?php echo $traceCO2 ?>, <?php echo $traceO2; ?>, <?php echo $traceVel; ?>);
+
+      <?php for($i = 0; $i <= count($row); $i++): ?>
+        <?php if(!empty($row[$i])): ?>
+                if(checks[i].checked === true)
+                {
+                  data.push(fullData[i]);
+                }
+        <?php endif; ?>
+              i++;
+      <?php endfor;
+            $row = $auxRow;
+      ?>
+    }
+  </script>
   <!--  <script src="../js/graph.js"></script> -->
   </body>
 </html>

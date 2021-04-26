@@ -1,95 +1,80 @@
-//document.querySelector(".addParam").addEventListener("click",addParam);
-//document.querySelector(".showResults").addEventListener("click",showResults);
-/*Ayuda js
-https://www.youtube.com/watch?v=xHbmHY9lJu4&ab_channel=FacultadAutodidacta
-https://www.youtube.com/watch?v=4biDfBztNGc&ab_channel=SoyDalto
-*/
-var param = [];
-var values = [];
+var checks = document.getElementsByClassName('form-check-input');
+Plotly.newPlot('grafico', []);
 
-/*
-function addParam()
-{
-    let html = document.querySelector(".container").innerHTML;
-    let newHTML = '<div><input type="text" class="parametro" placeholder="parametro"><input type="number" class="valor" placeholder="valor"></div>';
-    document.querySelector(".container").innerHTML = html + newHTML;
-}
-*/
+function prepareGraphic(dataX, traceHum, traceTem, traceCO, traceCO2, traceO2, traceVel){
+  axisX = createJSString(dataX);
+  axisY1 = createJSString(traceHum);
+  axisY2 = createJSString(traceTem);
+  axisY3 = createJSString(traceCO);
+  axisY4 = createJSString(traceCO2);
+  axisY5 = createJSString(traceO2);
+  axisY6 = createJSString(traceVel);
 
-/*https://www.youtube.com/watch?v=xHbmHY9lJu4&t=71s&ab_channel=FacultadAutodidacta 8:14*/
-
-function createJSString(json){
-  var parsed = JSON.parse(json);
-  var arr = [];
-  for(var x in parsed){
-    arr.push(parsed[x]);
+  for(var i = 0; i < axisX.length; i++)
+  {
+    if(axisX[i] < stDate)
+    {
+      axisX.splice(i, 1);
+      axisY1.splice(i, 1);
+      axisY2.splice(i, 1);
+      axisY3.splice(i, 1);
+      axisY4.splice(i, 1);
+      axisY5.splice(i, 1);
+      axisY6.splice(i, 1);
+    }
+    else
+      if(axisX[i] > edDate)
+      {
+        axisX.splice(i, 1);
+        axisY1.splice(i, 1);
+        axisY2.splice(i, 1);
+        axisY3.splice(i, 1);
+        axisY4.splice(i, 1);
+        axisY5.splice(i, 1);
+        axisY6.splice(i, 1);
+      }
   }
-  return arr;
-}
-
-function showResults(date, hum, tem, co, co2, o2, vel)
-{
-/*
-  axisX = createJSString(date);
-  axisY1 = createJSString(hum);
-  axisY2 = createJSString(tem);
-  axisY3 = createJSString(co);
-  axisY4 = createJSString(co2);
-  axisY5 = createJSString(o2);
-  axisY6 = createJSString(vel);
-
-*/
-  /*
-  for(var i = document.querySelectorAll('.parametro').lenght - 1; i >= 0; i--){
-    param.push(document.querySelectorAll('.parametro')[i].value);
-    values.push(parseInt(document.querySelectorAll('.valor')[i].value));
-  }*/
-
-/*
   var data1 = {
     x: axisX,
     y: axisY1,
+    name: 'Humedad',
     type: "scatter"
   };
 
   var data2 = {
     x: axisX,
     y: axisY2,
+    name: 'Temperatura',
     type: "scatter"
   };
 
   var data3 = {
     x: axisX,
     y: axisY3,
+    name: 'CO',
     type: "scatter"
   };
 
   var data4 = {
     x: axisX,
     y: axisY4,
+    name: 'CO2',
     type: "scatter"
   };
 
   var data5 = {
     x: axisX,
     y: axisY5,
+    name: 'O2',
     type: "scatter"
   };
 
   var data6 = {
     x: axisX,
     y: axisY6,
+    name: 'Velocidad',
     type: "scatter"
   };
 
-  var data7 = {
-    x: ["a", "b", "c", "d"],
-    y: [1,2,3,4],
-    type: "scatter"
-  };
-
-  var data = [data1, data2, data3, data4, data5, data6, data7];
-
-
-  Plotly.newPlot('grafico', data);
+  return [data1, data2, data3, data4, data5, data6];
 }
