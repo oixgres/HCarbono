@@ -21,7 +21,7 @@ if ($connection)
   else
     $admitted = "No Aprobado";
 
-  if(($username == '' || $pass=='') && !empty($_POST["sendMail"]) || $admitted == "No Aprobado")
+  if(($username == '' || $pass=='') && !empty($_POST["sendMail"]) && $admitted == "No Aprobado")
   {
     echo "Operacion invalida, no se puede enviar correo sin Username, ni Password, ni sin aprobacion";
   }

@@ -102,7 +102,7 @@ checkSession("../../index.html");
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm interactable"
                 id="nameSection"
                 name="name"
                 value="<?php  echo $_SESSION['Nombre']; ?>"
@@ -120,7 +120,7 @@ checkSession("../../index.html");
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm interactable"
                 id="companySection"
                 name="company"
                 value="<?php echo $company; ?>"
@@ -138,7 +138,7 @@ checkSession("../../index.html");
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm interactable"
                 id="deviceSection"
                 name="device"
                 value="<?php echo $device; ?>"
@@ -156,7 +156,7 @@ checkSession("../../index.html");
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm interactable"
                 id="citySection"
                 name="city"
                 value="<?php echo $_SESSION['Ciudad']; ?>"
@@ -174,7 +174,7 @@ checkSession("../../index.html");
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm interactable"
                 id="emailSection"
                 name="email"
                 value="<?php echo $_SESSION['Correo']; ?>"
@@ -192,7 +192,7 @@ checkSession("../../index.html");
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm interactable"
                 id="phoneSection"
                 name="phone"
                 value="<?php echo $_SESSION['Telefono']; ?>"

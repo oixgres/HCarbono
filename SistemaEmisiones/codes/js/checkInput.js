@@ -2,9 +2,9 @@
 const errorMessage = document.getElementsByClassName('d-flex ms-5 justify-content-center');
 
 /* Entrada sin errores */
-const input = document.getElementsByClassName('form-control form-control-sm');
+const input = document.getElementsByClassName('form-control form-control-sm interactable');
 
-const inputError = document.getElementsByClassName('form-control form-control-sm error');
+const inputError = document.getElementsByClassName('form-control form-control-sm interactable error');
 
 const form = document.getElementById('form');
 

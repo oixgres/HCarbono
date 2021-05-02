@@ -83,8 +83,10 @@ checkSession("../../index.html");
                   href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
                   class="btn config-button">Editar
                 </a>
+
                 <a
-                  onclick="togglePopup("adminPage.php?delete=<?php echo $row['idUsuario']; ?>")"
+                  id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
+                  onclick="togglePopup(this)"
                   class="btn config-button-danger"
                 >Borrar
                 </a>
@@ -107,7 +109,7 @@ checkSession("../../index.html");
     <div class="popup" id="popup-delete">
       <div class="overlay"></div>
       <div class="content">
-        <div class="close-button">&times;</div>
+        <div id = "1" class="close-button" onclick="togglePopup()">&times;</div>
         <h1 class="danger-text">ADVERTENCIA</h1>
         <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
         <p>¿Desea continuar?</p>
@@ -115,6 +117,7 @@ checkSession("../../index.html");
 
         </div>
         <a
+          id="popup-delete-button"
           href=""
           class="btn config-button-danger">Borrar
         </a>
