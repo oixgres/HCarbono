@@ -2,6 +2,9 @@ var checks = document.getElementsByClassName('form-check-input');
 Plotly.newPlot('grafico', []);
 
 function prepareGraphic(dataX, traceHum, traceTem, traceCO, traceCO2, traceO2, traceVel){
+  var edDate = document.getElementById('endDate').value;
+  var stDate = document.getElementById('startDate').value;
+
   axisX = createJSString(dataX);
   axisY1 = createJSString(traceHum);
   axisY2 = createJSString(traceTem);

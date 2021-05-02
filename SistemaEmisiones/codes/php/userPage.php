@@ -285,8 +285,11 @@ checkSession("../../index.html");
     document.querySelector(".displayGraph").addEventListener("click",displayGraph);
 
     function displayGraph(){
-      var fullData = prepareGraphic(<?php echo $dataX; ?>,<?php echo $traceHum; ?>,<?php echo $traceTem; ?>, <?php echo $traceCO; ?>, <?php echo $traceCO2 ?>, <?php echo $traceO2; ?>, <?php echo $traceVel; ?>);
+      var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
+      var data = [];
+      var i = 0;
 
+      /* Funcion para solo mostrar los datos seleccionados por el usuario */
       <?php for($i = 0; $i <= count($row); $i++): ?>
         <?php if(!empty($row[$i])): ?>
                 if(checks[i].checked === true)
@@ -298,6 +301,8 @@ checkSession("../../index.html");
       <?php endfor;
             $row = $auxRow;
       ?>
+      
+      Plotly.newPlot('grafico', data);
     }
   </script>
   <!--  <script src="../js/graph.js"></script> -->

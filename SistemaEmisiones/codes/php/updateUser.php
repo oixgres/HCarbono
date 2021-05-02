@@ -16,6 +16,7 @@ checkSession("../../index.html");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../css/pageStyle.css">
+    <link rel="stylesheet" href="../css/inputStyle.css">
   </head>
 
   <body class="background-color">
@@ -45,7 +46,7 @@ checkSession("../../index.html");
             $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $_SESSION['Id'])
           ?>
 
-          <!-- Correo al usuario -->
+          <!-- Enviar Correo al usuario -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
               <label for="sendMailSection" class="">¿Enviar correo?</label>
@@ -95,7 +96,7 @@ checkSession("../../index.html");
 
           <!-- Nombre -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
-            <div class="col-auto col-small d-flex justify-content-end">
+            <div class="col-small d-flex justify-content-end">
               <label for="nameSection" class="">Nombre Completo:</label>
             </div>
             <div class="col-auto form-small">
@@ -105,8 +106,9 @@ checkSession("../../index.html");
                 id="nameSection"
                 name="name"
                 value="<?php  echo $_SESSION['Nombre']; ?>"
-                required
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -122,8 +124,9 @@ checkSession("../../index.html");
                 id="companySection"
                 name="company"
                 value="<?php echo $company; ?>"
-                required
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -139,8 +142,9 @@ checkSession("../../index.html");
                 id="deviceSection"
                 name="device"
                 value="<?php echo $device; ?>"
-                required
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -156,8 +160,9 @@ checkSession("../../index.html");
                 id="citySection"
                 name="city"
                 value="<?php echo $_SESSION['Ciudad']; ?>"
-                required
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -173,8 +178,9 @@ checkSession("../../index.html");
                 id="emailSection"
                 name="email"
                 value="<?php echo $_SESSION['Correo']; ?>"
-                required
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -190,8 +196,9 @@ checkSession("../../index.html");
                 id="phoneSection"
                 name="phone"
                 value="<?php echo $_SESSION['Telefono']; ?>"
-                required
               >
+            </div>
+            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
             </div>
           </div>
 
@@ -218,6 +225,7 @@ checkSession("../../index.html");
           </div>
         </form>
       </div>
+      <script src="../js/checkInput.js" charset="utf-8"></script>
     </section>
   </body>
 </html>

@@ -2,7 +2,6 @@
 require_once "phpFunctions.php";
 
 checkSession("../../index.html");
-
 ?>
 <!DOCTYPE html>
 
