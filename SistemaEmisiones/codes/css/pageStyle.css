@@ -17,6 +17,10 @@ p{
   text-align: justify;
 }
 
+.danger-text{
+  color: rgb(213,52,73);
+}
+
 /*Color para el fondo de pantalla*/
 .background-color{
   background-color: rgba(255, 255, 255, 1);
@@ -50,6 +54,7 @@ p{
   color: rgba(255, 255, 255, 1);
   background-color: rgb(213,52,73);
   border: 1px solid rgb(135,28,42);
+  max-width: 100px;
 }
 
 /*Boton de danger al fijar*/

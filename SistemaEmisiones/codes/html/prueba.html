@@ -113,20 +113,19 @@ checkSession("../../index.html");
     <div class="popup" id="popup-delete">
       <div class="overlay"></div>
       <div class="content">
-        <div class="close-button">&times;</div>
+        <div class="close-button" onclick="togglePopup()">&times;</div>
         <h1 class="danger-text">ADVERTENCIA</h1>
         <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
         <p>¿Desea continuar?</p>
-        <div class="row">
-          
+        <div class="d-flex justify-content-center">
+          <a
+            href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
+            class="btn config-button-danger">Borrar
+          </a>
         </div>
-        <a
-          href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
-          class="btn config-button-danger">Borrar
-        </a>
       </div>
     </div>
-    <button onclick="togglePopup()">Prueba</button>
+    <!-- <button onclick="togglePopup()">Prueba</button> -->
     <script src="../js/popup.js" charset="utf-8"></script>
   </body>
 </html>
