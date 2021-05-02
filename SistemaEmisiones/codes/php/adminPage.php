@@ -84,9 +84,8 @@ checkSession("../../index.html");
                   class="btn config-button">Editar
                 </a>
                 <a
-                  onclick="togglePopup()"
+                  onclick="togglePopup("adminPage.php?delete=<?php echo $row['idUsuario']; ?>")"
                   class="btn config-button-danger"
-                  value="<?php echo $row['idUsuario']; ?>"
                 >Borrar
                 </a>
               </td>
@@ -116,7 +115,7 @@ checkSession("../../index.html");
 
         </div>
         <a
-          href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
+          href=""
           class="btn config-button-danger">Borrar
         </a>
       </div>

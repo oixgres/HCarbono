@@ -1,3 +1,6 @@
-function togglePopup(){
-  document.getElementById('popup-delete').classList.toggle("active");
+function togglePopup(deleteId){
+  var popup = document.getElementById('popup-delete')
+
+  popup.href=deleteId;
+  popup.classList.toggle("active");
 }
