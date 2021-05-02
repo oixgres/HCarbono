@@ -36,8 +36,7 @@ if ($connection)
     $id_user = getFirstQueryElement($connection, "Usuario", "idUsuario", "Correo", $email);
 
     /* Registramos el dispositivo */
-    $query = "INSERT INTO Dispositivo(Nombre,Usuario_idUsuario) VALUES ('$device', '$id_user')";
-    mysqli_query($connection, $query);
+    $query = "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES (NULL, '$id_user')";
 
     header("Location: ../html/registerResult.html");
     exit();

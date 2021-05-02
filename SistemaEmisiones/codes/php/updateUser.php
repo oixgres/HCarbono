@@ -43,7 +43,7 @@ checkSession("../../index.html");
             require_once "phpFunctions.php";
 
             $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $_SESSION['IdEmpresa']);
-            $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $_SESSION['Id'])
+            $device = getFirstQueryElement($connection, "Dispositivo", "Codigo", "Usuario_idUsuario", $_SESSION['Id'])
           ?>
 
           <!-- Enviar Correo al usuario -->

@@ -71,7 +71,7 @@ checkSession("../../index.html");
               <td><?php echo  $company?></td>
 
               <?php
-                $device = getFirstQueryElement($connection, "Dispositivo", "Nombre", "Usuario_idUsuario", $row["idUsuario"])
+                $device = getFirstQueryElement($connection, "Dispositivo", "Codigo", "Usuario_idUsuario", $row['idUsuario'])
               ?>
               <td><?php echo $device; ?></td>
 

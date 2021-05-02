@@ -75,7 +75,7 @@ if ($connection)
         mysqli_query($connection, $query);
 
         /* Creamos el dispositivo */
-        mysqli_query($connection, "INSERT INTO Dispositivo(Nombre,Usuario_idUsuario) VALUES('$device', '$id_user')");
+        mysqli_query($connection, "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES('$device', '$id_user')");
 
         /* Enviamos correo */
         if(!empty($_POST["sendMail"]))
@@ -105,7 +105,7 @@ if ($connection)
 
             /* Actualizamos dispositivo */
             $id_device = intval(getFirstQueryElement($connection, "Dispositivo", "idDispositivo", "Usuario_idUsuario", $id_user));
-            mysqli_query($connection, "UPDATE Dispositivo SET Nombre='".$device."' WHERE idDispositivo='".$id_device."'");
+            mysqli_query($connection, "UPDATE Dispositivo SET Codigo='".$device."' WHERE idDispositivo='".$id_device."'");
 
             /* Enviamos correo */
             if(!empty($_POST["sendMail"]))

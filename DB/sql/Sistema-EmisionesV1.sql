@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS Dispositivo;
 
 CREATE TABLE Dispositivo(
   idDispositivo INT NOT NULL AUTO_INCREMENT,
-  Nombre VARCHAR(45) NOT NULL,
+  Codigo VARCHAR(20),
   Usuario_idUsuario INT NOT NULL,
   PRIMARY KEY (idDispositivo),
   FOREIGN KEY (Usuario_idUsuario)
