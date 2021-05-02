@@ -37,6 +37,7 @@ if ($connection)
 
     /* Registramos el dispositivo */
     $query = "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES (NULL, '$id_user')";
+    ysqli_query($connection, $query);
 
     header("Location: ../html/registerResult.html");
     exit();

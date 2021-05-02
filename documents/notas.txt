@@ -1,3 +1,7 @@
 14/04/2021
 - Se pueden introducir usernames nulos para usuarios no activados
-- https://www.codeproject.com/tips/549347/browser-back-button-issue-after-logout-2 checar tomorrow
+
+01/05/2021
+- Checar como pasar el id del usuario al boton de advertencia al borrar
+- No se puede actualizar el usuario por que aparece mensaje de que para
+  enviar un correo es necesario el username y password

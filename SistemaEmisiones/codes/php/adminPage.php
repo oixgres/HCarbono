@@ -83,16 +83,11 @@ checkSession("../../index.html");
                   href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
                   class="btn config-button">Editar
                 </a>
-                <!-- Se elimina el usuario en automatico -->
-                <!--
-                <a
-                  href="adminPage.php?delete=<?php //echo $row['idUsuario']; ?>"
-                  class="btn config-button-danger">Borrar
-                </a>
-              -->
                 <a
                   onclick="togglePopup()"
-                  class="btn config-button-danger">Borrar
+                  class="btn config-button-danger"
+                  value="<?php echo $row['idUsuario']; ?>"
+                >Borrar
                 </a>
               </td>
             </tr>
@@ -118,7 +113,7 @@ checkSession("../../index.html");
         <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
         <p>¿Desea continuar?</p>
         <div class="row">
-          
+
         </div>
         <a
           href="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
@@ -126,7 +121,6 @@ checkSession("../../index.html");
         </a>
       </div>
     </div>
-    <button onclick="togglePopup()">Prueba</button>
     <script src="../js/popup.js" charset="utf-8"></script>
   </body>
 </html>

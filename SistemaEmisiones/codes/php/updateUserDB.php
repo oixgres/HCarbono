@@ -74,6 +74,9 @@ if ($connection)
         $query = "INSERT INTO Usuario(Username, Password, Nombre, Ciudad, Correo, Telefono, Aprobado, Empresa_idEmpresa) VALUES ('$username', '$pass', '$name', '$city', '$email', '$phone', '$admitted', '$id_company')";
         mysqli_query($connection, $query);
 
+        /* Recuperamos el id del usuaro */
+        $id_user = getFirstQueryElement("Usuario", "idUsuario", "Correo", $email);
+
         /* Creamos el dispositivo */
         mysqli_query($connection, "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES('$device', '$id_user')");
 

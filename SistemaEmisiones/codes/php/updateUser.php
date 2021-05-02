@@ -33,7 +33,7 @@ checkSession("../../index.html");
       <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
 
       <div class="container-fluid  mt-5">
-        <form class="" action="updateUserDB.php" method="post">
+        <form id="form" class="" action="updateUserDB.php" method="post">
 
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
