@@ -7,10 +7,19 @@
     <title>Sistema Emisiones (Nombre en desarrollo)</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    >
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
 
-    <!-- Mis diseños -->
+    <!-- Originales -->
     <link rel="stylesheet" href="codes/css/pageStyle.css">
   </head>
 
@@ -22,7 +31,15 @@
         <a class="navbar-brand" href="index.html">SISTEMA</a>
 
         <!-- Boton para desglosar el contenido -->
-        <button class="mb-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="mb-2 navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#myNavbar"
+          aria-controls="myNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -30,16 +47,29 @@
           </ul>
 
           <form class="d-inline-flex" method="post" action="codes/php/pageLogin.php">
+            
             <!-- Campo para ingresar username -->
             <div class="d-flex">
               <div class="mt-1" style="color:white;">Usuario</div>
-              <input class="form-control form-control-sm mx-2" type="text" placeholder="Ingresar Usuario" aria-label="Ingresar Usuario" name="username">
+              <input
+                class="form-control form-control-sm mx-2"
+                type="text"
+                placeholder="Ingresar Usuario"
+                aria-label="Ingresar Usuario"
+                name="username"
+              >
             </div>
 
             <!-- Campo para ingresar contraseña-->
             <div class="d-flex">
               <div class="mt-1" style="color:white;">Contraseña</div>
-              <input class="form-control form-control-sm mx-1" type="password" placeholder="Ingresar Contraseña" aria-label="Ingrear Contraseña" name=userpass>
+              <input
+                class="form-control form-control-sm mx-1"
+                type="password"
+                placeholder="Ingresar Contraseña"
+                aria-label="Ingrear Contraseña"
+                name=userpass
+              >
             </div>
 
             <!-- Boton de inicio de sesion-->
@@ -58,13 +88,31 @@
       </div>
     </nav>
 
-    <!-- Slider -->
+    <!-- Slider con imagenes -->
     <div id="carouselControl" class="carousel slide" data-bs-ride="carousel">
+      
       <!-- Botones para navegar en el slider -->
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselControl" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button 
+          type="button"
+          data-bs-target="#carouselControl"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselControl"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselControl"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
       </div>
 
       <!-- Contenido del slider -->
@@ -103,52 +151,55 @@
     </div>
 
     <!-- Cartas de la pagina -->
-    <section>
-      <div class="card card-group mx-3" style="border: 0;">
-        <div class="col">
-          <div class="card mt-5 mx-3 config-card">
-            <div class="cardbody">
-              <h2 class="card-title">Objetivo</h2>
-              <p class="card-text">
-                Completa una Solicitud de Admisión y realiza el pago de Preinscripción (cuota de admisión) de $3,000.00 pesos; así te asignaremos un número de matrícula y te registraremos a una de las fechas disponibles en nuestro calendario para aplicación de examen de admisión.
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="card mt-5 mx-3 config-card">
-            <div class="cardbody">
-              <h2 class="card-title">Alcance y Funcionalidad</h2>
-              <p class="card-text">
-                Completa una Solicitud de Admisión y realiza el pago de Preinscripción (cuota de admisión) de $3,000.00 pesos; así te asignaremos un número de matrícula y te registraremos a una de las fechas disponibles en nuestro calendario para aplicación de examen de admisión.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card mt-5 mx-3 config-card">
-            <div class="cardbody">
-              <h2 class="card-title">Acerca de</h2>
-              <p class="card-text">
-                Completa una Solicitud de Admisión y realiza el pago de Preinscripción (cuota de admisión) de $3,000.00 pesos; así te asignaremos un número de matrícula y te registraremos a una de las fechas disponibles en nuestro calendario para aplicación de examen de admisión.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card mt-5 mx-3 config-card">
-            <div class="cardbody">
-              <h2 class="card-title">Como obtengo información?</h2>
-              <p class="card-text">
-                Completa una Solicitud de Admisión y realiza el pago de Preinscripción (cuota de admisión) de $3,000.00 pesos; así te asignaremos un número de matrícula y te registraremos a una de las fechas disponibles en nuestro calendario para aplicación de examen de admisión.
-              </p>
-            </div>
+    <!-- Carta Objetivo -->
+    <div class="card card-group mx-3" style="border: 0;">
+      <div class="col">
+        <div class="card mt-5 mx-3 config-card">
+          <div class="cardbody">
+            <h2 class="card-title">Objetivo</h2>
+            <p class="card-text">
+              INSERTE TEXTO
+            </p>
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- Carta Alcance -->
+      <div class="col">
+        <div class="card mt-5 mx-3 config-card">
+          <div class="cardbody">
+            <h2 class="card-title">Alcance y Funcionalidad</h2>
+            <p class="card-text">
+              INSERTE TEXTO
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carta Acerca de -->
+      <div class="col">
+        <div class="card mt-5 mx-3 config-card">
+          <div class="cardbody">
+            <h2 class="card-title">Acerca de</h2>
+            <p class="card-text">
+              INSERTE TEXTO
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carta Obtener informacion -->
+      <div class="col">
+        <div class="card mt-5 mx-3 config-card">
+          <div class="cardbody">
+            <h2 class="card-title">Como obtengo información?</h2>
+            <p class="card-text">
+              INSERTE TEXTO
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

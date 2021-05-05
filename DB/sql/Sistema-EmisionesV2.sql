@@ -16,7 +16,6 @@ ALTER TABLE Empresa AUTO_INCREMENT = 1000;
 -- Dispositivo
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Dispositivo;
-
 CREATE TABLE Dispositivo(
   idDispositivo INT NOT NULL AUTO_INCREMENT,
   Codigo VARCHAR(20),
