@@ -23,9 +23,8 @@ checkSession("../../index.html");
     <?php
       require_once "dataBaseLogin.php";
 
-      $result = mysqli_query($connection, "SELECT Fecha, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha");
+      $result = mysqli_query($connection, "SELECT Fecha, Hora, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha, Hora");
 
-      $date=array();
       $hum=array();
       $temp=array();
       $CO=array();
@@ -36,12 +35,13 @@ checkSession("../../index.html");
       while($row=mysqli_fetch_row($result))
       {
         $date[]=$row[0];
-        $hum[]=$row[1];
-        $temp[]=$row[2];
-        $CO[]=$row[3];
-        $CO2[]=$row[4];
-        $O2[]=$row[5];
-        $vel[]=$row[6];
+        $time[]=$row[1];
+        $hum[]=$row[2];
+        $temp[]=$row[3];
+        $CO[]=$row[4];
+        $CO2[]=$row[5];
+        $O2[]=$row[6];
+        $vel[]=$row[7];
       }
 
       /* Usaremos este arreglo para obtener los datos */
@@ -49,6 +49,7 @@ checkSession("../../index.html");
       $auxRow  = $row;
 
       $dataX=json_encode($date);
+      $timeX = json_encode($time);
       $traceHum=json_encode($hum);
       $traceTem=json_encode($temp);
       $traceCO=json_encode($CO);
@@ -155,156 +156,29 @@ checkSession("../../index.html");
     <script src="../js/phpToJs.js" charset="utf-8"></script>
     <script src="../js/graph.js" charset="utf-8"></script>
 
-    <!--
     <script type="text/javascript">
-      function createJSString(json){
-        var parsed = JSON.parse(json);
-        var arr = [];
-        for(var x in parsed){
-          arr.push(parsed[x]);
-        }
-        return arr;
-      }
-    </script>
-  -->
-
-
-    <!-- <script type="text/javascript">
-
       document.querySelector(".displayGraph").addEventListener("click",displayGraph);
-      var checks = document.getElementsByClassName('form-check-input');
-      Plotly.newPlot('grafico', []);
--->
-<!--
-      function displayGraph()
-      {
-        var edDate = document.getElementById('endDate').value;
-        var stDate = document.getElementById('startDate').value;
 
-        axisX = createJSString(' <?php /*echo $dataX*/ ?>');
-        axisY1 = createJSString('<?php/* echo $traceHum */?>');
-        axisY2 = createJSString('<?php// echo $traceTem ?>');
-        axisY3 = createJSString('<?php// echo $traceCO ?>');
-        axisY4 = createJSString('<?php// echo $traceCO2 ?>');
-        axisY5 = createJSString('<?php// echo $traceO2 ?>');
-        axisY6 = createJSString('<?php //echo $traceVel ?>');
-
-        /* Funcion para seleccionar unicamente los datos de fecha por el usuario */
-        for(var i = 0; i < axisX.length; i++)
-        {
-          if(axisX[i] < stDate)
-          {
-            axisX.splice(i, 1);
-            axisY1.splice(i, 1);
-            axisY2.splice(i, 1);
-            axisY3.splice(i, 1);
-            axisY4.splice(i, 1);
-            axisY5.splice(i, 1);
-            axisY6.splice(i, 1);
-          }
-          else
-            if(axisX[i] > edDate)
-            {
-              axisX.splice(i, 1);
-              axisY1.splice(i, 1);
-              axisY2.splice(i, 1);
-              axisY3.splice(i, 1);
-              axisY4.splice(i, 1);
-              axisY5.splice(i, 1);
-              axisY6.splice(i, 1);
-            }
-        }
-
-        var data1 = {
-          x: axisX,
-          y: axisY1,
-          name: 'Humedad',
-          type: "scatter"
-        };
-
-        var data2 = {
-          x: axisX,
-          y: axisY2,
-          name: 'Temperatura',
-          type: "scatter"
-        };
-
-        var data3 = {
-          x: axisX,
-          y: axisY3,
-          name: 'CO',
-          type: "scatter"
-        };
-
-        var data4 = {
-          x: axisX,
-          y: axisY4,
-          name: 'CO2',
-          type: "scatter"
-        };
-
-        var data5 = {
-          x: axisX,
-          y: axisY5,
-          name: 'O2',
-          type: "scatter"
-        };
-
-        var data6 = {
-          x: axisX,
-          y: axisY6,
-          name: 'Velocidad',
-          type: "scatter"
-        };
-
-        var fullData = [data1, data2, data3, data4, data5, data6];
+      function displayGraph(){
+        var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $timeX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
         var data = [];
         var i = 0;
 
         /* Funcion para solo mostrar los datos seleccionados por el usuario */
-        <?php //for($i = 0; $i <= count($row); $i++): ?>
-          <?php //if(!empty($row[$i])): ?>
+        <?php for($i = 0; $i <= count($row); $i++): ?>
+          <?php if(!empty($row[$i])): ?>
                   if(checks[i].checked === true)
                   {
                     data.push(fullData[i]);
                   }
-          <?php //endif; ?>
+          <?php endif; ?>
                 i++;
-        <?php //endfor;
-            //  $row = $auxRow;
+        <?php endfor;
+              $row = $auxRow;
         ?>
 
-        //var data = [data1, data2, data3, data4, data5, data6];
-
-      Plotly.newPlot('grafico', data);
-
-    }
+        Plotly.newPlot('grafico', data);
+      }
     </script>
-  -->
-  <script type="text/javascript">
-    document.querySelector(".displayGraph").addEventListener("click",displayGraph);
-
-    function displayGraph(){
-      var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
-      var data = [];
-      var i = 0;
-
-      /* Funcion para solo mostrar los datos seleccionados por el usuario */
-      <?php for($i = 0; $i <= count($row); $i++): ?>
-        <?php if(!empty($row[$i])): ?>
-                if(checks[i].checked === true)
-                {
-                  data.push(fullData[i]);
-                }
-        <?php endif; ?>
-              i++;
-      <?php endfor;
-            $row = $auxRow;
-      ?>
-      
-      Plotly.newPlot('grafico', data);
-    }
-  </script>
-  <!--  <script src="../js/graph.js"></script> -->
   </body>
 </html>

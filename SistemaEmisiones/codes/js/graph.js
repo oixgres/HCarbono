@@ -1,80 +1,91 @@
+/* Se obtienen las opciones que el usuario selecciono */
 var checks = document.getElementsByClassName('form-check-input');
+
+/* Se crea una grafica vacia por default al cargar la pagina */
 Plotly.newPlot('grafico', []);
 
-function prepareGraphic(dataX, traceHum, traceTem, traceCO, traceCO2, traceO2, traceVel){
+function prepareGraphic(dataX, timeX, traceHum, traceTem, traceCO, traceCO2, traceO2, traceVel){
+  /* Obtenemos las fechas */
   var edDate = document.getElementById('endDate').value;
   var stDate = document.getElementById('startDate').value;
 
   axisX = createJSString(dataX);
-  axisY1 = createJSString(traceHum);
-  axisY2 = createJSString(traceTem);
-  axisY3 = createJSString(traceCO);
-  axisY4 = createJSString(traceCO2);
-  axisY5 = createJSString(traceO2);
-  axisY6 = createJSString(traceVel);
+  timeX = createJSString(timeX);
 
+  axisY = [
+    createJSString(traceHum),
+    createJSString(traceTem),
+    createJSString(traceCO),
+    createJSString(traceCO2),
+    createJSString(traceO2),
+    createJSString(traceVel)
+  ];
+
+
+  /* Se eliminan los datos cuyas fechas no fueron seleccionadas */
   for(var i = 0; i < axisX.length; i++)
   {
+    axisX[i] = axisX[i] +" "+ timeX[i];
     if(axisX[i] < stDate)
     {
       axisX.splice(i, 1);
-      axisY1.splice(i, 1);
-      axisY2.splice(i, 1);
-      axisY3.splice(i, 1);
-      axisY4.splice(i, 1);
-      axisY5.splice(i, 1);
-      axisY6.splice(i, 1);
+      timeX.splice(i, 1);
+
+      for(var j = 0; j < axisY.length; j++)
+        axisY[j].splice(i,1);
+
+      i--;
     }
     else
       if(axisX[i] > edDate)
       {
+        timeX.splice(i, 1);
         axisX.splice(i, 1);
-        axisY1.splice(i, 1);
-        axisY2.splice(i, 1);
-        axisY3.splice(i, 1);
-        axisY4.splice(i, 1);
-        axisY5.splice(i, 1);
-        axisY6.splice(i, 1);
+
+        for(var j = 0; j < axisY.length; j++)
+          axisY[j].splice(i,1);
+
+        i--;
       }
   }
   var data1 = {
     x: axisX,
-    y: axisY1,
+    y: axisY[0],
     name: 'Humedad',
     type: "scatter"
   };
 
   var data2 = {
     x: axisX,
-    y: axisY2,
+    y: axisY[1],
     name: 'Temperatura',
     type: "scatter"
   };
 
   var data3 = {
     x: axisX,
-    y: axisY3,
+    y: axisY[2],
     name: 'CO',
     type: "scatter"
   };
 
   var data4 = {
     x: axisX,
-    y: axisY4,
+    y: axisY[3],
     name: 'CO2',
     type: "scatter"
   };
 
   var data5 = {
     x: axisX,
-    y: axisY5,
+    y: axisY[4],
     name: 'O2',
     type: "scatter"
   };
 
   var data6 = {
     x: axisX,
-    y: axisY6,
+    y: axisY[5],
     name: 'Velocidad',
     type: "scatter"
   };
