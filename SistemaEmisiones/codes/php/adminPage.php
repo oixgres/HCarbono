@@ -109,7 +109,7 @@ checkSession("../../index.html");
     <div class="popup" id="popup-delete">
       <div class="overlay"></div>
       <div class="content">
-        <div id = "1" class="close-button" onclick="togglePopup()">&times;</div>
+        <div id = "1" class="close-button" onclick="togglePopup(1)">&times;</div>
         <h1 class="danger-text">ADVERTENCIA</h1>
         <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
         <p>¿Desea continuar?</p>

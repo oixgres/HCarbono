@@ -91,6 +91,7 @@ checkSession("../../index.html");
                 name="pass"
                 value="<?php echo $_SESSION['Password']; ?>"
                 >
+              
             </div>
           </div>
 

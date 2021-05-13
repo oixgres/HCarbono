@@ -13,7 +13,7 @@ p{
   margin-top: 1rem;
   margin-right: 1rem;
   padding-bottom: 1rem;
-  align: justify;
+  /*allign: justify;*/
   text-align: justify;
 }
 
@@ -78,11 +78,6 @@ p{
   height: 400px;
   display:flex;
   align-items:center;
-}
-
-/*Selecciono el tamaño minimo de la carta*/
-.config-card{
-  min-width: 15rem;
 }
 
 /*Evito el overflow*/
