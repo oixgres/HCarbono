@@ -85,12 +85,13 @@ p{
   overflow: hidden;
 }
 
-/*************************Revision****************************/
+/* Medidas del form pequeño */
 .form-small{
   min-width: 325px;
   max-width: 500px;
 }
 
+/* Medidas de columna pequeña */
 .col-small{
   width: 175px;
 }
