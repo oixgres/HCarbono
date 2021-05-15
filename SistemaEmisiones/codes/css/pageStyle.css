@@ -7,6 +7,14 @@ h2{
   padding: 1rem;
 }
 
+h3{
+  font-size: 30px; 
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #3C6728;
+}
+
 p{
   color: black;
   margin-left: 1rem;
@@ -57,10 +65,21 @@ p{
   max-width: 100px;
 }
 
+.config-button-alt{
+  color: rgba(255, 255, 255, 1);
+  background-color: rgb(51, 199, 122);
+  border: 1px solid rgb(6, 109, 61);
+}
+
 /*Boton de danger al fijar*/
 .config-button-danger:hover{
   color: rgba(255, 255, 255, 1);
   background-color: rgb(135,28,42);
+}
+
+.config-button-alt:hover{
+  color: rgba(255,255,255,1);
+  background-color: rgb(6, 109, 61);
 }
 
 /*Configuracion para imagen reescalable*/
