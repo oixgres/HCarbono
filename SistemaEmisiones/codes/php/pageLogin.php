@@ -48,7 +48,8 @@ if($connection)
   }
   else
   {
-    echo "Usuario o contraseña incorrectos";
+    header("Location: ../html/login.html");
+    exit();
   }
 }
 else
