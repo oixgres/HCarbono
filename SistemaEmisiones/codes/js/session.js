@@ -1,7 +1,12 @@
 const form = document.getElementById('form');
 const alertMessage = document.getElementById('alert');
 
-document.addEventListener("DOMContentLoaded", (event) => {
+//
+function getCookie(cookie){
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   alertMessage.style.display ="none";
   
   if(sessionStorage.getItem('error') == 'error'){
@@ -11,9 +16,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 form.addEventListener('submit', (e)=>{
-  sessionStorage.setItem('error', 'error')
-
-  e.preventDefault();
+  sessionStorage.setItem('error', 'error');
 })
 
 

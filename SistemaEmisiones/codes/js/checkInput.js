@@ -51,7 +51,7 @@ form.addEventListener('submit', (e)=>{
   if(sendMail.checked){
     for(var i = 0; i < mailRequirements.length; i++)
     {
-      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null || mailRequirements[i].checked==false){
+      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null || mailRequirements[2].checked==false){
         mailRequirements[i].classList.add("error");
         errorMailMessage[i].classList.add("error");
   

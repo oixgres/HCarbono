@@ -13,9 +13,11 @@ function getFirstQueryElement($connection, $table, $element, $where, $coincidenc
   $result = mysqli_query($connection, $query);
   $result = $result->fetch_array();
 
+
   return $result[0];
 }
 
+/* Funcion para enviar correo */
 function sendMail($email, $issue, $message)
 {
   $header = "FROM: noreply@hcarbono.com"."\r\n";
@@ -25,17 +27,19 @@ function sendMail($email, $issue, $message)
   @mail($email, $issue, $message, $header);
 }
 
+/* Funcion para crear token */
 function createToken()
 {
   return sha1(uniqid(rand(10000000,99999999), true));
 }
 
-function checkSession($redirecPage)
+/* Funcion para validar la sesion antes de cargar la pagina */ 
+function checkSession($userType, $redirectPage)
 {
   session_start();
-  if(($_COOKIE["token"] != $_SESSION["token"]) || !isset($_SESSION["token"]))
+  if(($_COOKIE["token"] != $_SESSION["token"]) || (!isset($_SESSION["token"]) && !isset($_COOKIE['id'])) || $_COOKIE['userType'] != $userType)
   {
-    header("Location: ".$redirecPage);
+    header("Location: ".$redirectPage);
     exit();
   }
 }

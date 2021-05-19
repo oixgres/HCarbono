@@ -1,7 +1,4 @@
-14/04/2021
-- Se pueden introducir usernames nulos para usuarios no activados
-
-01/05/2021
-- Checar como pasar el id del usuario al boton de advertencia al borrar
-- No se puede actualizar el usuario por que aparece mensaje de que para
-  enviar un correo es necesario el username y password
+18/05/2021
+- No aparece mensaje de error al pasar de la pagina principal a la pagina de login
+- Login por pagina externa falla
+- Se necesitan eliminar mas cookies en el logout

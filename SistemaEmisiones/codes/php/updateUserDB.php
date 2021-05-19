@@ -75,7 +75,7 @@ if ($connection)
         mysqli_query($connection, $query);
 
         /* Recuperamos el id del usuaro */
-        $id_user = getFirstQueryElement("Usuario", "idUsuario", "Correo", $email);
+        $id_user = getFirstQueryElement($connection, "Usuario", "idUsuario", "Correo", $email);
 
         /* Creamos el dispositivo */
         mysqli_query($connection, "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES('$device', '$id_user')");

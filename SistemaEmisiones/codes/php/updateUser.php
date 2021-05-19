@@ -3,7 +3,7 @@ session_start();
 
 require_once "phpFunctions.php";
 
-checkSession("../../index.html");
+checkSession('admin',"../../index.html");
 ?>
 <!DOCTYPE html>
 
@@ -32,8 +32,8 @@ checkSession("../../index.html");
     <section>
       <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
 
-      <div class="container-fluid  mt-5">
-        <form id="form" class="" action="updateUserDB.php" method="post">
+      <div class="container-fluid d-flex justify-content-center mt-5">
+        <form id="form" action="updateUserDB.php" method="post">
 
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
@@ -49,7 +49,7 @@ checkSession("../../index.html");
           <!-- Enviar Correo al usuario -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
             <div class="col-auto col-small d-flex justify-content-end">
-              <label for="sendMailSection" class="">¿Enviar correo?</label>
+              <label for="sendMailSection">¿Enviar correo?</label>
             </div>
             <div class="col-auto form-small">
               <input
@@ -63,154 +63,181 @@ checkSession("../../index.html");
           </div>
 
           <!-- Usuario -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
-            <div class="col-auto col-small d-flex justify-content-end">
-              <label for="userSection" class="">Usuario:</label>
+          <div class="row g-3 align-items-center d-flex justify-content-center">
+            <div class="col-small d-flex justify-content-end">
+              <label for="userSection">Usuario:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm required-for-mail"
                 id="userSection"
                 name="user"
                 value="<?php  echo $_SESSION['Username']; ?>"
               >
             </div>
           </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex required-for-mail-message" data-error="Campo requerido para enviar correo">
+            </div>
+          </div>
 
           <!-- Contraseña -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
-            <div class="col-auto col-small d-flex justify-content-end">
-              <label for="passSection" class="">Contraseña:</label>
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
+            <div class="col-small d-flex justify-content-end">
+              <label for="passSection">Contraseña:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm"
+                class="form-control form-control-sm required-for-mail"
                 id="passSection"
                 name="pass"
                 value="<?php echo $_SESSION['Password']; ?>"
                 >
-              
+            </div>
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex required-for-mail-message" data-error="Campo requerido para enviar correo">
             </div>
           </div>
 
           <!-- Nombre -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="nameSection" class="">Nombre Completo:</label>
+              <label for="nameSection">Nombre Completo:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm interactable"
+                class="form-control form-control-sm no-empty-input"
                 id="nameSection"
                 name="name"
                 value="<?php  echo $_SESSION['Nombre']; ?>"
               >
             </div>
-            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Compañia -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="companySection" class="">Compañia:</label>
+              <label for="companySection">Compañia:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm interactable"
+                class="form-control form-control-sm no-empty-input"
                 id="companySection"
                 name="company"
                 value="<?php echo $company; ?>"
               >
             </div>
-            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Dispositivo -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="$deviceSection" class="">Dispositivo:</label>
+              <label for="$deviceSection">Dispositivo:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm interactable"
+                class="form-control form-control-sm no-empty-input"
                 id="deviceSection"
                 name="device"
                 value="<?php echo $device; ?>"
               >
             </div>
-            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Ciudad -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="citySection" class="">Ciudad:</label>
+              <label for="citySection">Ciudad:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm interactable"
+                class="form-control form-control-sm no-empty-input"
                 id="citySection"
                 name="city"
                 value="<?php echo $_SESSION['Ciudad']; ?>"
               >
             </div>
-            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Correo -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="emailSection" class="">Correo de contacto:</label>
+              <label for="emailSection">Correo de contacto:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm interactable"
+                class="form-control form-control-sm no-empty-input"
                 id="emailSection"
                 name="email"
                 value="<?php echo $_SESSION['Correo']; ?>"
               >
             </div>
-            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Telefono -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="phoneSection" class="">Telefono:</label>
+              <label for="phoneSection">Telefono:</label>
             </div>
             <div class="col-auto form-small">
               <input
                 type="text"
-                class="form-control form-control-sm interactable"
+                class="form-control form-control-sm no-empty-input"
                 id="phoneSection"
                 name="phone"
                 value="<?php echo $_SESSION['Telefono']; ?>"
               >
             </div>
-            <div class="d-flex ms-5 justify-content-center" data-error="Este campo debe ser llenado" >
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Estatus -->
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
+          <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-auto col-small d-flex justify-content-end">
-              <label for="statusSection" class="">Aprobado:</label>
+              <label for="statusSection">Aprobado:</label>
             </div>
             <div class="col-auto form-small">
               <input
-                class="form-check-input"
+                class="form-check-input required-for-mail"
                 type="checkbox"
                 value="good"
                 name="admitted"
@@ -218,6 +245,11 @@ checkSession("../../index.html");
                   checked
                 <?php endif; ?>
               >
+            </div>
+          </div>
+          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+            <div class="col-small"></div>
+            <div class="col-auto form-small d-flex required-for-mail-message" data-error="Campo requerido para enviar correo">
             </div>
           </div>
 
@@ -230,3 +262,4 @@ checkSession("../../index.html");
     </section>
   </body>
 </html>
+

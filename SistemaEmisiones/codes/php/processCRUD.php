@@ -6,18 +6,22 @@ $connection = mysqli_connect($host, $user, $password, $bd);
 
 if($connection)
 {
+  /*  Borrar usuario */
   if(isset($_GET['delete']))
   {
     $id = $_GET['delete'];
     mysqli_query($connection, "DELETE FROM Usuario WHERE idUsuario='".$id."'");
   }
 
+  /* Editar usuario */
   if(isset($_GET['edit']))
   {
     $id = $_GET['edit'];
     $result = mysqli_query($connection, "SELECT * FROM Usuario WHERE idUsuario='".$id."'");
-
-    if(count($result) == 1)
+    $nr = mysqli_num_rows($result);
+    
+    //if(count($result) == 1)
+    if($nr == 1)
     {
       $row = $result->fetch_array();
       $_SESSION['Id']=$row['idUsuario'];
@@ -30,12 +34,12 @@ if($connection)
       $_SESSION['Aprobado']=$row['Aprobado'];
       $_SESSION['IdEmpresa']=$row['Empresa_idEmpresa'];
       $_SESSION['Button'] = "Actualizar";
-      //header("Location: updateUser.php");
       echo '<script>window.location="updateUser.php"</script>';
       exit();
     }
   }
 
+  /* Crear Usuario */ 
   if(isset($_GET['create']))
   {
     $_SESSION['Id']=NULL;

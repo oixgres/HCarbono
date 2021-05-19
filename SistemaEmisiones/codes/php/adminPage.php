@@ -1,7 +1,7 @@
 <?php
 require_once "phpFunctions.php";
 
-checkSession("../../index.html");
+checkSession('admin', "../../index.html");
 ?>
 <!DOCTYPE html>
 
