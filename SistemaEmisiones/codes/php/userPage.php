@@ -1,4 +1,3 @@
-<!-- Revivido -->
 <?php
 require_once "phpFunctions.php";
 

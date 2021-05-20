@@ -89,9 +89,9 @@ if ($connection)
           $message.= "Su contraseña es: ".$pass."\n\r";
 
           sendMail($email, "Nueva Cuenta hcarbono", $message);
-          header("Location: adminPage.php");
-          exit();
         }
+        header("Location: adminPage.php");
+        exit();
       }
       else
         if($nrc != 1)
@@ -147,4 +147,4 @@ else
 {
   echo "No se logro conectar al servidor";
 }
- ?>
+?>

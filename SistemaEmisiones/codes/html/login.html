@@ -1,5 +1,4 @@
 <!-- Creado por: Sergio Enrique Guerra Cervantes -->
-
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -51,7 +50,7 @@
           <h1 class="my-5 d-flex justify-content-center">Ingreso H.Carbono</h1>
           
           <!-- Formulario de Ingreso -->
-          <form id="form" action="../php/pageLogin.php" method="POST">
+          <form id="form" action="../php/pageLogin.php" method="post">
 
             <!-- Campo para ingresar username -->
             <div class="form-group mx-2 my-4">
@@ -59,24 +58,20 @@
               <input 
               type="text"
               class="form-control" 
-              id="user"
-              placeholder="Introduzca Usuario"
+              placeholder="Ingresar Contraseña"
               name="username"
-              required  
-              >
+            >
             </div>
 
             <!-- Campo para ingresar contraseña-->
             <div class="form-group mx-2 my-4">
               <label for="user">Contraseña:</label>
               <input 
-              type="text"
-              class="form-control" 
-              id="user"
-              placeholder="Introduzca Usuario"
-              name="username"
-              required  
-              >
+              type="password"
+              class="form-control"
+              placeholder="Introduzca Contraseña"
+              name="userpass"
+            >
             </div>
 
             <!-- Botones de ingreso y registro -->
