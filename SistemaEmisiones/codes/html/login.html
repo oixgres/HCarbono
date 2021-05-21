@@ -21,6 +21,7 @@
 
     <!-- Mis diseños -->
     <link rel="stylesheet" href="../css/pageStyle.css">
+    <link rel="stylesheet" href="../css/inputStyle.css">
   </head>
 
   <body class="background-color">
@@ -53,24 +54,32 @@
             <!-- Campo para ingresar username -->
             <div class="form-group mx-2 my-4">
               <label for="user">Usuario:</label>
-              <input 
-              type="text"
-              class="form-control" 
-              placeholder="Ingresar Contraseña"
-              name="username"
-            >
+              <input
+                id="username"
+                type="text"
+                class="form-control no-empty-input" 
+                placeholder="Ingresar Contraseña"
+                name="username"
+                
+              >
+              <div class="empty-input-message" data-error="Este campo debe ser llenado" >
+              </div>
             </div>
-
+            
             <!-- Campo para ingresar contraseña-->
             <div class="form-group mx-2 my-4">
               <label for="user">Contraseña:</label>
               <input 
-              type="password"
-              class="form-control"
-              placeholder="Introduzca Contraseña"
-              name="userpass"
-            >
+                id = "password"
+                type="password"
+                class="form-control no-empty-input"
+                placeholder="Introduzca Contraseña"
+                name="userpass"
+              >
+              <div class="empty-input-message" data-error="Este campo debe ser llenado" >
+              </div>
             </div>
+            
 
             <!-- Botones de ingreso y registro -->
             <div class="form-group mx-2 my-5 d-flex justify-content-center">

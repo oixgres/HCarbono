@@ -1,8 +1,18 @@
 const form = document.getElementById('form');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
+const errorMessage = document.getElementsByClassName('empty-input-message');
 const alertMessage = document.getElementById('alert');
 
+username.addEventListener('input', (e) =>{
+  username.classList.remove('error');
+  errorMessage[0].classList.remove('error');
+})
+
+password.addEventListener('input', (e)=>{
+  password.classList.remove('error');
+  errorMessage[1].classList.remove('error');
+})
 
 document.addEventListener("DOMContentLoaded", () => {
   if(alertMessage != null){
@@ -13,13 +23,32 @@ document.addEventListener("DOMContentLoaded", () => {
       alertMessage.style.display =  "block";
       sessionStorage.clear();
     }
+  }
+  else{
+    sessionStorage.removeItem('error');
   }  
 });
 
 form.addEventListener('submit', (e)=>{
   if(username.value === '' || password.value === '')
   {
-    e.preventDefault();
+    if(form.name == "index-form"){
+      sessionStorage.setItem('error', '<strong> Los campos de usuario y contraseña deben ser llenados </strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');  
+      e.preventDefault();
+      window.location ='codes/html/login.html';
+    }
+    else{
+      if(username.value === ""){
+        username.classList.add('error')
+        errorMessage[0].classList.add('error');
+      }
+      if(password.value === ""){
+        password.classList.add('error')
+        errorMessage[1].classList.add('error');
+      }
+    }
+    
+    e.preventDefault()
   }
   else
     sessionStorage.setItem('error', '<strong> Usuario o contraseña incorrectos </strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
