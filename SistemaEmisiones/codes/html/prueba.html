@@ -3,7 +3,7 @@ session_start();
 
 require_once "phpFunctions.php";
 
-checkSession("../../index.html");
+checkSession('admin',"../../index.html");
 ?>
 <!DOCTYPE html>
 
@@ -22,7 +22,7 @@ checkSession("../../index.html");
   <body class="background-color">
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SISTEMA</a>
+        <a class="navbar-brand" href="#">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
         <a class="btn btn-sm config-button-navbar "href="adminPage.php">Regresar</a>
@@ -33,7 +33,7 @@ checkSession("../../index.html");
       <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
 
       <div class="container-fluid d-flex justify-content-center mt-5">
-        <form id="form" action="updateUserDB.php" method="post">
+        <form id="register-form" action="updateUserDB.php" method="post">
 
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">

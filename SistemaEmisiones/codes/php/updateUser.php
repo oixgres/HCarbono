@@ -10,7 +10,7 @@ checkSession('admin',"../../index.html");
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Sistema Emisiones (Nombre en desarrollo)</title>
+    <title>H.Carbono | <?php echo  $_SESSION['Button'];?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@ checkSession('admin',"../../index.html");
   <body class="background-color">
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SISTEMA</a>
+        <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
         <a class="btn btn-sm config-button-navbar "href="adminPage.php">Regresar</a>
@@ -33,7 +33,7 @@ checkSession('admin',"../../index.html");
       <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
 
       <div class="container-fluid d-flex justify-content-center mt-5">
-        <form id="form" action="updateUserDB.php" method="post">
+        <form id="register-form" action="updateUserDB.php" method="post">
 
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">

@@ -1,5 +1,5 @@
 
-const form = document.getElementById('form');
+const form = document.getElementById('register-form');
 /* Los mensajes de error */
 const errorMessage = document.getElementsByClassName('empty-input-message');
 /* Inputs del usuario */
@@ -10,13 +10,22 @@ const sendMail = document.getElementById('sendMailSection');
 const mailRequirements = document.getElementsByClassName('required-for-mail');
 const errorMailMessage = document.getElementsByClassName('required-for-mail-message');
 
+function removeErroClass(component, message, removeItem){
+  component.classList.remove(removeItem);
+  message.classList.remove(removeItem);
+}
+
+function addErrorClass(component, message, removeItem){
+  component.classList.add(removeItem);
+  message.classList.add(removeItem);
+}
+
 /* Agregamos eventListener a todos los input para que cuando un error sea modificado desaparezcan las señales de error */
 for(let i = 0; i < input.length; i++)
 {
   input[i].addEventListener('input', ()=>{
     if (input[i].value != '' && input[i].value != null){
-      input[i].classList.remove("error");
-      errorMessage[i].classList.remove("error");
+      removeErroClass(input[i], errorMessage[i], 'error');
     }
   })
 }
@@ -26,8 +35,7 @@ for(let i = 0; i < mailRequirements.length; i++)
 {
   mailRequirements[i].addEventListener('input', ()=>{
     if(mailRequirements[i].value != '' && mailRequirements[i].value != null){
-      mailRequirements[i].classList.remove('error');
-      errorMailMessage[i].classList.remove('error');
+      removeErroClass(mailRequirements[i], errorMailMessage[i], 'error');
     }
   })
 }
@@ -40,8 +48,7 @@ form.addEventListener('submit', (e)=>{
   for(var i = 0; i < input.length; i++)
   {
     if (input[i].value === '' || input[i].value == null){
-      input[i].classList.add("error");
-      errorMessage[i].classList.add("error");
+      addErrorClass(input[i], errorMessage[i], 'error');
 
       errorCount++;
     }
@@ -51,9 +58,8 @@ form.addEventListener('submit', (e)=>{
   if(sendMail.checked){
     for(var i = 0; i < mailRequirements.length; i++)
     {
-      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null || mailRequirements[2].checked==false){
-        mailRequirements[i].classList.add("error");
-        errorMailMessage[i].classList.add("error");
+      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+        addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
   
         sendMail.checked = false;
         e.preventDefault();
@@ -73,8 +79,7 @@ sendMail.addEventListener('click', (e)=>{
   for(var i = 0; i < mailRequirements.length; i++)
   {
     if(mailRequirements[i].value  === '' || mailRequirements[i].value == null || (mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
-      mailRequirements[i].classList.add("error");
-      errorMailMessage[i].classList.add("error");
+      addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
 
       errorCount++;
     }

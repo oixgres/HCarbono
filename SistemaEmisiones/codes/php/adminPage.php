@@ -20,7 +20,7 @@ checkSession('admin', "../../index.html");
   <body class="background-color">
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.html">SISTEMA</a>
+        <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
         <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
