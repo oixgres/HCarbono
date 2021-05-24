@@ -47,7 +47,13 @@
           </ul>
 
           <!-- Formulario de Ingreso -->
-          <form id = "form" class="d-inline-flex" method="post" action="codes/php/pageLogin.php" name="index-form">
+          <form
+            id="form"
+            class="d-inline-flex"
+            method="post"
+            action="codes/php/pageLogin.php"
+            name="index-form"
+          >
             
             <!-- Campo para ingresar username -->
             <div class="d-flex">
@@ -71,7 +77,7 @@
                 type="password"
                 placeholder="Ingresar Contraseña"
                 aria-label="Ingresar Contraseña"
-                name=userpass
+                name="userpass"
               >
             </div>
 
@@ -143,11 +149,22 @@
       </div>
 
       <!-- Botones para avanzar y retroceder dentro del slider -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselControl"  data-bs-slide="prev">
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselControl"
+        data-bs-slide="prev"
+      >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselControl"  data-bs-slide="next">
+      
+      <button 
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselControl"
+        data-bs-slide="next"
+      >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
@@ -155,18 +172,19 @@
 
     <!-- Cartas de la pagina -->
     <div class="row mx-3 g-4" style="border: 0;">
-    <!-- Carta Objetivo -->
-    
+      
+      <!-- Carta Objetivo -->
       <div class="col-xl-3 col-md-6 col-sm-12">
         <div class="card mt-3  h-100 ">
           <div class="cardbody">
             <h2 class="card-title">Objetivo</h2>
             <p class="card-text">
-              El objetivo del <i><b>H.Carbono</b></i> es brindar información confiable y al instante de la huella de carbono
-que produce un automóvil al consumir mezclas de combustibles derivados del petróleo o en
-mezcla con biocombustibles, uno de los principales beneficios es el uso del sistema para el análisis
-y recopilación de la información almacenada en la nube para recorridos que normalmente realiza
-el usuario.
+              El objetivo del <i><b>H.Carbono</b></i> es brindar información
+confiable y al instante de la huella de carbono que produce un automóvil al
+consumir mezclas de combustibles derivados del petróleo o en mezcla con
+biocombustibles, uno de los principales beneficios es el uso del sistema para
+el análisis y recopilación de la información almacenada en la nube para
+recorridos que normalmente realiza el usuario.
             </p>
           </div>
         </div>
@@ -178,12 +196,14 @@ el usuario.
           <div class="cardbody">
             <h2 class="card-title">Alcances y Funcionalidad</h2>
             <p class="card-text">
-              El sistema permite determinar la huella de carbono en tiempo real de un automóvil en
-movimiento, permite recabar información, así como almacenarla en la nube y posteriormente
-poder descargarla y analizar los resultados de las emisiones, el recorrido y la distancia recorrida
-del vehículo, el sistema permite una autonomía hasta 2 días con transmisión de información
-ininterrumpida. El usuario puede observar y descargar los datos directo de la interfaz de sistema, o
-también desde otro dispositivo (celular, Tablet, laptop, o computadora de escritorio).
+              El sistema permite determinar la huella de carbono en tiempo
+real de un automóvil en movimiento, permite recabar información, así como
+almacenarla en la nube y posteriormente poder descargarla y analizar los
+resultados de las emisiones, el recorrido y la distancia recorrida del
+vehículo, el sistema permite una autonomía hasta 2 días con transmisión de
+información ininterrumpida. El usuario puede observar y descargar los datos
+directo de la interfaz de sistema, o también desde otro dispositivo
+(celular, Tablet, laptop, o computadora de escritorio).
             </p>
           </div>
         </div>
@@ -195,29 +215,38 @@ también desde otro dispositivo (celular, Tablet, laptop, o computadora de escri
           <div class="cardbody">
             <h2 class="card-title">Acerca de</h2>
             <p class="card-text">
-              El sistema <i><b>H.Carbono</b></i> inició sus primeras investigaciones en 2020, en base a la necesidad y la
-preocupación de la evaluación de calidad del aire en Baja California, el sistema fue creado por un
-grupo multidisciplinario de investigadores de la Facultad de Ciencias de la Ingeniería y Tecnología
-en apoyo con estudiantes de Ingeniería, el desarrollo tecnológico cuenta con la protección de
-derechos de autor ante INDAUTOR.
+              El sistema <i><b>H.Carbono</b></i> inició sus primeras
+investigaciones en 2020, en base a la necesidad y la preocupación de la
+evaluación de calidad del aire en Baja California, el sistema fue creado por
+un grupo multidisciplinario de investigadores de la Facultad de Ciencias de la
+Ingeniería y Tecnología en apoyo con estudiantes de Ingeniería, el desarrollo
+tecnológico cuenta con la protección de derechos de autor ante INDAUTOR.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Carta Obtener informacion -->
+      <!-- Carta Obtener Informacion -->
       <div class="col-xl-3 col-md-6 col-sm-12">
         <div class="card mt-3  h-100 ">
           <div class="cardbody">
             <h2 class="card-title">¿Cómo obtengo información?</h2>
             <p class="card-text mb-0">
-              Para mayor información acerca del servicio o cuestiones técnicas, se puede comunicar por correo
-electrónico con el Dr. Camilo Caraveo Mena o con el Dr. Armando Pérez Sánchez.
+              Para mayor información acerca del servicio o cuestiones técnicas,
+              se puede comunicar por correo electrónico con el Dr. Camilo
+              Caraveo Mena o con el Dr. Armando Pérez Sánchez.
             </p>
+            <!-- Correos de encargados -->
             <p class="text-end" style="line-height: 30px;">
-              <a class="mb-5" href="mailto:camilo.caraveo@uabc.edu.mx">camilo.caraveo@uabc.edu.mx</a>
-              <br>
-              <a class="mt-5" href="mailto:armando.perez.sanchez@uabc.edu.mx">armando.perez.sanchez@uabc.edu.mx</a>
+              <a
+                class="mb-5"
+                href="mailto:camilo.caraveo@uabc.edu.mx"
+              >camilo.caraveo@uabc.edu.mx</a>
+              <br> <!-- Salto de linea -->
+              <a
+                class="mt-5"
+                href="mailto:armando.perez.sanchez@uabc.edu.mx"
+              >armando.perez.sanchez@uabc.edu.mx</a>
             </p>
           </div>
         </div>

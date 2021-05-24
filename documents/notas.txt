@@ -1,11 +1,3 @@
-19/05/2021
-- La pagina permite el ingreso de un usuario vacio +
-- La pagina no muestra error si el usuario no tiene dispositivo  +
-- El admin puede crear usuarios con correos repetidos (no deberia)
+23/05/2021
 
-20/05/2021
-- Cuando un usuario ingresa a la pagina de login se muestra el mensaje de que no esta registrado +
-
-
-21/05/2021
-- El boton de crear nuevo usuario se estira indefinidademnte al minimizar pantalla
+- Por alguna razon aparece un scroll lateral cuando aparece el mensaje de error en inputs

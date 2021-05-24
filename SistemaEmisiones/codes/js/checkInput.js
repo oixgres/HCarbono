@@ -55,19 +55,19 @@ form.addEventListener('submit', (e)=>{
   }
 
   /* Si se selecciono enviar correo verificamos que los campos username y password esten completos */
-  if(sendMail.checked){
-    for(var i = 0; i < mailRequirements.length; i++)
-    {
-      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
-        addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
-  
-        sendMail.checked = false;
-        e.preventDefault();
-      }
-    }
-  
+  if(sendMail){
+    if(sendMail.checked){
+      for(var i = 0; i < mailRequirements.length; i++)
+      {
+        if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+          addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
+          
+          sendMail.checked = false;
+          e.preventDefault();
+        }
+      } 
+    }  
   }
-
   /* Si se encontro un error se impide el enviar los datos */
   if(errorCount> 0)
     e.preventDefault();

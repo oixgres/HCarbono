@@ -77,7 +77,7 @@ checkSession('admin', "../../index.html");
               <td><?php echo $device; ?></td>
 
 
-              <td>
+              <td class="d-flex justify-content-end">
                 <!-- Redireccion a pagina para editar el usuaro -->
                 <a
                   href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
@@ -87,7 +87,7 @@ checkSession('admin', "../../index.html");
                 <a
                   id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
                   onclick="togglePopup(this)"
-                  class="btn config-button-danger"
+                  class="btn config-button-danger mx-3"
                 >Borrar
                 </a>
               </td>
@@ -98,7 +98,7 @@ checkSession('admin', "../../index.html");
     </section>
 
     <!-- Boton para crear usuarios -->
-    <div class="d-grid d-md-flex justify-content-md-end">
+    <div class="d-flex justify-content-end">
       <a
         href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
         class="btn config-button mt-5 me-5 mb-5">Nuevo
@@ -124,8 +124,6 @@ checkSession('admin', "../../index.html");
       </div>
     </div>
     <script src="../js/popup.js" charset="utf-8"></script>
-    <script src="../js/getCookie.js"></script>
-    <script src="../js/user.js"></script>
     <!-- <script src="../js/session.js"></script> -->
   </body>
 </html>

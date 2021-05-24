@@ -24,7 +24,7 @@ function sendMail($email, $issue, $message)
   $header.= "Reply-To: noreply@hcarbono.com"."\r\n";
   $header.= "X-Mailer: PHP/".phpversion();
 
-  @mail($email, $issue, $message, $header);
+  mail($email, $issue, $message, $header);
 }
 
 /* Funcion para crear token */

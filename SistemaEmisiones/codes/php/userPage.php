@@ -155,8 +155,6 @@ checkSession('user', "../../index.html");
     </div>
     <script src="../js/phpToJs.js" charset="utf-8"></script>
     <script src="../js/graph.js" charset="utf-8"></script>
-    <script src="../js/getCookie.js"></script>
-    <script src="../js/user.js"></script>
     <!-- <script src="../js/session.js"></script> -->
 
     <script type="text/javascript">

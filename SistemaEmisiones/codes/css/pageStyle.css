@@ -51,6 +51,11 @@ p{
   width: 100px;
 }
 
+.config-button, .config-button-danger{
+  min-width: 70px;
+  max-width: 90px;
+}
+
 /*Cambiar color del boton al fijar*/
 .config-button:hover,.config-button-navbar:hover{
   color: rgba(255, 255, 255, 1);

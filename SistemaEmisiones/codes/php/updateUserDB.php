@@ -29,6 +29,7 @@ if ($connection)
   {
     /*Recuperamos el anterior Estatus del usuario*/
     $pastUsername = getFirstQueryElement($connection, "Usuario", "Username", "idUsuario", $id_user);
+    $pastEmail = getFirstQueryElement($connection, "Usuario", "Correo", "idUsuario", $id_user);
     $pastPassword = getFirstQueryElement($connection, "Usuario", "Password", "idUsuario", $id_user);
     $pastAdmitted = getFirstQueryElement($connection, "Usuario", "Aprobado", "idUsuario", $id_user);
 
@@ -48,68 +49,81 @@ if ($connection)
     /* Si el username esta registrado y si es diferente de si mismo */
     if($nru > 0 && $username != $pastUsername && $username!='')
     {
-      echo "Usuario ya utilizado, ingrese otro";
+      echo "Usuario ya utilizado, favor de ingresar otro";
     }
     else
-      /* Creamos Usuario */
-      if ($operation == "Crear")
+    {
+      /* Verificamos que el correo no este repetido */
+      $query = "SELECT * FROM Usuario WHERE Correo='$email'";
+      $query_result = mysqli_query($connection, $query);
+      $nre = mysqli_num_rows($query_result);
+
+      /* Si el correo ya esta registrado */
+      if($nre > 0 && $email != $pastEmail && $email != '')
       {
-        /* Verificamos que no se repita la empresa */
-        $query = "SELECT * FROM Empresa WHERE Nombre='".$company."'";
-        $res_query = mysqli_query($connection, $query);
-        $nr = mysqli_num_rows($res_query);
-
-        /*Si no existe la empresa la registramos*/
-        if($nr == 0)
-        {
-          /*Registramos compañia*/
-          $query = "INSERT INTO Empresa(Nombre) VALUES ('$company')";
-          mysqli_query($connection, $query);
-        }
-
-        /* Obtenemos el id de la empresa */
-        $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
-
-        /* Creamos el usuario */
-        $query = "INSERT INTO Usuario(Username, Password, Nombre, Ciudad, Correo, Telefono, Aprobado, Empresa_idEmpresa) VALUES ('$username', '$pass', '$name', '$city', '$email', '$phone', '$admitted', '$id_company')";
-        mysqli_query($connection, $query);
-
-        /* Recuperamos el id del usuaro */
-        $id_user = getFirstQueryElement($connection, "Usuario", "idUsuario", "Correo", $email);
-
-        /* Creamos el dispositivo */
-        mysqli_query($connection, "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES('$device', '$id_user')");
-
-        /* Enviamos correo */
-        if(!empty($_POST["sendMail"]))
-        {
-          $message = "Bienvenido a hcarbono \n\r\n\r";
-          $message.= "Se ha creado una cuenta en hcarbono.com \n\r";
-          $message.= "Su username es: ".$username."\n\r";
-          $message.= "Su contraseña es: ".$pass."\n\r";
-
-          sendMail($email, "Nueva Cuenta hcarbono", $message);
-        }
-        header("Location: adminPage.php");
-        exit();
+        echo 'Correo ya utilizado, favor de ingresar otro';
       }
       else
-        if($nrc != 1)
+      {
+        /* Creamos Usuario */
+        if ($operation == "Crear")
         {
-          echo "La compañia no existe";
+          /* Verificamos que no se repita la empresa */
+          $query = "SELECT * FROM Empresa WHERE Nombre='".$company."'";
+          $res_query = mysqli_query($connection, $query);
+          $nr = mysqli_num_rows($res_query);
+          
+          /*Si no existe la empresa la registramos*/
+          if($nr == 0)
+          {
+            /*Registramos compañia*/
+            $query = "INSERT INTO Empresa(Nombre) VALUES ('$company')";
+            mysqli_query($connection, $query);
+          }
+
+          /* Obtenemos el id de la empresa */
+          $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
+
+          /* Creamos el usuario */
+          $query = "INSERT INTO Usuario(Username, Password, Nombre, Ciudad, Correo, Telefono, Aprobado, Empresa_idEmpresa) VALUES ('$username', '$pass', '$name', '$city', '$email', '$phone', '$admitted', '$id_company')";
+          mysqli_query($connection, $query);
+          
+          /* Recuperamos el id del usuaro */
+          $id_user = getFirstQueryElement($connection, "Usuario", "idUsuario", "Correo", $email);
+
+          /* Creamos el dispositivo */
+          mysqli_query($connection, "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES('$device', '$id_user')");
+          
+          /* Enviamos correo */
+          if(!empty($_POST["sendMail"]))
+          {
+            $message = "Bienvenido a hcarbono \n\r\n\r";
+            $message.= "Se ha creado una cuenta en hcarbono.com \n\r";
+            $message.= "Su username es: ".$username."\n\r";
+            $message.= "Su contraseña es: ".$pass."\n\r";
+            
+            sendMail($email, "Nueva Cuenta hcarbono", $message);
+          }
+          header("Location: adminPage.php");
+          exit();
         }
         else
+          if($nrc != 1)
+          {
+            echo "La compañia no existe";
+          }
+          else
           if($operation == "Actualizar")
           {
             /* Actualizamos Usuario */
             $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
             $query = "UPDATE Usuario SET Username='".$username."', Password='".$pass."', Nombre='".$name."', Ciudad='".$city."', Correo='".$email."', Telefono='".$phone."', Aprobado='".$admitted."', Empresa_idEmpresa='".$id_company."' WHERE idUsuario='".$id_user."'";
             mysqli_query($connection, $query);
-
+            
             /* Actualizamos dispositivo */
             $id_device = intval(getFirstQueryElement($connection, "Dispositivo", "idDispositivo", "Usuario_idUsuario", $id_user));
             mysqli_query($connection, "UPDATE Dispositivo SET Codigo='".$device."' WHERE idDispositivo='".$id_device."'");
-
+            
             /* Enviamos correo */
             if(!empty($_POST["sendMail"]))
             {
@@ -120,28 +134,29 @@ if ($connection)
                 $message.= "Su solicitud de cuenta a sido aprobada  \n\r";
                 $message.= "Su username es: ".$username."\n\r";
                 $message.= "Su contraseña es: ".$pass."\n\r";
-
+                
                 sendMail($email, "Cuenta aprobada hcarbono", $message);
               }
               else
-                if($pastAdmitted == "Aprobado" && $admitted == "Aprobado")
+              if($pastAdmitted == "Aprobado" && $admitted == "Aprobado")
               {
-                  $message = "Saludos de parte de hcarbono \n\r\n\r";
-                  $message.= "Se han realizado modificaciones a sus datos \n\r";
-                  $message.= "Su username es: ".$username."\n\r";
-                  $message.= "Su contraseña es: ".$pass."\n\r";
-
-                  sendMail($email, "Cambio de datos hcarbono", $message);
+                $message = "Saludos de parte de hcarbono \n\r\n\r";
+                $message.= "Se han realizado modificaciones a sus datos \n\r";
+                $message.= "Su username es: ".$username."\n\r";
+                $message.= "Su contraseña es: ".$pass."\n\r";
+                
+                sendMail($email, "Cambio de datos hcarbono", $message);
               }
             }
-
+            
             header("Location: adminPage.php");
             exit();
           }
           else
-            echo "No se pudo realizar ninguna operacion";
+            echo "No se pudo realizar ninguna operacion"; 
+      }
+    }
   }
-
 }
 else
 {
