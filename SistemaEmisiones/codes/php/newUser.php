@@ -10,7 +10,6 @@ if ($connection)
   $city = $_POST["city"];
   $email = $_POST["email"];
   $phone = $_POST["phone"];
-  $device = $_POST["device"];
 
   /* Verificamos que el correo no se encuentre ya registrado */
   $checkmail = mysqli_query($connection, "SELECT * FROM Usuario WHERE Correo='".$email."'");
