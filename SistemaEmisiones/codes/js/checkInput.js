@@ -30,29 +30,35 @@ function addErrorClass(component, message, removeItem){
 }
 
 function validateInputs(component, message){
-  removeErroClass(component, message, 'error');
-  
   switch(component.name){
     case 'name':
       if(!expressions.name.test(component.value)){
+        message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
         addErrorClass(component, message, 'error');
-        // getAttribute(a)
-        // setAttribute(a,a)
       }
     break;
-
-    default: console.log(component.name);
+    
+    case 'email':
+      if(!expressions.mail.test(component.value)){
+        message.setAttribute('data-error', 'Correo invalido');
+        addErrorClass(component, message, 'error');
+      }
+    break;
   }
+
+  //message.setAttribute('data-error', previousMessage);
 }
 
 
 /* Agregamos eventListener a todos los input para que cuando un error sea modificado desaparezcan las señales de error */
 for(let i = 0; i < input.length; i++)
 {
-  input[i].addEventListener('input', ()=>{
+  input[i].addEventListener('keyup', ()=>{
     if (input[i].value != '' && input[i].value != null){
       validateInputs(input[i],errorMessage[i]);
-      
+    }
+    else{
+      removeErroClass(input[i], errorMessage[i], 'error')
     }
   })
 }
@@ -81,7 +87,7 @@ if(sendMail){
     }
     
     if(errorCount > 0)
-    sendMail.checked = null;
+      sendMail.checked = null;
   });
 }
 
@@ -93,6 +99,7 @@ form.addEventListener('submit', (e)=>{
   for(var i = 0; i < input.length; i++)
   {
     if (input[i].value === '' || input[i].value == null){
+      errorMessage[i].setAttribute('data-error', 'Esta campo debe ser llenado');
       addErrorClass(input[i], errorMessage[i], 'error');
 
       errorCount++;
