@@ -1,3 +1,2 @@
-23/05/2021
-
-- Por alguna razon aparece un scroll lateral cuando aparece el mensaje de error en inputs + 
+24/05/2021
+- Aparece mensaje de error al pasar el la pagina de usuario/administrador a la pagina principal 
