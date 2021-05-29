@@ -1,2 +1,2 @@
 24/05/2021
-- Aparece mensaje de error al pasar el la pagina de usuario/administrador a la pagina principal 
+- Aparece mensaje de error al pasar el la pagina de usuario/administrador a la pagina de ingreso

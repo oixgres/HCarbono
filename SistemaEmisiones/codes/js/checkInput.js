@@ -16,7 +16,8 @@ const expressions = {
 	name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	mail: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-	phone: /^\d{7,14}$/ // 7 a 14 numeros.
+	phone: /^[\+]?\d{7,14}$/, // 7 a 14 numeros.
+  never: /^;$/
 }
 
 function removeErroClass(component, message, removeItem){
@@ -40,6 +41,15 @@ function validateInputs(component, message){
         removeErroClass(component, message, 'error');
     break;
 
+    case 'company':
+      if(expressions.never.test(component.value)){
+        message.setAttribute('data-error', 'Compañia invalda');
+        addErrorClass(component, message, 'error');
+      }
+      else{
+        removeErroClass(component,message, 'error');
+      }
+    break;
     case 'city':
       if(!expressions.name.test(component.value)){
         message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
@@ -56,6 +66,7 @@ function validateInputs(component, message){
       }
       else
         removeErroClass(component, message, 'error');
+    break;
 
     case 'phone':
       if(!expressions.phone.test(component.value)){
@@ -122,7 +133,12 @@ form.addEventListener('submit', (e)=>{
     if (input[i].value === '' || input[i].value == null){
       errorMessage[i].setAttribute('data-error', 'Esta campo debe ser llenado');
       addErrorClass(input[i], errorMessage[i], 'error');
-
+    }
+    else{
+      validateInputs(input[i], errorMessage[i]);
+    }
+      
+    if(input[i].classList.contains('error')){
       errorCount++;
     }
   }

@@ -10,7 +10,7 @@ checkSession('user', "../../index.html");
   <head>
     <meta charset="utf-8">
 
-    <title>H.Carbono | <?php echo $_COOKIE['']; ?></title>
+    <title>H.Carbono | <?php echo $_COOKIE['Nombre']; ?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
@@ -155,7 +155,7 @@ checkSession('user', "../../index.html");
     </div>
     <script src="../js/phpToJs.js" charset="utf-8"></script>
     <script src="../js/graph.js" charset="utf-8"></script>
-    <!-- <script src="../js/session.js"></script> -->
+    <script src="../js/session.js"></script>
 
     <script type="text/javascript">
       document.querySelector(".displayGraph").addEventListener("click",displayGraph);

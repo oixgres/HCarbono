@@ -124,6 +124,6 @@ checkSession('admin', "../../index.html");
       </div>
     </div>
     <script src="../js/popup.js" charset="utf-8"></script>
-    <!-- <script src="../js/session.js"></script> -->
+    <script src="../js/session.js"></script>
   </body>
 </html>
