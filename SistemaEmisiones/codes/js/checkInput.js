@@ -36,6 +36,17 @@ function validateInputs(component, message){
         message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
         addErrorClass(component, message, 'error');
       }
+      else
+        removeErroClass(component, message, 'error');
+    break;
+
+    case 'city':
+      if(!expressions.name.test(component.value)){
+        message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
+        addErrorClass(component, message, 'error');
+      }
+      else
+        removeErroClass(component, message, 'error');
     break;
     
     case 'email':
@@ -43,6 +54,16 @@ function validateInputs(component, message){
         message.setAttribute('data-error', 'Correo invalido');
         addErrorClass(component, message, 'error');
       }
+      else
+        removeErroClass(component, message, 'error');
+
+    case 'phone':
+      if(!expressions.phone.test(component.value)){
+        message.setAttribute('data-error', 'Numero telefonico invalido');
+        addErrorClass(component, message, 'error');
+      }
+      else
+        removeErroClass(component, message, 'error');
     break;
   }
 
@@ -53,7 +74,7 @@ function validateInputs(component, message){
 /* Agregamos eventListener a todos los input para que cuando un error sea modificado desaparezcan las señales de error */
 for(let i = 0; i < input.length; i++)
 {
-  input[i].addEventListener('keyup', ()=>{
+  input[i].addEventListener('input', ()=>{
     if (input[i].value != '' && input[i].value != null){
       validateInputs(input[i],errorMessage[i]);
     }
