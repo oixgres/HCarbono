@@ -155,7 +155,6 @@ checkSession('user', "../../index.html");
     </div>
     <script src="../js/phpToJs.js" charset="utf-8"></script>
     <script src="../js/graph.js" charset="utf-8"></script>
-    <script src="../js/session.js"></script>
 
     <script type="text/javascript">
       document.querySelector(".displayGraph").addEventListener("click",displayGraph);
@@ -180,6 +179,10 @@ checkSession('user', "../../index.html");
 
         Plotly.newPlot('grafico', data);
       }
+    </script>
+
+    <script type="text/javascript">
+      sessionStorage.removeItem('error');
     </script>
   </body>
 </html>
