@@ -25,6 +25,8 @@
   </head>
 
   <body class="background-color">
+
+    <!-- Navegador de la pagina --->
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
@@ -37,12 +39,17 @@
       </div>
     </nav>
 
-    <section>
+    
       <h1 class="mt-5 ms-5 d-flex justify-content-center">REGISTRO</h1>
+      
+      <!-- Formulario de registro de usuario -->
       <div class="container-fluid  mt-5">
-
-        <!-- Formulario de registro de usuario -->
-        <form id="register-form" class="needs-validation" action="../php/newUser.php" method="post">
+        <form
+          id="register-form"
+          class="needs-validation"
+          action="../php/newUser.php"
+          method="post"
+        >
 
           <!-- Nombre -->
           <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
@@ -59,10 +66,13 @@
               >
             </div>
           </div>
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+          <!-- Mensaje de error para Nombre -->
+          <div class="row g-3 d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
-            </div>
+            <div
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado"
+            ></div>
           </div>
 
           <!-- Compañia -->
@@ -80,10 +90,13 @@
               >
             </div>
           </div>
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+          <!-- Mensaje de error para Compañia -->
+          <div class="row g-3 d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
-            </div>
+            <div
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado"
+            ></div>
           </div>
 
           <!-- Ciudad -->
@@ -101,10 +114,13 @@
               >
             </div>
           </div>
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+          <!-- Mensaje de error para Ciudad -->
+          <div class="row g-3 d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
-            </div>
+            <div
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado"
+            ></div>
           </div>
 
           <!-- Correo -->
@@ -122,10 +138,13 @@
               >
             </div>
           </div>
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+          <!-- Mensaje de error para Correo -->
+          <div class="row g-3 d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
-            </div>
+            <div
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado"
+            ></div>
           </div>
 
           <!-- Telefono -->
@@ -143,10 +162,13 @@
               >
             </div>
           </div>
-          <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+          <!-- Mensaje de error para Telefono -->
+          <div class="row g-3 d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
-            </div>
+            <div
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado"
+            ></div>
           </div>
 
           <!-- Boton para registrar -->
@@ -156,6 +178,5 @@
         </form>
       </div>
       <script src="../js/checkInput.js"></script>
-    </section>
   </body>
 </html>

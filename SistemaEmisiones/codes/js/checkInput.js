@@ -17,7 +17,6 @@ const expressions = {
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	mail: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	phone: /^[\+]?\d{7,14}$/, // 7 a 14 numeros.
-  never: /^;$/
 }
 
 function removeErroClass(component, message, removeItem){
@@ -42,7 +41,7 @@ function validateInputs(component, message){
     break;
 
     case 'company':
-      if(expressions.never.test(component.value)){
+      if(component.value.includes(";")){
         message.setAttribute('data-error', 'Compañia invalda');
         addErrorClass(component, message, 'error');
       }
