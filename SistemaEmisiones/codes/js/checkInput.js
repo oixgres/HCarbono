@@ -19,16 +19,19 @@ const expressions = {
 	phone: /^[\+]?\d{7,14}$/, // 7 a 14 numeros.
 }
 
+/* Funcion para remover clases */
 function removeErroClass(component, message, removeItem){
   component.classList.remove(removeItem);
   message.classList.remove(removeItem);
 }
 
+/* Funcion para agregar clases */
 function addErrorClass(component, message, removeItem){
   component.classList.add(removeItem);
   message.classList.add(removeItem);
 }
 
+/* Funcion revisar que las entradas tengan datos correctos */ 
 function validateInputs(component, message){
   switch(component.name){
     case 'name':
@@ -76,10 +79,7 @@ function validateInputs(component, message){
         removeErroClass(component, message, 'error');
     break;
   }
-
-  //message.setAttribute('data-error', previousMessage);
 }
-
 
 /* Agregamos eventListener a todos los input para que cuando un error sea modificado desaparezcan las señales de error */
 for(let i = 0; i < input.length; i++)
@@ -104,6 +104,7 @@ for(let i = 0; i < mailRequirements.length; i++)
   })
 }
 
+/* EventListener para verificar que los campso de correo esten correctos */
 if(sendMail){
   sendMail.addEventListener('click', (e)=>{
     let errorCount = 0;
@@ -123,40 +124,41 @@ if(sendMail){
 }
 
 /* Al dar click a enviar se verifica que todos los campos tengan contenido */
-form.addEventListener('submit', (e)=>{
-  let errorCount = 0;
+// form.addEventListener('submit', (e)=>{
+//   let errorCount = 0;
 
-  /* Hace chequeo de que los inputs tengan contenido */
-  for(var i = 0; i < input.length; i++)
-  {
-    if (input[i].value === '' || input[i].value == null){
-      errorMessage[i].setAttribute('data-error', 'Esta campo debe ser llenado');
-      addErrorClass(input[i], errorMessage[i], 'error');
-    }
-    else{
-      validateInputs(input[i], errorMessage[i]);
-    }
+//   /* Hace chequeo de que los inputs tengan contenido */
+//   for(var i = 0; i < input.length; i++)
+//   {
+//     if (input[i].value === '' || input[i].value == null){
+//       errorMessage[i].setAttribute('data-error', 'Esta campo debe ser llenado');
+//       addErrorClass(input[i], errorMessage[i], 'error');
+//     }
+//     else{
+//       validateInputs(input[i], errorMessage[i]);
+//     }
       
-    if(input[i].classList.contains('error')){
-      errorCount++;
-    }
-  }
+//     if(input[i].classList.contains('error')){
+//       errorCount++;
+//     }
+//   }
 
-  /* Si se selecciono enviar correo verificamos que los campos username y password esten completos */
-  if(sendMail){
-    if(sendMail.checked){
-      for(var i = 0; i < mailRequirements.length; i++)
-      {
-        if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
-          addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
+//   /* Si se selecciono enviar correo verificamos que los campos username y password esten completos */
+//   if(sendMail){
+//     if(sendMail.checked){
+//       for(var i = 0; i < mailRequirements.length; i++)
+//       {
+//         if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+//           addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
           
-          sendMail.checked = false;
-          e.preventDefault();
-        }
-      } 
-    }  
-  }
-  /* Si se encontro un error se impide el enviar los datos */
-  if(errorCount> 0)
-    e.preventDefault();
-});
+//           sendMail.checked = false;
+//           e.preventDefault();
+//         }
+//       } 
+//     }  
+//   } 
+
+//   /* Si se encontro un error se impide el enviar los datos */
+//   if(errorCount> 0)
+//     e.preventDefault();
+// });
