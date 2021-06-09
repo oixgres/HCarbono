@@ -17,23 +17,36 @@ form.addEventListener('submit', (e)=>{
       errorCount++;
     }
   }
-  
+
+  /* Si se selecciono enviar correo verificamos que los campos username y password esten completos */
+  if(sendMail){
+    if(sendMail.checked){
+      for(var i = 0; i < mailRequirements.length; i++)
+      {
+        if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+          addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
+          
+          sendMail.checked = false;
+          e.preventDefault();
+        }
+      } 
+    }  
+  } 
+
   /* Si se encontro un error se impide el enviar los datos */
   if(errorCount> 0)
     e.preventDefault();
   else{
-    /* Si no hay errores enviamos datos y recibimos respuesta */
     $.ajax({
       type: 'POST',
-      url: '../php/newUser.php',
+      url: '../php/updateUserDB.php',
       data: $(form).serialize(),
       success: function(response){
-        if(response == 'CORREO UTILIZADO')
+        if(response == 'CORREO UTILIZADO' || 'USUARIO UTILIZADO')
           console.log(response);
         else
           window.location = response;
       }
     })
-    e.preventDefault();
   }
 });

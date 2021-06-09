@@ -123,7 +123,7 @@ if(sendMail){
   });
 }
 
-/* Al dar click a enviar se verifica que todos los campos tengan contenido */
+// /* Al dar click a enviar se verifica que todos los campos tengan contenido */
 // form.addEventListener('submit', (e)=>{
 //   let errorCount = 0;
 
@@ -161,4 +161,10 @@ if(sendMail){
 //   /* Si se encontro un error se impide el enviar los datos */
 //   if(errorCount> 0)
 //     e.preventDefault();
+//   else{
+//     $.ajax({
+//       type: 'POST',
+//       url: '../php/newUser.php'
+//     })
+//   }
 // });

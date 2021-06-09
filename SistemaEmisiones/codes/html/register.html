@@ -19,6 +19,9 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- jquery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
     <link rel="stylesheet" href="../css/inputStyle.css">
@@ -44,11 +47,16 @@
     
     <!-- Formulario de registro de usuario -->
     <div class="container-fluid  mt-5">
+<!--       
       <form
         id="register-form"
         class="needs-validation"
         action="../php/newUser.php"
         method="post"
+      >
+      -->
+      <form
+        id="register-form"
       >
         <!-- Nombre -->
         <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
@@ -176,10 +184,6 @@
         </div>
       </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-            crossorigin="anonymous">
-    </script>
     <script src="../js/checkInput.js"></script>
     <script src="../js/register.js"></script>
   </body>

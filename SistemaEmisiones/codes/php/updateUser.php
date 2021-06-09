@@ -33,8 +33,8 @@ checkSession('admin',"../../index.html");
       <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
 
       <div class="container-fluid d-flex justify-content-center mt-5">
-        <form id="register-form" action="updateUserDB.php" method="post">
-
+        <!-- <form id="register-form" action="updateUserDB.php" method="post"> -->
+        <form id="register-form">
           <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
           <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
           <input type="hidden" name="operation" value="<?php echo $_SESSION['Button'] ?>">
@@ -259,6 +259,7 @@ checkSession('admin',"../../index.html");
         </form>
       </div>
       <script src="../js/checkInput.js" charset="utf-8"></script>
+      <script src="../js/updateUser.js" charset="utf-8"></script>
     </section>
   </body>
 </html>
