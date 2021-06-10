@@ -28,8 +28,11 @@ form.addEventListener('submit', (e)=>{
       url: '../php/newUser.php',
       data: $(form).serialize(),
       success: function(response){
-        if(response == 'CORREO UTILIZADO')
+        if(response == 'CORREO UTILIZADO'){
           console.log(response);
+          errorMessage.namedItem('email').setAttribute('data-error', 'Este correo ya ha sido registrado')
+          addErrorClass(input.namedItem('email'), errorMessage.namedItem('email'), 'error');
+        }
         else
           window.location = response;
       }

@@ -15,6 +15,9 @@ checkSession('admin',"../../index.html");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
+    <!-- jquery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="../css/pageStyle.css">
     <link rel="stylesheet" href="../css/inputStyle.css">
   </head>
@@ -73,13 +76,18 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm required-for-mail"
                 id="userSection"
                 name="user"
+                placeholder="Ingresar usuario"
                 value="<?php  echo $_SESSION['Username']; ?>"
               >
             </div>
           </div>
+          <!-- Mensaje de error para Usuario -->
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex required-for-mail-message" data-error="Campo requerido para enviar correo">
+            <div
+              name="user"
+              class="col-auto form-small d-flex required-for-mail-message"
+              data-error="Campo requerido para enviar correo">
             </div>
           </div>
 
@@ -94,13 +102,17 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm required-for-mail"
                 id="passSection"
                 name="pass"
+                placeholder="Ingresar contraseña"
                 value="<?php echo $_SESSION['Password']; ?>"
                 >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex required-for-mail-message" data-error="Campo requerido para enviar correo">
+            <div
+              name="pass"
+              class="col-auto form-small d-flex required-for-mail-message"
+              data-error="Campo requerido para enviar correo">
             </div>
           </div>
 
@@ -115,13 +127,17 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm no-empty-input"
                 id="nameSection"
                 name="name"
+                placeholder="Ingresar nombre completo"
                 value="<?php  echo $_SESSION['Nombre']; ?>"
               >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
+            <div
+              name="name"
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado">
             </div>
           </div>
 
@@ -136,20 +152,24 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm no-empty-input"
                 id="companySection"
                 name="company"
+                placeholder="Ingresar compañia"
                 value="<?php echo $company; ?>"
               >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
+            <div
+              name="company"
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado">
             </div>
           </div>
 
           <!-- Dispositivo -->
           <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
             <div class="col-small d-flex justify-content-end">
-              <label for="$deviceSection">Dispositivo:</label>
+              <label for="deviceSection">Dispositivo:</label>
             </div>
             <div class="col-auto form-small">
               <input
@@ -157,13 +177,17 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm no-empty-input"
                 id="deviceSection"
                 name="device"
+                placeholder="Ingresar dispositivo"
                 value="<?php echo $device; ?>"
               >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
+            <div
+              name="device"
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado">
             </div>
           </div>
 
@@ -178,13 +202,17 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm no-empty-input"
                 id="citySection"
                 name="city"
+                placeholder="Ingresar ciudad"
                 value="<?php echo $_SESSION['Ciudad']; ?>"
               >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
+            <div
+              name="city"
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado">
             </div>
           </div>
 
@@ -199,13 +227,17 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm no-empty-input"
                 id="emailSection"
                 name="email"
+                placeholder="Ingresar correo electronico"
                 value="<?php echo $_SESSION['Correo']; ?>"
               >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
+            <div
+              name="email"
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado">
             </div>
           </div>
 
@@ -220,13 +252,17 @@ checkSession('admin',"../../index.html");
                 class="form-control form-control-sm no-empty-input"
                 id="phoneSection"
                 name="phone"
+                placeholder="Ingresar numero telefonico"
                 value="<?php echo $_SESSION['Telefono']; ?>"
               >
             </div>
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex empty-input-message" data-error="Este campo debe ser llenado">
+            <div
+              name="phone"
+              class="col-auto form-small d-flex empty-input-message"
+              data-error="Este campo debe ser llenado">
             </div>
           </div>
 
@@ -249,7 +285,10 @@ checkSession('admin',"../../index.html");
           </div>
           <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
             <div class="col-small"></div>
-            <div class="col-auto form-small d-flex required-for-mail-message" data-error="Campo requerido para enviar correo">
+            <div
+              name="admitted"
+              class="col-auto form-small d-flex required-for-mail-message"
+              data-error="Campo requerido para enviar correo">
             </div>
           </div>
 

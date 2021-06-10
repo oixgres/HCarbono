@@ -36,7 +36,7 @@ if(mysqli_num_rows($checkmail) == 0)
   $query = "INSERT INTO Dispositivo(Codigo,Usuario_idUsuario) VALUES (NULL, '$id_user')";
   mysqli_query($connection, $query);
 
-  echo '../html/registerResult.html';
+  echo 'registerResult.html';
 }
 else
 {

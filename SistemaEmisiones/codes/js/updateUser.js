@@ -42,10 +42,26 @@ form.addEventListener('submit', (e)=>{
       url: '../php/updateUserDB.php',
       data: $(form).serialize(),
       success: function(response){
-        if(response == 'CORREO UTILIZADO' || 'USUARIO UTILIZADO')
-          console.log(response);
-        else
-          window.location = response;
+        console.log(response);
+
+        let json = JSON.parse(response);
+
+        if(json.location)
+          window.location = json.location;
+        else{
+          if(json.type == 'input_error'){
+            errorMessage.namedItem(json.input).setAttribute('data-error', json.error);
+            addErrorClass(input.namedItem(json.input), errorMessage.namedItem(json.input), 'error');
+          }
+          else{
+            //aplicar lo mismo pero para correo
+          }
+        }
+
+        // if(response == 'CORREO UTILIZADO' || 'USUARIO UTILIZADO')
+        //   console.log(response);
+        // else
+        //   window.location = response;
       }
     })
   }
