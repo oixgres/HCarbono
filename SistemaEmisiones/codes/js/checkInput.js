@@ -1,5 +1,6 @@
 
 const form = document.getElementById('register-form');
+
 /* Los mensajes de error */
 const errorMessage = document.getElementsByClassName('empty-input-message');
 /* Inputs del usuario */
@@ -12,7 +13,7 @@ const errorMailMessage = document.getElementsByClassName('required-for-mail-mess
 
 /*  Expresiones */
 const expressions = {
-	user: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+	user: /^[a-zA-Z0-9\_\-]{3,20}$/, // Letras, numeros, guion y guion_bajo
 	name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	mail: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -20,7 +21,7 @@ const expressions = {
 }
 
 /* Funcion para remover clases */
-function removeErroClass(component, message, removeItem){
+function removeErrorClass(component, message, removeItem){
   component.classList.remove(removeItem);
   message.classList.remove(removeItem);
 }
@@ -34,13 +35,22 @@ function addErrorClass(component, message, removeItem){
 /* Funcion revisar que las entradas tengan datos correctos */ 
 function validateInputs(component, message){
   switch(component.name){
+    case 'user':
+      if(!expressions.user.test(component.value)){
+        message.setAttribute('data-error', 'Nombre de usuario invalido');
+        addErrorClass(component, message, 'error');
+      }
+      else
+        removeErrorClass(component, message, 'error');
+    break;
+    
     case 'name':
       if(!expressions.name.test(component.value)){
         message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
         addErrorClass(component, message, 'error');
       }
       else
-        removeErroClass(component, message, 'error');
+        removeErrorClass(component, message, 'error');
     break;
 
     case 'company':
@@ -49,16 +59,17 @@ function validateInputs(component, message){
         addErrorClass(component, message, 'error');
       }
       else{
-        removeErroClass(component,message, 'error');
+        removeErrorClass(component,message, 'error');
       }
     break;
+
     case 'city':
       if(!expressions.name.test(component.value)){
         message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
         addErrorClass(component, message, 'error');
       }
       else
-        removeErroClass(component, message, 'error');
+        removeErrorClass(component, message, 'error');
     break;
     
     case 'email':
@@ -67,7 +78,7 @@ function validateInputs(component, message){
         addErrorClass(component, message, 'error');
       }
       else
-        removeErroClass(component, message, 'error');
+        removeErrorClass(component, message, 'error');
     break;
 
     case 'phone':
@@ -76,7 +87,7 @@ function validateInputs(component, message){
         addErrorClass(component, message, 'error');
       }
       else
-        removeErroClass(component, message, 'error');
+        removeErrorClass(component, message, 'error');
     break;
   }
 }
@@ -89,7 +100,7 @@ for(let i = 0; i < input.length; i++)
       validateInputs(input[i],errorMessage[i]);
     }
     else{
-      removeErroClass(input[i], errorMessage[i], 'error')
+      removeErrorClass(input[i], errorMessage[i], 'error')
     }
   })
 }
@@ -99,7 +110,7 @@ for(let i = 0; i < mailRequirements.length; i++)
 {
   mailRequirements[i].addEventListener('input', ()=>{
     if(mailRequirements[i].value != '' && mailRequirements[i].value != null){
-      removeErroClass(mailRequirements[i], errorMailMessage[i], 'error');
+      removeErrorClass(mailRequirements[i], errorMailMessage[i], 'error');
     }
   })
 }

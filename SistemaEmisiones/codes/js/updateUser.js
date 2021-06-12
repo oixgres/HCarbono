@@ -19,19 +19,24 @@ form.addEventListener('submit', (e)=>{
   }
 
   /* Si se selecciono enviar correo verificamos que los campos username y password esten completos */
-  if(sendMail){
-    if(sendMail.checked){
-      for(var i = 0; i < mailRequirements.length; i++)
-      {
-        if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
-          addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
-          
-          sendMail.checked = false;
-          e.preventDefault();
-        }
-      } 
-    }  
-  } 
+  if(sendMail.checked){
+    for(var i = 0; i < mailRequirements.length; i++)
+    {
+      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+        addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
+        
+        sendMail.checked = false;
+      }
+      else{
+        validateInputs(mailRequirements[i], errorMailMessage[i])
+      }
+      
+      if(mailRequirements[i].classList.contains('error'))
+        errorCount++;
+    } 
+  }
+
+
 
   /* Si se encontro un error se impide el enviar los datos */
   if(errorCount> 0)
@@ -54,15 +59,12 @@ form.addEventListener('submit', (e)=>{
             addErrorClass(input.namedItem(json.input), errorMessage.namedItem(json.input), 'error');
           }
           else{
-            //aplicar lo mismo pero para correo
+            errorMailMessage.namedItem(json.input).setAttribute('data-error', json.error);
+            addErrorClass(mailRequirements.namedItem(json.input), errorMailMessage.namedItem(json.input), 'error');
           }
         }
-
-        // if(response == 'CORREO UTILIZADO' || 'USUARIO UTILIZADO')
-        //   console.log(response);
-        // else
-        //   window.location = response;
       }
     })
+    e.preventDefault();
   }
 });

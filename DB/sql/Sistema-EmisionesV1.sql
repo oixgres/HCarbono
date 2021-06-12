@@ -9,7 +9,6 @@ CREATE TABLE Empresa (
   Nombre VARCHAR(45) NULL,
   PRIMARY KEY (idEmpresa)
 );
-
 ALTER TABLE Empresa AUTO_INCREMENT = 1000;
 
 -- -----------------------------------------------------
@@ -22,14 +21,12 @@ CREATE TABLE Administrador (
   Password VARCHAR(45) NOT NULL,
   PRIMARY KEY (idAdministrador)
 );
-
 ALTER TABLE Administrador AUTO_INCREMENT = 1000;
 
 -- -----------------------------------------------------
 -- Dispositivo
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Dispositivo;
-
 CREATE TABLE Dispositivo(
   idDispositivo INT NOT NULL AUTO_INCREMENT,
   Codigo VARCHAR(20),
@@ -39,7 +36,6 @@ CREATE TABLE Dispositivo(
   REFERENCES Usuario(idUsuario)
   ON DELETE CASCADE
 );
-
 ALTER TABLE Dispositivo AUTO_INCREMENT=1000;
 
 -- -----------------------------------------------------
@@ -69,7 +65,6 @@ CREATE TABLE Estadisticas(
   ON DELETE SET NULL,
   PRIMARY KEY (idEmisiones)
 );
-
 ALTER TABLE Estadisticas AUTO_INCREMENT=1000;
 
 -- -----------------------------------------------------
@@ -91,7 +86,6 @@ CREATE TABLE Usuario (
   ON DELETE SET NULL,
   PRIMARY KEY (idUsuario)
 );
-
 ALTER TABLE Usuario AUTO_INCREMENT = 1000;
 
 
