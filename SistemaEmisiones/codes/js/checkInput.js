@@ -43,6 +43,15 @@ function validateInputs(component, message){
       else
         removeErrorClass(component, message, 'error');
     break;
+
+    case 'pass':
+      if(!expressions.password.test(component)){
+        message.setAttribute('data-error', 'Contraseña invalida');
+        addErrorClass(component, message, 'error')
+      }
+      else
+        removeErrorClass(component, message, 'error');
+    break;
     
     case 'name':
       if(!expressions.name.test(component.value)){
@@ -100,7 +109,7 @@ for(let i = 0; i < input.length; i++)
       validateInputs(input[i],errorMessage[i]);
     }
     else{
-      removeErrorClass(input[i], errorMessage[i], 'error')
+      removeErrorClass(input[i], errorMessage[i], 'error');
     }
   })
 }
@@ -110,6 +119,9 @@ for(let i = 0; i < mailRequirements.length; i++)
 {
   mailRequirements[i].addEventListener('input', ()=>{
     if(mailRequirements[i].value != '' && mailRequirements[i].value != null){
+      validateInputs(mailRequirements[i], errorMailMessage[i]);
+    }
+    else{
       removeErrorClass(mailRequirements[i], errorMailMessage[i], 'error');
     }
   })

@@ -1,6 +1,7 @@
 /* Al dar click a enviar se verifica que todos los campos tengan contenido */
 form.addEventListener('submit', (e)=>{
   let errorCount = 0;
+  let checkFlag = false;
 
   /* Hace chequeo de que los inputs tengan contenido */
   for(var i = 0; i < input.length; i++)
@@ -19,24 +20,22 @@ form.addEventListener('submit', (e)=>{
   }
 
   /* Si se selecciono enviar correo verificamos que los campos username y password esten completos */
-  if(sendMail.checked){
-    for(var i = 0; i < mailRequirements.length; i++)
-    {
-      if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
-        addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
-        
-        sendMail.checked = false;
+  for(var i = 0; i < mailRequirements.length; i++){
+    if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+      if(sendMail.checked){
+        errorMailMessage[i].setAttribute('data-error', 'Campo requerido para enviar correo')
+        addErrorClass(mailRequirements[i], errorMailMessage[i], 'error');
+        checkFlag = true;
       }
-      else{
-        validateInputs(mailRequirements[i], errorMailMessage[i])
-      }
-      
-      if(mailRequirements[i].classList.contains('error'))
-        errorCount++;
-    } 
+    }
+    else
+      validateInputs(mailRequirements[i], errorMailMessage[i]);
+    
+    if(mailRequirements[i].classList.contains('error'))
+      errorCount++; 
   }
-
-
+  if(checkFlag)
+    sendMail.checked = false;
 
   /* Si se encontro un error se impide el enviar los datos */
   if(errorCount> 0)
