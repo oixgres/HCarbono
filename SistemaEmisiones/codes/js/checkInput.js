@@ -18,6 +18,7 @@ const expressions = {
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	mail: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	phone: /^[\+]?\d{7,14}$/, // 7 a 14 numeros.
+  device: /[^;]{1,40}$/
 }
 
 /* Funcion para remover clases */
@@ -45,7 +46,7 @@ function validateInputs(component, message){
     break;
 
     case 'pass':
-      if(!expressions.password.test(component)){
+      if(!expressions.password.test(component.value)){
         message.setAttribute('data-error', 'Contraseña invalida');
         addErrorClass(component, message, 'error')
       }
@@ -135,6 +136,7 @@ if(sendMail){
     for(var i = 0; i < mailRequirements.length; i++)
     {
       if(mailRequirements[i].value  === '' || mailRequirements[i].value == null || (mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
+        errorMailMessage[i].setAttribute('data-error', 'Campo requerido para enviar correo')
         addErrorClass(mailRequirements[i], errorMailMessage[i], 'error')
         
         errorCount++;

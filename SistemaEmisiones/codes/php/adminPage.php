@@ -76,20 +76,21 @@ checkSession('admin', "../../index.html");
               ?>
               <td><?php echo $device; ?></td>
 
+              <td>
+                <div class="d-flex justify-content-end">
+                  <!-- Redireccion a pagina para editar el usuaro -->
+                  <a
+                    href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
+                    class="btn config-button">Editar
+                  </a>
 
-              <td class="d-flex justify-content-end">
-                <!-- Redireccion a pagina para editar el usuaro -->
-                <a
-                  href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
-                  class="btn config-button">Editar
-                </a>
-
-                <a
-                  id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
-                  onclick="togglePopup(this)"
-                  class="btn config-button-danger mx-3"
-                >Borrar
-                </a>
+                  <a
+                    id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
+                    onclick="togglePopup(this)"
+                    class="btn config-button-danger mx-3"
+                  >Borrar
+                  </a>
+                </div>
               </td>
             </tr>
           <?php endwhile; ?>
