@@ -33,8 +33,10 @@ form.addEventListener('submit', (e)=>{
           errorMessage.namedItem('email').setAttribute('data-error', 'Este correo ya ha sido registrado')
           addErrorClass(input.namedItem('email'), errorMessage.namedItem('email'), 'error');
         }
-        else
+        else{
+          sessionStorage.setItem('new', 'new');
           window.location = response;
+        }
       }
     })
     e.preventDefault();
