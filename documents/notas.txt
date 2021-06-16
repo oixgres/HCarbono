@@ -1,0 +1,3 @@
+16/06/2021
+
+- Verificar que eliminar usuario funcione tras modificaciones

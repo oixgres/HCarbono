@@ -21,8 +21,11 @@ p{
   margin-top: 1rem;
   margin-right: 1rem;
   padding-bottom: 1rem;
-  /*allign: justify;*/
   text-align: justify;
+}
+
+.clickable{
+  cursor: pointer;
 }
 
 .danger-text{
@@ -115,6 +118,10 @@ p{
 .form-small{
   min-width: 325px;
   max-width: 500px;
+}
+
+.form-xs{
+  width: 300px;
 }
 
 /* Medidas de columna pequeña */

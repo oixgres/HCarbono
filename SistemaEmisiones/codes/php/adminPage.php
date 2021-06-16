@@ -35,8 +35,8 @@ checkSession('admin', "../../index.html");
 
         $result = mysqli_query($connection, "SELECT * FROM Usuario");
       ?>
+
       <!-- Tabla para mostrar los usuarios registrados -->
-      <!-- <div class="mx-1 d-flex justify-content-center table-responsive"> -->
       <div class="mx-5 mt-5 table-responsive">
         <table class="table">
           <!--Cabeza de la tabla-->
@@ -110,18 +110,14 @@ checkSession('admin', "../../index.html");
     <div class="popup" id="popup-delete">
       <div class="overlay"></div>
       <div class="content">
-        <div id = "1" class="close-button" onclick="toggleDeletePopup(1)">&times;</div>
+        <div class="close-button" onclick="toggleDeletePopup(1)">&times;</div>
         <h1 class="danger-text">ADVERTENCIA</h1>
         <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
         <p>¿Desea continuar?</p>
-        <div class="row">
-
-        </div>
         <a
           id="popup-delete-button"
-          href=""
-          class="btn config-button-danger">Borrar
-        </a>
+          class="btn config-button-danger"
+        >Borrar</a>
       </div>
     </div>
     <script src="../js/popup.js" charset="utf-8"></script>
