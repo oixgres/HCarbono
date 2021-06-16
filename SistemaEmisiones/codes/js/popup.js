@@ -1,4 +1,4 @@
-function togglePopup(deleteId){
+function toggleDeletePopup(deleteId){
   var popup = document.getElementById('popup-delete');
   var deleteButton = document.getElementById('popup-delete-button');
 
@@ -6,4 +6,8 @@ function togglePopup(deleteId){
     deleteButton.href=deleteId.id;
 
   popup.classList.toggle("active");
+}
+
+function togglePasswordPopup(){
+  
 }
