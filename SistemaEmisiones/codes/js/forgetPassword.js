@@ -5,7 +5,6 @@ const forgetErrorMessage = document.getElementById('forget-error-message');
 formForgetPassword.addEventListener('submit', (e)=>{
   if(forgetInput.value === null || forgetInput.value != '')
   {
-    
     $.ajax({
       type: 'POST',
       url: '../php/forgetPassword.php',
@@ -14,7 +13,6 @@ formForgetPassword.addEventListener('submit', (e)=>{
         console.log(response);
       }
     })
-    
   }
   else
   {
