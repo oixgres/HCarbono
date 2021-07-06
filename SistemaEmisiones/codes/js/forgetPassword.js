@@ -8,9 +8,8 @@ formForgetPassword.addEventListener('submit', (e)=>{
     $.ajax({
       type: 'POST',
       url: '../php/forgetPassword.php',
-      data: {forgetInput},
+      data: $(formForgetPassword).serialize(),
       success: function(response){
-        console.log(response);
         alert(response);
       }
     })

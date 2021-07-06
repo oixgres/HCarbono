@@ -14,11 +14,11 @@ if(mysqli_query($connection, $query))
   $username = getFirstQueryElement($connection, 'Usuario', 'Username', 'Correo', $identifier);
   $password = getFirstQueryElement($connection, 'Usuario', 'Password', 'Correo', $identifier);
   
-  $message = "Saludos desde H.Carbono!!"."\n\n\r"."Se ha solicitado la recuperación de contraseña."."\n\r"."Usuario='$username'"."\n\r"."Contraseña='$password'";
+  $message = "Saludos desde H.Carbono!!"."\n\r"."Se ha solicitado el reenvio de su usuario y contraseña."."\n\r"."Su usuario es: '$username'"."Su contraseña es: '$password'";
 
   sendMail($identifier, "Recuperacion de contraseña", $message);
 
-  echo "Mensaje enviado con exito al correo ".$identifier;
+  echo "Sus datos han sido enviados con exito al correo ".$identifier;
 }
 else
 {
