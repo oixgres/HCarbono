@@ -1,5 +1,5 @@
 const formForgetPassword = document.getElementById('forget-password-form');
-const forgetInput = document.getElementById('number-mail');
+const forgetInput = document.getElementById('forget-mail');
 const forgetErrorMessage = document.getElementById('forget-error-message');
 
 formForgetPassword.addEventListener('submit', (e)=>{
@@ -11,6 +11,7 @@ formForgetPassword.addEventListener('submit', (e)=>{
       data: {forgetInput},
       success: function(response){
         console.log(response);
+        alert(response);
       }
     })
   }

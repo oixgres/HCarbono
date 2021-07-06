@@ -4,7 +4,7 @@ require_once 'dataBaseLogin.php';
 require_once 'phpFunctions.php';
 
 /* Numero telefonico o mensaje */
-$identifier = $_POST['forget-mail'];
+$identifier = $_POST['mail'];
 
 /* Checamos si existe correo */
 $query = "SELECT * FROM Usuario WHERE Correo='$identifier'";
@@ -14,7 +14,7 @@ if(mysqli_query($connection, $query))
   $username = getFirstQueryElement($connection, 'Usuario', 'Username', 'Correo', $identifier);
   $password = getFirstQueryElement($connection, 'Usuario', 'Password', 'Correo', $identifier);
   
-  $message = "Saludos desde H.Carbono!! \n\n\rSe ha solicitado la recuperación de contraseña. \n\rUsuario='$username'\n\rContraseña='$password'";
+  $message = "Saludos desde H.Carbono!!"."\n\n\r"."Se ha solicitado la recuperación de contraseña."."\n\r"."Usuario='$username'"."\n\r"."Contraseña='$password'";
 
   sendMail($identifier, "Recuperacion de contraseña", $message);
 
