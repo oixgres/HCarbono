@@ -10,7 +10,16 @@ formForgetPassword.addEventListener('submit', (e)=>{
       url: '../php/forgetPassword.php',
       data: $(formForgetPassword).serialize(),
       success: function(response){
-        alert(response);
+        let json = JSON.parse(response);
+
+        if(json.result){
+          alert(json.message)
+          window.location = '../../index.html'
+        }
+        else{
+          forgetErrorMessage.setAttribute('data-error', json.message);
+          addErrorClass(forgetInput, forgetErrorMessage, 'error');
+        }
       }
     })
   }

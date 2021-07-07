@@ -50,7 +50,7 @@
       role="alert"
     ></div>
 
-    <!-- Ingreso a la pagina -->
+    <!-- Tarjeta de Ingreso-->
     <div class="col-xl-8 col-md-10 col-sm-6 position-absolute top-50 start-50 translate-middle">
       <div class="row">
         <div class="card col-xl-6 col-md-6 col-xs-10 offset-1 offset-md-3 shadow-lg p-3 mb-5 bg-body rounded">
@@ -70,7 +70,6 @@
                 class="form-control no-empty-input" 
                 placeholder="Ingresar Contraseña"
                 name="username"
-                
               >
               <!-- Mensaje de error -->
               <div
@@ -121,9 +120,6 @@
       </div>
     </div>
 
-    <!-- Contultar para el sms -->
-    <!-- https://www.codespeedy.com/send-sms-in-php/#:~:text=%20How%20to%20send%20SMS%20in%20PHP%3F%20,SMS%20in%20PHP.%20The%20code%20I...%20More%20 -->
-
     <!-- Popup de enviar correo -->
     <div class="popup" id="popup-password">
       <div class="overlay"></div>
@@ -131,13 +127,14 @@
         <div class="close-button" onclick="togglePasswordPopup()">&times;</div>
         
         <!-- Titulo de la forma -->
-        <h1>Recupere su contraseña</h1>
+        <h1 class="mt-4">Recupere su contraseña</h1>
         
         <!-- Forma para enviar el correo electronico o numero telefonico -->
         <form id="forget-password-form">
           <p
             style="text-align: center;"
-          >Ingrese su correo electronico o numero telefonico.</p>
+            class="mb-0 mt-5"
+          >Ingrese su correo electronico para recibir sus datos.</p>
 
           <input
             id="forget-mail"
@@ -158,7 +155,6 @@
           <button type="submit" class="btn config-button mt-3">Enviar</button>
         </form>
       </div>
-
     </div>
 
     <script src="../js/session.js"></script>

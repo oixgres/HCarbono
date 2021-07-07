@@ -8,8 +8,9 @@ $identifier = $_POST['mail'];
 
 /* Checamos si existe correo */
 $query = "SELECT * FROM Usuario WHERE Correo='$identifier'";
+$result = mysqli_query($connection, $query);
 
-if(mysqli_query($connection, $query))
+if(mysqli_num_rows($result) > 0)
 {
   $username = getFirstQueryElement($connection, 'Usuario', 'Username', 'Correo', $identifier);
   $password = getFirstQueryElement($connection, 'Usuario', 'Password', 'Correo', $identifier);
@@ -18,11 +19,15 @@ if(mysqli_query($connection, $query))
 
   sendMail($identifier, "Recuperacion de contraseña", $message);
 
-  echo "Sus datos han sido enviados con exito al correo ".$identifier;
+  echo json_encode(array(
+    'result' => true,
+    'message' => "Sus datos han sido enviados con exito al correo ".$identifier
+  ));
 }
 else
 {
-  echo "No existe ningun usuario registrado con el correo ".$identifier;
+  echo json_encode(array(
+    'message' => "No existe ningun usuario registrado con el correo ".$identifier
+  ));
 }
-
 ?>
