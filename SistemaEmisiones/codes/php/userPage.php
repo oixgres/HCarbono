@@ -12,10 +12,23 @@ checkSession('user', "../../index.html");
 
     <title>H.Carbono | <?php echo $_COOKIE['Nombre']; ?></title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    >
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+    <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
   </head>
 
@@ -23,8 +36,10 @@ checkSession('user', "../../index.html");
     <?php
       require_once "dataBaseLogin.php";
 
+      /* Se solicita la informacion de la base de datos */
       $result = mysqli_query($connection, "SELECT Fecha, Hora, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha, Hora");
 
+      /* Las variables se convierten en arreglos para obtener los datos */
       $hum=array();
       $temp=array();
       $CO=array();
@@ -32,6 +47,7 @@ checkSession('user', "../../index.html");
       $O2=array();
       $vel=array();
 
+      /* Se almacenan los datos obtenidos en nuestras variables */
       while($row=mysqli_fetch_row($result))
       {
         $date[]=$row[0];
@@ -44,10 +60,13 @@ checkSession('user', "../../index.html");
         $vel[]=$row[7];
       }
 
-      /* Usaremos este arreglo para obtener los datos */
+      /* Juntamos todos los arreglos en uno solo */
       $row = array($hum, $temp, $CO, $CO2, $O2, $vel);
+
+      /* Creamos un arreglo auxiliar */
       $auxRow  = $row;
 
+      /* Transformamos nuestros arreglos a jsons para trabajarlos mejor */
       $dataX=json_encode($date);
       $timeX = json_encode($time);
       $traceHum=json_encode($hum);
@@ -58,6 +77,7 @@ checkSession('user', "../../index.html");
       $traceVel=json_encode($vel);
     ?>
 
+    <!-- Navegador de la pagina -->
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">H.CARBONO</a>
@@ -71,7 +91,6 @@ checkSession('user', "../../index.html");
       <div class="col-6 mt-5">
         <!-- Calendario -->
         <!-- Fecha inicial -->
-
         <label for="startDate">Fecha Inicial: </label>
         <input
           type="date"
@@ -150,7 +169,7 @@ checkSession('user', "../../index.html");
           max="<?php echo date('Y-m-d'); ?>"
           class="me-3"
         >
-        <input class="btn btn-primary config-button btn-sm hide-overflow" type="submit" name="export" value="Exportar datos">
+        <input class="btn btn-primary config-button btn-sm hide-overflow" type="submit" name="export" value="Exportar">
       </form>
     </div>
     <script src="../js/phpToJs.js" charset="utf-8"></script>

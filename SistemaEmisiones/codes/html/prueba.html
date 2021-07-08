@@ -1,126 +1,208 @@
 <?php
 require_once "phpFunctions.php";
 
-checkSession('admin', "../../index.html");
+checkSession('user', "../../index.html");
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>H. Carbono | Administrador</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <title>H.Carbono | <?php echo $_COOKIE['Nombre']; ?></title>
 
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    >
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
-    <link rel="stylesheet" href="../css/popupStyle.css">
   </head>
 
   <body class="background-color">
+    <?php
+      require_once "dataBaseLogin.php";
+
+      /* Se solicita la informacion de la base de datos */
+      $result = mysqli_query($connection, "SELECT Fecha, Hora, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha, Hora");
+
+      /* Las variables se convierten en arreglos para obtener los datos */
+      $hum=array();
+      $temp=array();
+      $CO=array();
+      $CO2=array();
+      $O2=array();
+      $vel=array();
+
+      /* Se almacenan los datos obtenidos en nuestras variables */
+      while($row=mysqli_fetch_row($result))
+      {
+        $date[]=$row[0];
+        $time[]=$row[1];
+        $hum[]=$row[2];
+        $temp[]=$row[3];
+        $CO[]=$row[4];
+        $CO2[]=$row[5];
+        $O2[]=$row[6];
+        $vel[]=$row[7];
+      }
+
+      /* Juntamos todos los arreglos en uno solo */
+      $row = array($hum, $temp, $CO, $CO2, $O2, $vel);
+
+      /* Creamos un arreglo auxiliar */
+      $auxRow  = $row;
+
+      /* Transformamos nuestros arreglos a jsons para trabajarlos mejor */
+      $dataX=json_encode($date);
+      $timeX = json_encode($time);
+      $traceHum=json_encode($hum);
+      $traceTem=json_encode($temp);
+      $traceCO=json_encode($CO);
+      $traceCO2=json_encode($CO2);
+      $traceO2=json_encode($O2);
+      $traceVel=json_encode($vel);
+    ?>
+
+    <!-- Navegador de la pagina -->
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
+        <a class="navbar-brand" href="#">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
         <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
       </div>
     </nav>
 
-    <section>
-      <?php
-        require_once "dataBaseLogin.php";
-        require_once "processCRUD.php";
-        require_once "phpFunctions.php";
+    <div class="row mx-5">
+      <div class="col-xl-6 col-md-4 col-sm-3 mt-5">
+        <!-- Calendario -->
+        <!-- Fecha inicial -->
+        <label for="startDate">Fecha Inicial: </label>
+        <input
+          type="date"
+          id="startDate"
+          class="me-2"
+          value="<?php echo $date[0]; ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+        >
 
-        $result = mysqli_query($connection, "SELECT * FROM Usuario");
-      ?>
-      <!-- Tabla para mostrar los usuarios registrados -->
-      <!-- <div class="mx-1 d-flex justify-content-center table-responsive"> -->
-      <div class="mx-5 mt-5 table-responsive">
-        <table class="table">
-          <!--Cabeza de la tabla-->
-          <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Contraseña</th>
-              <th>Nombre</th>
-              <th>Ciudad</th>
-              <th>Correo</th>
-              <th>Telefono</th>
-              <th>Estado</th>
-              <th>Empresa</th>
-              <th>Dispositivo</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
+        <!-- Fecha final -->
+        <label for="endDate">Fecha Final: </label>
+        <input
+          type="date"
+          id="endDate"
+          value="<?php echo date('Y-m-d'); ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+        >
 
-          <?php while($row = mysqli_fetch_assoc($result)): ?>
-            <tr>
-              <td><?php echo $row['Username']; ?></td>
-              <td><?php echo $row['Password']; ?></td>
-              <td><?php echo $row['Nombre']; ?></td>
-              <td><?php echo $row['Ciudad']; ?></td>
-              <td><?php echo $row['Correo']; ?></td>
-              <td><?php echo $row['Telefono']; ?></td>
-              <td><?php echo $row['Aprobado']; ?></td>
+        <!-- Lista de checkbox -->
+        <div class="">
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="hum">
+            <label class="form-check-label" for="hum">Humedad de las emisiones</label>
+          </div>
 
-              <!-- Obtenemos el nombre de la empresa -->
-              <?php
-                $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $row['Empresa_idEmpresa']);
-              ?>
-              <td><?php echo  $company?></td>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="tem">
+            <label class="form-check-label" for="tem">Temperatura de las emisiones</label>
+          </div>
 
-              <?php
-                $device = getFirstQueryElement($connection, "Dispositivo", "Codigo", "Usuario_idUsuario", $row['idUsuario'])
-              ?>
-              <td><?php echo $device; ?></td>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="co">
+            <label class="form-check-label" for="co">CO</label>
+          </div>
 
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="co2">
+            <label class="form-check-label" for="co2">CO2</label>
+          </div>
 
-              <td class="d-flex justify-content-end">
-                <!-- Redireccion a pagina para editar el usuaro -->
-                <a
-                  href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
-                  class="btn config-button">Editar
-                </a>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="o2">
+            <label class="form-check-label" for="o2">O2</label>
+          </div>
 
-                <a
-                  id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
-                  onclick="toggleDeletePopup(this)"
-                  class="btn config-button-danger mx-3"
-                >Borrar
-                </a>
-              </td>
-            </tr>
-          <?php endwhile; ?>
-        </table>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" name="graph[]" id="vel">
+            <label class="form-check-label" for="vel">Velocidad</label>
+          </div>
+        </div>
+        <button class="displayGraph btn btn-primary config-button hide-overflow mt-5">Graficar</button>
       </div>
-    </section>
 
-    <!-- Boton para crear usuarios -->
-    <div class="d-flex justify-content-end">
-      <a
-        href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
-        class="btn config-button mt-5 me-5 mb-5">Nuevo
-      </a>
-    </div>
-
-    <!-- Popup eliminar usuarios -->
-    <div class="popup" id="popup-delete">
-      <div class="overlay"></div>
-      <div class="content">
-        <div id = "1" class="close-button" onclick="toggleDeletePopup(1)">&times;</div>
-        <h1 class="danger-text">ADVERTENCIA</h1>
-        <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
-        <p>¿Desea continuar?</p>
-        <a
-          id="popup-delete-button"
-          href=""
-          class="btn config-button-danger">Borrar
-        </a>
+      <div class="col-xl-6 col-md-8 col-sm-9 mt-2">
+        <div id="grafico"></div>
       </div>
     </div>
-    <script src="../js/popup.js" charset="utf-8"></script>
-    <!-- <script src="../js/session.js"></script> -->
+
+    <!-- Descargar CSV -->
+    <div class="row mt-3 me-5">
+      <form action="export.php" method="post" class="d-flex justify-content-end">
+        <input
+          type="date"
+          name="startDateCSV"
+          value="<?php echo $date[0]; ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+          class="me-3"
+        >
+        <input
+          type="date"
+          name="endDateCSV"
+          value="<?php echo date('Y-m-d'); ?>"
+          min="<?php echo $date[0]; ?>"
+          max="<?php echo date('Y-m-d'); ?>"
+          class="me-3"
+        >
+        <input class="btn btn-primary config-button btn-sm hide-overflow" type="submit" name="export" value="Exportar">
+      </form>
+    </div>
+    <script src="../js/phpToJs.js" charset="utf-8"></script>
+    <script src="../js/graph.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      document.querySelector(".displayGraph").addEventListener("click",displayGraph);
+
+      function displayGraph(){
+        var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $timeX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
+        var data = [];
+        var i = 0;
+
+        /* Funcion para solo mostrar los datos seleccionados por el usuario */
+        <?php for($i = 0; $i <= count($row); $i++): ?>
+          <?php if(!empty($row[$i])): ?>
+                  if(checks[i].checked === true)
+                  {
+                    data.push(fullData[i]);
+                  }
+          <?php endif; ?>
+                i++;
+        <?php endfor;
+              $row = $auxRow;
+        ?>
+
+        Plotly.newPlot('grafico', data);
+      }
+    </script>
+
+    <script type="text/javascript">
+      sessionStorage.removeItem('error');
+    </script>
   </body>
 </html>
