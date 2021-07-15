@@ -9,16 +9,16 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, traceCO, traceCO2, tra
   var edDate = document.getElementById('endDate').value;
   var stDate = document.getElementById('startDate').value;
 
-  axisX = createJSString(dataX);
-  timeX = createJSString(timeX);
+  axisX = jsonContains(dataX);
+  timeX = jsonContains(timeX);
 
   axisY = [
-    createJSString(traceHum),
-    createJSString(traceTem),
-    createJSString(traceCO),
-    createJSString(traceCO2),
-    createJSString(traceO2),
-    createJSString(traceVel)
+    jsonContains(traceHum),
+    jsonContains(traceTem),
+    jsonContains(traceCO),
+    jsonContains(traceCO2),
+    jsonContains(traceO2),
+    jsonContains(traceVel)
   ];
 
 

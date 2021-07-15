@@ -239,14 +239,27 @@ checkSession('user', "../../index.html");
     </div>
 
     <!-- Archivos para facilitar el despliegue de la grafica -->
-    <script src="../js/phpToJs.js"></script>
+    <script src="../js/jsonConvert.js"></script>
     <script src="../js/graph.js"></script>
 
     <script type="text/javascript">
       document.querySelector(".displayGraph").addEventListener("click",displayGraph);
 
-      /* Funcion para desplegar la grafica */
       function displayGraph(){
+        var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $timeX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
+        var data = [];
+        var checkIndex = 0;
+
+        for(i = 0; i < checks.count; i++)
+          if(checks[i].checked === true)
+            data.push(fullData[i]);
+        
+        
+        Plotly.newPlot('grafico', data);
+      }
+
+      /* Funcion para desplegar la grafica */
+      function displayGraph2(){
         var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $timeX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
         var data = [];
         var i = 0;

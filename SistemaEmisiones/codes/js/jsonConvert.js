@@ -1,4 +1,4 @@
-function createJSString(json){
+function jsonContains(json){
   var parsed = JSON.parse(json);
   var arr = [];
   for(var x in parsed){
