@@ -103,15 +103,17 @@ else
         /* Enviamos correo */
         if(!empty($_POST["sendMail"]))
         {
-          $message = "Bienvenido a hcarbono \n\r\n\r";
+          $message = "Bienvenido a hcarbono \n\r";
           $message.= "Se ha creado una cuenta en hcarbono.com \n\r";
-          $message.= "Su username es: ".$username."\n\r";
+          $message.= "Su username es: ".$username."\n";
           $message.= "Su contraseña es: ".$pass."\n\r";
           
           sendMail($email, "Nueva Cuenta hcarbono", $message);
         }
-        header("Location: adminPage.php");
-        exit();
+        //header("Location: adminPage.php");
+        echo json_encode(array(
+          'location'=> 'adminPage.php'
+        ));
       }
       else
         if($nrc != 1)
@@ -140,9 +142,9 @@ else
               /* Correo de usuario aceptado */
               if($pastAdmitted == "No Aprobado" && $admitted == "Aprobado")
               {
-                $message = "Saludos de parte de hcarbono \n\r\n\r";
-                $message.= "Su solicitud de cuenta a sido aprobada  \n\r";
-                $message.= "Su username es: ".$username."\n\r";
+                $message = "Saludos de parte de hcarbono! \n\r";
+                $message.= "Su solicitud de cuenta a sido aprobada.  \n\r";
+                $message.= "Su username es: ".$username."\n";
                 $message.= "Su contraseña es: ".$pass."\n\r";
                 
                 sendMail($email, "Cuenta aprobada hcarbono", $message);
@@ -150,12 +152,12 @@ else
               else
               if($pastAdmitted == "Aprobado" && $admitted == "Aprobado")
               {
-                $message = "Saludos de parte de hcarbono \n\r\n\r";
-                $message.= "Se han realizado modificaciones a sus datos \n\r";
-                $message.= "Su username es: ".$username."\n\r";
+                $message = "Saludos de parte de hcarbono! \n\r";
+                $message.= "Se han realizado modificaciones a sus datos. \n\r";
+                $message.= "Su username es: ".$username."\n";
                 $message.= "Su contraseña es: ".$pass."\n\r";
                 
-                sendMail($email, "Cambio de datos hcarbono", $message);
+                sendMail($email, "Modificación de datos hcarbono", $message);
               }
             }
             echo json_encode(array(

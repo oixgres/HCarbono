@@ -10,14 +10,25 @@ checkSession('admin',"../../index.html");
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>H.Carbono | <?php echo  $_SESSION['Button'];?></title>
+    <title>H.Carbono | <?php echo $_SESSION['Button'];?> Usuario</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    >
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- jquery -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
     <link rel="stylesheet" href="../css/inputStyle.css">
   </head>
@@ -28,18 +39,37 @@ checkSession('admin',"../../index.html");
         <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-sm config-button-navbar "href="adminPage.php">Regresar</a>
+        <a
+          class="btn btn-sm config-button-navbar"
+          href="adminPage.php"
+        >Regresar</a>
       </div>
     </nav>
 
-    <h1 class="mt-5 ms-5 d-flex justify-content-center">EDITAR REGISTRO</h1>
+    <h1
+      class="mt-5 ms-5 d-flex justify-content-center"
+    ><?php echo strtoupper($_SESSION['Button'])?> REGISTRO </h1>
 
     <div class="container-fluid d-flex justify-content-center mt-5">
-      <!-- <form id="register-form" action="updateUserDB.php" method="post"> -->
       <form id="register-form">
-        <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
-        <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
-        <input type="hidden" name="operation" value="<?php echo $_SESSION['Button'] ?>">
+        <input
+          type="hidden" 
+          name="id"
+          value="<?php  echo $_SESSION['Id']; ?>"
+        >
+        
+        <input
+          type="hidden" 
+          name="idCompany"
+          value="<?php  echo $_SESSION['IdEmpresa']; ?>"
+        >
+        
+        <input
+          type="hidden"
+          name="operation"
+          value="<?php echo $_SESSION['Button'] ?>"
+        >
+
         <?php
           require_once "dataBaseLogin.php";
           require_once "phpFunctions.php";
@@ -50,7 +80,7 @@ checkSession('admin',"../../index.html");
 
         <!-- Enviar Correo al usuario -->
         <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
-          <div class="col-auto col-small d-flex justify-content-end">
+          <div class="col-small d-flex justify-content-end">
             <label for="sendMailSection">¿Enviar correo?</label>
           </div>
           <div class="col-auto form-small">
@@ -81,13 +111,13 @@ checkSession('admin',"../../index.html");
           </div>
         </div>
         <!-- Mensaje de error para Usuario -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="user"
             class="col-auto form-small d-flex required-for-mail-message"
-            data-error="Campo requerido para enviar correo">
-          </div>
+            data-error="Campo requerido para enviar correo"
+          ></div>
         </div>
 
         <!-- Contraseña -->
@@ -106,13 +136,13 @@ checkSession('admin',"../../index.html");
               >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="pass"
             class="col-auto form-small d-flex required-for-mail-message"
-            data-error="Campo requerido para enviar correo">
-          </div>
+            data-error="Campo requerido para enviar correo"
+          ></div>
         </div>
 
         <!-- Nombre -->
@@ -131,13 +161,13 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="name"
             class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
+            data-error="Este campo debe ser llenado"
+          ></div>
         </div>
 
         <!-- Compañia -->
@@ -156,13 +186,13 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="company"
             class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
+            data-error="Este campo debe ser llenado"
+          ></div>
         </div>
 
         <!-- Dispositivo -->
@@ -181,13 +211,13 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="device"
             class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
+            data-error="Este campo debe ser llenado"
+          ></div>
         </div>
 
         <!-- Ciudad -->
@@ -206,13 +236,13 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="city"
             class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
+            data-error="Este campo debe ser llenado"
+          ></div>
         </div>
 
         <!-- Correo -->
@@ -231,13 +261,13 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="email"
             class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
+            data-error="Este campo debe ser llenado"
+          ></div>
         </div>
 
         <!-- Telefono -->
@@ -256,21 +286,21 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="phone"
             class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
+            data-error="Este campo debe ser llenado"
+          ></div>
         </div>
 
         <!-- Estatus -->
         <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-auto col-small d-flex justify-content-end">
+          <div class="col-small d-flex justify-content-end">
             <label for="statusSection">Aprobado:</label>
           </div>
-          <div class="col-auto form-small">
+          <div class="col-auto  form-small">
             <input
               class="form-check-input required-for-mail"
               type="checkbox"
@@ -282,17 +312,20 @@ checkSession('admin',"../../index.html");
             >
           </div>
         </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+        <div class="row g-3 d-flex justify-content-center mb-3">
           <div class="col-small"></div>
           <div
             name="admitted"
             class="col-auto form-small d-flex required-for-mail-message"
-            data-error="Campo requerido para enviar correo">
-          </div>
+            data-error="Campo requerido para enviar correo"
+          ></div>
         </div>
 
-        <div class="mt-5 ms-5 d-flex justify-content-center">
-          <button type="submit" class="btn config-button"><?php echo $_SESSION['Button']; ?></button>
+        <div class="mt-5 mb-3 ms-5 d-flex justify-content-center">
+          <button
+            type="submit"
+            class="btn config-button"
+          ><?php echo $_SESSION['Button']; ?></button>
         </div>
       </form>
     </div>

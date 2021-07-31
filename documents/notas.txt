@@ -1,3 +1,7 @@
 16/06/2021
 
 - Verificar que eliminar usuario funcione tras modificaciones
+
+
+15/07/2021
+- No funciona la creacion de usuarios

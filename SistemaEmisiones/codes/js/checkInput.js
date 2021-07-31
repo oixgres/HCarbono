@@ -73,6 +73,15 @@ function validateInputs(component, message){
       }
     break;
 
+    case 'device':
+        if(component.value.includes(";")){
+          message.setAttribute('data-error', 'Dispositivo invalido');
+          addErrorClass(component, message, 'error');
+        }
+        else
+          removeErrorClass(component, message, 'error');
+    break;
+
     case 'city':
       if(!expressions.name.test(component.value)){
         message.setAttribute('data-error', 'No caracteres numericos, ni especiales');
@@ -98,6 +107,10 @@ function validateInputs(component, message){
       }
       else
         removeErrorClass(component, message, 'error');
+    break;
+
+    case 'admitted':
+      removeErrorClass(component, message, 'error');
     break;
   }
 }

@@ -245,39 +245,29 @@ checkSession('user', "../../index.html");
     <script type="text/javascript">
       document.querySelector(".displayGraph").addEventListener("click",displayGraph);
 
+      /* Funcion para desplegar la grafica */
       function displayGraph(){
-        var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $timeX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
-        var data = [];
-        var checkIndex = 0;
 
-        for(i = 0; i < checks.count; i++)
+        /* Preparamos los datos */ 
+        var fullData = prepareGraphic(
+          '<?php echo $dataX; ?>',
+          '<?php echo $timeX; ?>',
+          '<?php echo $traceHum; ?>',
+          '<?php echo $traceTem; ?>',
+          '<?php echo $traceCO; ?>',
+          '<?php echo $traceCO2 ?>',
+          '<?php echo $traceO2; ?>',
+          '<?php echo $traceVel; ?>'
+        );
+
+        var data = [];
+
+        /* Solo se muestran los datos seleccionados por el usuario */
+        for(i = 0; i < checks.length; i++)
           if(checks[i].checked === true)
             data.push(fullData[i]);
-        
-        
-        Plotly.newPlot('grafico', data);
-      }
-
-      /* Funcion para desplegar la grafica */
-      function displayGraph2(){
-        var fullData = prepareGraphic('<?php echo $dataX; ?>','<?php echo $timeX; ?>','<?php echo $traceHum; ?>','<?php echo $traceTem; ?>', '<?php echo $traceCO; ?>', '<?php echo $traceCO2 ?>', '<?php echo $traceO2; ?>', '<?php echo $traceVel; ?>');
-        var data = [];
-        var i = 0;
-
-        /* Solo mostrar los datos seleccionados por el usuario */
-        <?php for($i = 0; $i <= count($row); $i++): ?>
-          <?php if(!empty($row[$i])): ?>
-                  if(checks[i].checked === true)
-                  {
-                    data.push(fullData[i]);
-                  }
-          <?php endif; ?>
-                i++;
-        <?php endfor;
-              $row = $auxRow;
-        ?>
-
-        /* Se despliega la grafica con los datos seleccionado */
+          
+        /* Grafica lista para desplegarse */ 
         Plotly.newPlot('grafico', data);
       }
     </script>

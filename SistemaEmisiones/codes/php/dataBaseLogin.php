@@ -6,4 +6,4 @@ $password="1094346";
 $bd="hcarbono_BD";
 
 $connection = mysqli_connect($host, $user, $password, $bd);
- ?>
+?>
