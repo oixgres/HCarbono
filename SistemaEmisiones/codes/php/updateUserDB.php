@@ -1,8 +1,12 @@
 <?php
+session_start();
+
 require_once "dataBaseLogin.php";
 require_once "phpFunctions.php";
 
-$id_user = $_POST['id'];
+$id_user = $_SESSION['Id'];
+$operation = $_SESSION['Button'];
+
 $username = $_POST['user'];
 $pass = $_POST['pass'];
 $name = $_POST["name"];
@@ -11,7 +15,6 @@ $device = $_POST["device"];
 $city = $_POST["city"];
 $email = $_POST["email"];
 $phone = $_POST["phone"];
-$operation = $_POST["operation"];
 
 /* Checamos el checkbox de Aprobado */
 if(!empty($_POST['admitted']))

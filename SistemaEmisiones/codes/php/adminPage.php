@@ -106,6 +106,7 @@ checkSession('admin', "../../index.html");
             ?>
             <td><?php echo $device; ?></td>
 
+            <!-- Botones del renglon -->
             <td>
               <div class="d-flex justify-content-end">
                 <!-- Editar usuaro -->
@@ -141,7 +142,7 @@ checkSession('admin', "../../index.html");
       <div class="content">
         <div class="close-button" onclick="toggleDeletePopup(1)">&times;</div>
         <h1 class="danger-text">ADVERTENCIA</h1>
-        <p>Una vez eliminado este usuario sus datos se perderan para siempre</p>
+        <p>Una vez eliminado este usuario sus datos se perderan para siempre.</p>
         <p>¿Desea continuar?</p>
         <a
           id="popup-delete-button"
@@ -149,8 +150,8 @@ checkSession('admin', "../../index.html");
         >Borrar</a>
       </div>
     </div>
-    <script src="../js/popup.js" charset="utf-8"></script>
-    <script src="../js/session.js"></script>
+    <script src="../js/popup.js"></script>
+    <!-- <script src="../js/session.js"></script> -->
     <script type="text/javascript">
       sessionStorage.removeItem('error');
     </script>

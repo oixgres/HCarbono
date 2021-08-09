@@ -15,9 +15,9 @@ if(mysqli_num_rows($result) > 0)
   $username = getFirstQueryElement($connection, 'Usuario', 'Username', 'Correo', $identifier);
   $password = getFirstQueryElement($connection, 'Usuario', 'Password', 'Correo', $identifier);
   
-  $message = "Saludos desde H.Carbono!!"."\n\r"."Se ha solicitado el reenvio de su usuario y contraseña."."\n\r"."Su usuario es: '$username'"."\n"."Su contraseña es: '$password'";
+  $message = "Saludos desde H.Carbono!!"."\n\r"."Se ha solicitado el reenvio de su usuario y contraseña."."\n\r"."Su usuario es: $username"."\n"."Su contraseña es: $password";
 
-  sendMail($identifier, "Recuperacion de contraseña", $message);
+  sendMail($identifier, "Recuperación de contraseña hcarbono", $message);
 
   echo json_encode(array(
     'result' => true,

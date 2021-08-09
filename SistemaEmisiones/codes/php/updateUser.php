@@ -5,6 +5,7 @@ require_once "phpFunctions.php";
 
 checkSession('admin',"../../index.html");
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -26,7 +27,9 @@ checkSession('admin',"../../index.html");
     ></script>
 
     <!-- jquery -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+    ></script>
 
     <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
@@ -34,6 +37,7 @@ checkSession('admin',"../../index.html");
   </head>
 
   <body class="background-color">
+    <!-- Navegador -->
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
@@ -46,36 +50,35 @@ checkSession('admin',"../../index.html");
       </div>
     </nav>
 
+    <!-- Titulo del Formulario -->
     <h1
       class="mt-5 ms-5 d-flex justify-content-center"
     ><?php echo strtoupper($_SESSION['Button'])?> REGISTRO </h1>
 
+    <!-- Formulario -->
     <div class="container-fluid d-flex justify-content-center mt-5">
       <form id="register-form">
-        <input
-          type="hidden" 
-          name="id"
-          value="<?php  echo $_SESSION['Id']; ?>"
-        >
-        
-        <input
-          type="hidden" 
-          name="idCompany"
-          value="<?php  echo $_SESSION['IdEmpresa']; ?>"
-        >
-        
-        <input
-          type="hidden"
-          name="operation"
-          value="<?php echo $_SESSION['Button'] ?>"
-        >
-
         <?php
           require_once "dataBaseLogin.php";
           require_once "phpFunctions.php";
 
-          $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $_SESSION['IdEmpresa']);
-          $device = getFirstQueryElement($connection, "Dispositivo", "Codigo", "Usuario_idUsuario", $_SESSION['Id'])
+          /* Petición para obtener el nombre de la empresa */
+          $company = getFirstQueryElement(
+            $connection,
+            "Empresa",
+            "Nombre",
+            "idEmpresa",
+            $_SESSION['IdEmpresa']
+          );
+          
+          /* Peticion para obtener el nombre del dispositivo */
+          $device = getFirstQueryElement(
+            $connection,
+            "Dispositivo",
+            "Codigo",
+            "Usuario_idUsuario",
+            $_SESSION['Id']
+          );
         ?>
 
         <!-- Enviar Correo al usuario -->
@@ -321,6 +324,7 @@ checkSession('admin',"../../index.html");
           ></div>
         </div>
 
+        <!-- Boton Modificar/Crear -->
         <div class="mt-5 mb-3 ms-5 d-flex justify-content-center">
           <button
             type="submit"
@@ -329,8 +333,8 @@ checkSession('admin',"../../index.html");
         </div>
       </form>
     </div>
-    <script src="../js/checkInput.js" charset="utf-8"></script>
-    <script src="../js/updateUser.js" charset="utf-8"></script>
+    <script src="../js/checkInput.js"></script>
+    <script src="../js/updateUser.js"></script>
   </body>
 </html>
 
