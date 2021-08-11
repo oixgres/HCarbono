@@ -1,305 +1,159 @@
 <?php
-session_start();
-
 require_once "phpFunctions.php";
 
-checkSession('admin',"../../index.html");
+checkSession('admin', "../../index.html");
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>H.Carbono | <?php echo  $_SESSION['Button'];?></title>
+    <title>H. Carbono | Administrador</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    >
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
 
-    <!-- jquery -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
-    <link rel="stylesheet" href="../css/inputStyle.css">
+    <link rel="stylesheet" href="../css/popupStyle.css">
   </head>
 
   <body class="background-color">
+    
+    <!-- Navegador de la pagina -->
     <nav class="navbar navbar-dark config-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-sm config-button-navbar "href="adminPage.php">Regresar</a>
+        <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
       </div>
     </nav>
 
-    <h1
-      class="mt-5 ms-5 d-flex justify-content-center"
-    ><?php ?> Usuario</h1>
+    <?php
+      require_once "dataBaseLogin.php";
 
-    <div class="container-fluid d-flex justify-content-center mt-5">
-      <!-- <form id="register-form" action="updateUserDB.php" method="post"> -->
-      <form id="register-form">
-        <input type="hidden" name="id" value="<?php  echo $_SESSION['Id']; ?>">
-        <input type="hidden" name="idCompany" value="<?php  echo $_SESSION['IdEmpresa']; ?>">
-        <input type="hidden" name="operation" value="<?php echo $_SESSION['Button'] ?>">
-        <?php
-          require_once "dataBaseLogin.php";
-          require_once "phpFunctions.php";
+      /* Funciones CRUD */
+      require_once "processCRUD.php";
 
-          $company = getFirstQueryElement($connection, "Empresa", "Nombre", "idEmpresa", $_SESSION['IdEmpresa']);
-          $device = getFirstQueryElement($connection, "Dispositivo", "Codigo", "Usuario_idUsuario", $_SESSION['Id'])
-        ?>
+      /* Obtenemos los usuarios */
+      $result = mysqli_query($connection, "SELECT * FROM Usuario");
+    ?>
 
-        <!-- Enviar Correo al usuario -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-4">
-          <div class="col-auto col-small d-flex justify-content-end">
-            <label for="sendMailSection">¿Enviar correo?</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              class="form-check-input"
-              id="sendMailSection"
-              type="checkbox"
-              value="good"
-              name="sendMail"
-            >
-          </div>
-        </div>
+    <!-- Tabla para mostrar los usuarios registrados -->
+    <div class="mx-5 mt-5 table-responsive">
+      <table class="table">
+        
+        <!--Cabeza de la tabla-->
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Contraseña</th>
+            <th>Nombre</th>
+            <th>Ciudad</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Empresa</th>
+            <th>Dispositivo</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
 
-        <!-- Usuario -->
-        <div class="row g-3 align-items-center d-flex justify-content-center">
-          <div class="col-small d-flex justify-content-end">
-            <label for="userSection">Usuario:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm required-for-mail"
-              id="userSection"
-              name="user"
-              placeholder="Ingresar usuario"
-              value="<?php  echo $_SESSION['Username']; ?>"
-            >
-          </div>
-        </div>
-        <!-- Mensaje de error para Usuario -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="user"
-            class="col-auto form-small d-flex required-for-mail-message"
-            data-error="Campo requerido para enviar correo">
-          </div>
-        </div>
+        <!-- Renglones de la tabla -->
+        <?php while($row = mysqli_fetch_assoc($result)): ?>
+          <tr>
+            <td><?php echo $row['Username']; ?></td>
+            <td><?php echo $row['Password']; ?></td>
+            <td><?php echo $row['Nombre']; ?></td>
+            <td><?php echo $row['Ciudad']; ?></td>
+            <td><?php echo $row['Correo']; ?></td>
+            <td><?php echo $row['Telefono']; ?></td>
+            <td><?php echo $row['Aprobado']; ?></td>
 
-        <!-- Contraseña -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="passSection">Contraseña:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm required-for-mail"
-              id="passSection"
-              name="pass"
-              placeholder="Ingresar contraseña"
-              value="<?php echo $_SESSION['Password']; ?>"
-              >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="pass"
-            class="col-auto form-small d-flex required-for-mail-message"
-            data-error="Campo requerido para enviar correo">
-          </div>
-        </div>
+            <!-- Obtenemos el nombre de la empresa -->
+            <?php
+              $company = getFirstQueryElement(
+                $connection,
+                "Empresa",
+                "Nombre",
+                "idEmpresa",
+                $row['Empresa_idEmpresa']
+              );
+            ?>
+            <td><?php echo  $company; ?></td>
 
-        <!-- Nombre -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="nameSection">Nombre Completo:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm no-empty-input"
-              id="nameSection"
-              name="name"
-              placeholder="Ingresar nombre completo"
-              value="<?php  echo $_SESSION['Nombre']; ?>"
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="name"
-            class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
-        </div>
+            <!-- Obtenemos el codigo del dispositivo -->
+            <?php
+              $device = getFirstQueryElement(
+                $connection,
+                "Dispositivo",
+                "Codigo",
+                "Usuario_idUsuario",
+                $row['idUsuario']
+              );
+            ?>
+            <td><?php echo $device; ?></td>
 
-        <!-- Compañia -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="companySection">Compañia:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm no-empty-input"
-              id="companySection"
-              name="company"
-              placeholder="Ingresar compañia"
-              value="<?php echo $company; ?>"
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="company"
-            class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
-        </div>
+            <!-- Botones del renglon -->
+            <td>
+              <div class="d-flex justify-content-end">
+                <!-- Editar usuaro -->
+                <a
+                  href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
+                  class="btn config-button"
+                >Editar</a>
 
-        <!-- Dispositivo -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="deviceSection">Dispositivo:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm no-empty-input"
-              id="deviceSection"
-              name="device"
-              placeholder="Ingresar dispositivo"
-              value="<?php echo $device; ?>"
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="device"
-            class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
-        </div>
-
-        <!-- Ciudad -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="citySection">Ciudad:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm no-empty-input"
-              id="citySection"
-              name="city"
-              placeholder="Ingresar ciudad"
-              value="<?php echo $_SESSION['Ciudad']; ?>"
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="city"
-            class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
-        </div>
-
-        <!-- Correo -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="emailSection">Correo de contacto:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm no-empty-input"
-              id="emailSection"
-              name="email"
-              placeholder="Ingresar correo electronico"
-              value="<?php echo $_SESSION['Correo']; ?>"
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="email"
-            class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
-        </div>
-
-        <!-- Telefono -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-small d-flex justify-content-end">
-            <label for="phoneSection">Telefono:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              type="text"
-              class="form-control form-control-sm no-empty-input"
-              id="phoneSection"
-              name="phone"
-              placeholder="Ingresar numero telefonico"
-              value="<?php echo $_SESSION['Telefono']; ?>"
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="phone"
-            class="col-auto form-small d-flex empty-input-message"
-            data-error="Este campo debe ser llenado">
-          </div>
-        </div>
-
-        <!-- Estatus -->
-        <div class="row g-3 align-items-center d-flex justify-content-center mt-1">
-          <div class="col-auto col-small d-flex justify-content-end">
-            <label for="statusSection">Aprobado:</label>
-          </div>
-          <div class="col-auto form-small">
-            <input
-              class="form-check-input required-for-mail"
-              type="checkbox"
-              value="good"
-              name="admitted"
-              <?php if($_SESSION['Aprobado'] == "Aprobado"): ?>
-                checked
-              <?php endif; ?>
-            >
-          </div>
-        </div>
-        <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
-          <div class="col-small"></div>
-          <div
-            name="admitted"
-            class="col-auto form-small d-flex required-for-mail-message"
-            data-error="Campo requerido para enviar correo">
-          </div>
-        </div>
-
-        <div class="mt-5 mb-3 ms-5 d-flex justify-content-center">
-          <button type="submit" class="btn config-button"><?php echo $_SESSION['Button']; ?></button>
-        </div>
-      </form>
+                <!-- Eliminar Usuario -->
+                <a
+                  id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
+                  onclick="toggleDeletePopup(this)"
+                  class="btn config-button-danger mx-3"
+                >Borrar</a>
+              </div>
+            </td>
+          </tr>
+        <?php endwhile; ?>
+      </table>
     </div>
-    <script src="../js/checkInput.js" charset="utf-8"></script>
-    <script src="../js/updateUser.js" charset="utf-8"></script>
+
+    <!-- Boton para crear usuarios -->
+    <div class="d-flex justify-content-end">
+      <a
+        href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
+        class="btn config-button mt-5 me-5 mb-5">Nuevo
+      </a>
+    </div>
+
+    <!-- Popup eliminar usuarios -->
+    <div class="popup" id="popup-delete">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-button" onclick="toggleDeletePopup(1)">&times;</div>
+        <h1 class="danger-text">ADVERTENCIA</h1>
+        <p>Una vez eliminado este usuario sus datos se perderan para siempre.</p>
+        <p>¿Desea continuar?</p>
+        <a
+          id="popup-delete-button"
+          class="btn config-button-danger"
+        >Borrar</a>
+      </div>
+    </div>
+    <script src="../js/popup.js"></script>
+    <!-- <script src="../js/session.js"></script> -->
+    <script type="text/javascript">
+      sessionStorage.removeItem('error');
+    </script>
   </body>
 </html>
-

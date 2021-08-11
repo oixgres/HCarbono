@@ -42,14 +42,20 @@ p{
 }
 
 /*Color base para la pagina*/
-.config-color, .config-button, .config-button-navbar{
+.config-color, .config-button, .config-button-navbar, .config-button-search{
   background-color: rgb(91,155,213);
 }
 
-/*Boton para la pagina de usuario y demas*/
-.config-button, .config-button-navbar{
+/*Color para boton basico*/
+.config-button, .config-button-navbar, .config-button-search{
   border: 1px solid rgb(0,77,141);
   color: rgba(255, 255, 255, 1);
+}
+
+/*Tamaño de botones */
+.config-button, .config-button-danger{
+  min-width: 70px;
+  max-width: 90px;
 }
 
 /*Botones para el navbar*/
@@ -58,13 +64,8 @@ p{
   width: 100px;
 }
 
-.config-button, .config-button-danger{
-  min-width: 70px;
-  max-width: 90px;
-}
-
 /*Cambiar color del boton al fijar*/
-.config-button:hover,.config-button-navbar:hover{
+.config-button:hover,.config-button-navbar:hover, .config-button-search:hover{
   color: rgba(255, 255, 255, 1);
   background-color: rgb(0,77,141);
 }
