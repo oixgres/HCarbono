@@ -46,8 +46,6 @@ form.addEventListener('submit', (e)=>{
       url: '../php/updateUserDB.php',
       data: $(form).serialize(),
       success: function(response){
-        console.log(response);
-
         let json = JSON.parse(response);
 
         if(json.location)
