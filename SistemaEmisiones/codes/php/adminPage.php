@@ -151,7 +151,6 @@ checkSession('admin', "../../index.html");
       </div>
     </div>
     <script src="../js/popup.js"></script>
-    <!-- <script src="../js/session.js"></script> -->
     <script type="text/javascript">
       sessionStorage.removeItem('error');
     </script>
