@@ -1,17 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------
--- Empresa
--- -----------------------------------------------------
-DROP TABLE IF EXISTS Empresa;
-CREATE TABLE Empresa (
-  idEmpresa INT NOT NULL AUTO_INCREMENT,
-  Nombre VARCHAR(45) NULL,
-  PRIMARY KEY (idEmpresa)
-);
-ALTER TABLE Empresa AUTO_INCREMENT = 1000;
-
--- -----------------------------------------------------
 -- Administrador
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Administrador;
@@ -22,6 +11,17 @@ CREATE TABLE Administrador (
   PRIMARY KEY (idAdministrador)
 );
 ALTER TABLE Administrador AUTO_INCREMENT = 1000;
+
+-- -----------------------------------------------------
+-- Empresa
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS Empresa;
+CREATE TABLE Empresa (
+  idEmpresa INT NOT NULL AUTO_INCREMENT,
+  Nombre VARCHAR(45) NULL,
+  PRIMARY KEY (idEmpresa)
+);
+ALTER TABLE Empresa AUTO_INCREMENT = 1000;
 
 -- -----------------------------------------------------
 -- Dispositivo
@@ -45,12 +45,15 @@ DROP TABLE IF EXISTS Estadisticas;
 CREATE TABLE Estadisticas(
   idEmisiones INT NOT NULL AUTO_INCREMENT,
   Fecha DATE NOT NULL,
-  Humedad INT,
-  Temperatura INT,
-  CO INT,
-  CO2 INT,
-  O2 INT,
-  Velocidad INT,
+  Humedad FLOAT,
+  Latitud FLOAT,
+  Longitud FLOAT,
+  Temperatura FLOAT,
+  Presion FLOAT,
+  O2 FLOAT,
+  H2 FLOAT,
+  CO FLOAT,
+  CO2 FLOAT,
   Usuario_idUsuario INT,
   Empresa_idEmpresa INT,
   Dispositivo_idDispositivo INT,

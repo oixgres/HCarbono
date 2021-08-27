@@ -1,22 +1,17 @@
 <?php
-require_once 'dataBaseLogin.php';
-require_once 'phpFunctions.php';
+session_start();
+
+require_once "phpFunctions.php";
 
 checkSession('admin',"../../index.html");
-
-$query = "SELECT * FROM Usuario WHERE idUsuario='".$_COOKIE['Id']."'";
-$data  = mysqli_query($connection, $query);
-$user = mysqli_fetch_assoc($data);
 ?>
+
 <!DOCTYPE html>
 
-<script>
-  console.log(<?php echo $user ?>)
-</script>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>H.Carbono | <?php echo $_COOKIE['Button'];?> Usuario</title>
+    <title>H.Carbono | <?php echo $_SESSION['Button'];?> Usuario</title>
 
     <!-- Bootstrap -->
     <link
@@ -58,12 +53,13 @@ $user = mysqli_fetch_assoc($data);
     <!-- Titulo del Formulario -->
     <h1
       class="mt-5 ms-5 d-flex justify-content-center"
-    ><?php echo strtoupper($_COOKIE['Button'])?> REGISTRO </h1>
+    ><?php echo strtoupper($_SESSION['Button'])?> REGISTRO </h1>
 
     <!-- Formulario -->
     <div class="container-fluid d-flex justify-content-center mt-5">
       <form id="register-form">
         <?php
+          require_once "dataBaseLogin.php";
           require_once "phpFunctions.php";
 
           /* Petición para obtener el nombre de la empresa */
@@ -72,7 +68,7 @@ $user = mysqli_fetch_assoc($data);
             "Empresa",
             "Nombre",
             "idEmpresa",
-            $user['Empresa_idEmpresa']
+            $_SESSION['IdEmpresa']
           );
           
           /* Peticion para obtener el nombre del dispositivo */
@@ -81,7 +77,7 @@ $user = mysqli_fetch_assoc($data);
             "Dispositivo",
             "Codigo",
             "Usuario_idUsuario",
-            $user['idUsuario']
+            $_SESSION['Id']
           );
         ?>
 
@@ -113,7 +109,7 @@ $user = mysqli_fetch_assoc($data);
               id="userSection"
               name="user"
               placeholder="Ingresar usuario"
-              value="<?php  echo $user['Username']; ?>"
+              value="<?php  echo $_SESSION['Username']; ?>"
             >
           </div>
         </div>
@@ -139,7 +135,7 @@ $user = mysqli_fetch_assoc($data);
               id="passSection"
               name="pass"
               placeholder="Ingresar contraseña"
-              value="<?php echo $user['Password']; ?>"
+              value="<?php echo $_SESSION['Password']; ?>"
               >
           </div>
         </div>
@@ -164,7 +160,7 @@ $user = mysqli_fetch_assoc($data);
               id="nameSection"
               name="name"
               placeholder="Ingresar nombre completo"
-              value="<?php  echo $user['Nombre']; ?>"
+              value="<?php  echo $_SESSION['Nombre']; ?>"
             >
           </div>
         </div>
@@ -239,7 +235,7 @@ $user = mysqli_fetch_assoc($data);
               id="citySection"
               name="city"
               placeholder="Ingresar ciudad"
-              value="<?php echo $user['Ciudad']; ?>"
+              value="<?php echo $_SESSION['Ciudad']; ?>"
             >
           </div>
         </div>
@@ -264,7 +260,7 @@ $user = mysqli_fetch_assoc($data);
               id="emailSection"
               name="email"
               placeholder="Ingresar correo electronico"
-              value="<?php echo $user['Correo']; ?>"
+              value="<?php echo $_SESSION['Correo']; ?>"
             >
           </div>
         </div>
@@ -289,7 +285,7 @@ $user = mysqli_fetch_assoc($data);
               id="phoneSection"
               name="phone"
               placeholder="Ingresar numero telefonico"
-              value="<?php echo $user['Telefono']; ?>"
+              value="<?php echo $_SESSION['Telefono']; ?>"
             >
           </div>
         </div>
@@ -313,7 +309,7 @@ $user = mysqli_fetch_assoc($data);
               type="checkbox"
               value="good"
               name="admitted"
-              <?php if($user['Aprobado'] == "Aprobado"): ?>
+              <?php if($_SESSION['Aprobado'] == "Aprobado"): ?>
                 checked
               <?php endif; ?>
             >
@@ -333,7 +329,7 @@ $user = mysqli_fetch_assoc($data);
           <button
             type="submit"
             class="btn config-button"
-          ><?php echo $_COOKIE['Button']; ?></button>
+          ><?php echo $_SESSION['Button']; ?></button>
         </div>
       </form>
     </div>

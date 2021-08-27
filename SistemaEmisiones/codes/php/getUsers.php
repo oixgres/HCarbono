@@ -12,13 +12,13 @@ while($row = mysqli_fetch_assoc($users))
 
   $usersArray[]=array(
     'idUsuario'=>$row['idUsuario'],
-    'Username'=>$row['Username'],
-    'Password'=>$row['Password'],
+    'Usuario'=>$row['Username'],
+    'Contraseña'=>$row['Password'],
     'Nombre'=>$row['Nombre'],
     'Ciudad'=>$row['Ciudad'], 
     'Correo'=>$row['Correo'],
     'Telefono'=>$row['Telefono'],
-    'Aprobado'=>$row['Aprobado'],
+    'Estado'=>$row['Aprobado'],
     'idEmpresa'=>$row['Empresa_idEmpresa'],
     'Empresa'=>$company,
     'Dispositivo'=>$device

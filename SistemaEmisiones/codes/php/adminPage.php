@@ -1,15 +1,16 @@
 <?php
-require_once "phpFunctions.php";
+require_once 'phpFunctions.php';
 
-checkSession('admin', "../../index.html");
+checkSession('admin', '../../index.html');
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>H. Carbono | Administrador</title>
+
+    <link rel="stylesheet" href="">
 
     <!-- Bootstrap -->
     <link 
@@ -24,116 +25,56 @@ checkSession('admin', "../../index.html");
       crossorigin="anonymous"
     ></script>
 
+    <!-- jquery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
+    <link rel="stylesheet" href="../css/searchStyle.css">
     <link rel="stylesheet" href="../css/popupStyle.css">
   </head>
 
-  <body class="background-color">
-    
-    <!-- Navegador de la pagina -->
-    <nav class="navbar navbar-dark config-color">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
-        <ul class="navbar-nav me-auto justify-content-end">
+  <body>
+    <!-- Buscador de usuarios -->
+    <div class="searchbox-config">
+      <div class="input-group">
+        <input id="search-input" type="text" placeholder="Buscar Usuario" class="form-control">
+        <!-- <button class="btn config-button" id="search-button" style="z-index:0;">
+          <img src="../../images/search-white.svg" alt="">
+        </button> -->
+        <div class="dropdown">
+          <button 
+            class="btn dropdown-toggle config-button-search"
+            type="button"
+            id="search-button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+          Nombre</button>
+        <ul class="dropdown-menu" aria-labelledby="search-button">
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Usuario</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Contraseña</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Nombre</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Ciudad</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Correo</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Telefono</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Empresa</button></li>
+          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Dispositivo</button></li>
         </ul>
-        <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
+</div>
       </div>
-    </nav>
+    </div>
 
-    <?php
-      require_once "dataBaseLogin.php";
-
-      /* Funciones CRUD */
-      require_once "processCRUD.php";
-
-      /* Obtenemos los usuarios */
-      $result = mysqli_query($connection, "SELECT * FROM Usuario");
-    ?>
-
-    <!-- Tabla para mostrar los usuarios registrados -->
+    <!-- Tabla de usuarios -->
     <div class="mx-5 mt-5 table-responsive">
-      <table class="table">
-        
-        <!--Cabeza de la tabla-->
-        <thead>
-          <tr>
-            <th>Usuario</th>
-            <th>Contraseña</th>
-            <th>Nombre</th>
-            <th>Ciudad</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-            <th>Estado</th>
-            <th>Empresa</th>
-            <th>Dispositivo</th>
-            <th>Accion</th>
-          </tr>
-        </thead>
-
-        <!-- Renglones de la tabla -->
-        <?php while($row = mysqli_fetch_assoc($result)): ?>
-          <tr>
-            <td><?php echo $row['Username']; ?></td>
-            <td><?php echo $row['Password']; ?></td>
-            <td><?php echo $row['Nombre']; ?></td>
-            <td><?php echo $row['Ciudad']; ?></td>
-            <td><?php echo $row['Correo']; ?></td>
-            <td><?php echo $row['Telefono']; ?></td>
-            <td><?php echo $row['Aprobado']; ?></td>
-
-            <!-- Obtenemos el nombre de la empresa -->
-            <?php
-              $company = getFirstQueryElement(
-                $connection,
-                "Empresa",
-                "Nombre",
-                "idEmpresa",
-                $row['Empresa_idEmpresa']
-              );
-            ?>
-            <td><?php echo  $company; ?></td>
-
-            <!-- Obtenemos el codigo del dispositivo -->
-            <?php
-              $device = getFirstQueryElement(
-                $connection,
-                "Dispositivo",
-                "Codigo",
-                "Usuario_idUsuario",
-                $row['idUsuario']
-              );
-            ?>
-            <td><?php echo $device; ?></td>
-
-            <!-- Botones del renglon -->
-            <td>
-              <div class="d-flex justify-content-end">
-                <!-- Editar usuaro -->
-                <a
-                  href="adminPage.php?edit=<?php echo $row['idUsuario']; ?>"
-                  class="btn config-button"
-                >Editar</a>
-
-                <!-- Eliminar Usuario -->
-                <a
-                  id="adminPage.php?delete=<?php echo $row['idUsuario']; ?>"
-                  onclick="toggleDeletePopup(this)"
-                  class="btn config-button-danger mx-3"
-                >Borrar</a>
-              </div>
-            </td>
-          </tr>
-        <?php endwhile; ?>
-      </table>
+      <table id="users-table" class="table"></table>
     </div>
 
     <!-- Boton para crear usuarios -->
     <div class="d-flex justify-content-end">
-      <a
-        href="adminPage.php?create=<?php echo $row['idUsuario']; ?>"
-        class="btn config-button mt-5 me-5 mb-5">Nuevo
-      </a>
+      <button
+        class="btn config-button mt-5 me-5 mb-5"
+        onclick="updateButton(false)"
+      >Nuevo</button>
     </div>
 
     <!-- Popup eliminar usuarios -->
@@ -144,13 +85,18 @@ checkSession('admin', "../../index.html");
         <h1 class="danger-text">ADVERTENCIA</h1>
         <p>Una vez eliminado este usuario sus datos se perderan para siempre.</p>
         <p>¿Desea continuar?</p>
-        <a
+        <button
           id="popup-delete-button"
           class="btn config-button-danger"
-        >Borrar</a>
+          value="null"
+        >Borrar</button>
       </div>
     </div>
     <script src="../js/popup.js"></script>
+
+    <!-- Archivos para realizar la busqueda -->
+    <script src="../js/table.js"></script>
+    <script src="../js/search.js"></script>
     <script type="text/javascript">
       sessionStorage.removeItem('error');
     </script>

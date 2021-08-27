@@ -1,18 +1,68 @@
 const usersTable = document.getElementById('users-table');
+const deleteButton = document.getElementById('popup-delete-button');
 const headTable  = ['Usuario','Contraseña','Nombre','Ciudad','Correo','Telefono','Estado','Empresa','Dispositivo','Accion'];
 
-// var users = [];
 var users;
-var sortedUsers;
+var filteredUsers;
+var rows;
 var sortableButtons;
 
-function createTable(colNames, cols){
-  console.log(cols)
+/* Funcion para crear los renglones de la tabla */
+function createRows(cols){
+  let table; 
+  let bodyTableIni = '<tbody id="rows">', bodyTableEnd='</tbody>';
 
+  table = bodyTableIni;
+
+  /* Informacion de los usuarios */
+  if(cols.length > 0)
+    cols.forEach(user =>{
+
+      table += '<tr>';
+      
+      /* Chequeo de que los datos no esten vacios */
+      if(user.Usuario)
+        table += '<td>'+user.Usuario+'</td>';
+      else
+        table += '<td>-</td>';
+
+      if(user.Contraseña)
+        table += '<td>'+user.Usuario+'</td>';
+      else
+        table += '<td>-</td>';
+
+      table += '<td>'+user.Nombre+'</td>';
+      table += '<td>'+user.Ciudad+'</td>';
+      table += '<td>'+user.Correo+'</td>';
+      table += '<td>'+user.Telefono+'</td>';
+      table += '<td>'+user.Estado+'</td>';
+      table += '<td>'+user.Empresa+'</td>';
+      
+      if(user.Dispositivo)
+        table += '<td>'+user.Dispositivo+'</td>';
+      else
+        table += '<td>-</td>';
+      
+      /* Botones */
+      table+='<td><div class="d-flex justify-content-end">'; 
+      /* Editar Usuario */
+      table+='<button value="'+user.idUsuario+'" onclick="updateButton(this)" class="btn config-button">Editar</a>';
+      /* Eliminar Usuario */
+      table+='<button value="'+user.idUsuario+'" onclick="toggleDeletePopup(this)" class="btn config-button-danger mx-3">Borrar</button>';
+      
+      table +='</div></td>';
+      table += '</tr>';
+    });
+
+    table += bodyTableEnd;
+
+  return table; 
+}
+
+/* Funcion para crear la tabla */
+function createTable(colNames, cols){
   let table;
   let headTableIni = '<thead><tr>', headTableEnd = '</thead></tr>';
-  let bodyTableIni = '<tr>', bodyTableEnd='</tr>';
-  let index = 0; 
 
   /* Cabeza de la tabla */
   table = headTableIni;
@@ -21,9 +71,11 @@ function createTable(colNames, cols){
     /* Arriba:&#9660; Abajo:&#9650; Derecha:&#x2BC8;*/
     if(name != 'Accion'){
       table+=(
-        '<th style="vertical-align: middle;">'
-        +name+
-        '<button id='+name+' value=null class="btn btn-outline-dark sortable-button" onClick=sortButton(this);>&#x2BC8;</button>'+
+        '<th>'+
+        '<div style="display:flex;">'+
+        '<span>'+name+'</span>'+
+        '<button id='+name+' value=null class="sortable-button" onClick=sortButton(this);>&#x2BC8;</button>'+
+        '</div>'+
         '</th>'
         ); 
     }
@@ -34,42 +86,29 @@ function createTable(colNames, cols){
   table += headTableEnd;
   
   /* Cuerpo de la tabla */
-  if(cols.length > 0)
-    while(index < cols.length){
-      table += bodyTableIni;
-
-      /* Informacion de los usuarios */
-      table += '<td>'+cols[index].Username+'</td>';
-      table += '<td>'+cols[index].Password+'</td>';
-      table += '<td>'+cols[index].Nombre+'</td>';
-      table += '<td>'+cols[index].Ciudad+'</td>';
-      table += '<td>'+cols[index].Correo+'</td>';
-      table += '<td>'+cols[index].Telefono+'</td>';
-      table += '<td>'+cols[index].Aprobado+'</td>';
-      table += '<td>'+cols[index].Empresa+'</td>';
-      table += '<td>'+cols[index].Dispositivo+'</td>';
-
-      /* Botones */
-      table+='<td><div class="d-flex justify-content-end">';
-
-      /* Editar Usuario */
-      table+='<a href="adminPage.php?edit='+cols[index].idUsuario+'" class="btn config-button">Editar</a>';
-      
-      /* Eliminar Usuario */
-      table+='<a id="adminPage.php?delete='+cols[index].idUsuario+'" onclick="toggleDeletePopup(this)" class="btn config-button-danger mx-3">Borrar</a>';
-
-      table +='</div></td>';
-      table += bodyTableEnd;
-
-      index++;
-    }
-
+  table+=createRows(cols);
+  
   return table;
 }
-function removeTable(){
-  usersTable.innerHTML = '';
+
+/* Funcion para el boton de editar y crear usuarios */
+function updateButton(button){
+  /* Checamos si crearemos o editaremos usuarios */
+  if(button){
+    /* Se crea cookie donde  se almacena el id del usuario a editar */
+    document.cookie =  "Id="+button.value;
+    document.cookie = "Button=Editar";
+  }
+  else{
+    /* Remover cookie */
+    document.cookie = "Id=0";
+    document.cookie = "Button=Crear";
+  }
+  
+  window.location = '../php/updateUser.php';
 }
 
+/* Funcion para que al precionar un boton los renglones se ordenen */
 function sortButton(button){
   let index = 0;
   
@@ -87,22 +126,32 @@ function sortButton(button){
       index++;
     }
   
+  filteredUsers = sortRow(filteredUsers, button.id, JSON.parse(button.value) ? -1 : 1);
+  rows.innerHTML = '';
+  rows.innerHTML = createRows(filteredUsers);
   JSON.parse(button.value) ? button.innerHTML='&#9650;' : button.innerHTML='&#9660;';
 }
 
+/* Funcion para ordenar renglones */
 function sortRow(table, rowName, upDown){
-  /* Ordenar */
-  table = table.sort(function(a, b) {
-    if(a[rowName] > b[rowName])
-      return 1;
-    else
-      if(a[rowName < b[rowName]])
-        return -1;
+  return table.sort(function(a, b) {
+    if(a[rowName] === null || b[rowName] === null)
+      if(a[rowName] != null)
+        return 1*upDown;
       else
-        return 0;
+        return -1*upDown;
+    else
+      if(a[rowName].toUpperCase() > b[rowName].toUpperCase())
+        return 1*upDown;
+      else
+        if(a[rowName].toUpperCase() < b[rowName].toUpperCase())
+          return -1*upDown;
+        else
+          return 0;
   });
 }
 
+/* Acciones antes de mostrar la pagina */
 document.addEventListener('DOMContentLoaded', ()=>{
   $.ajax({
     type: 'POST',
@@ -110,7 +159,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     success: function (response){
       users = JSON.parse(response);
+      filteredUsers = users;
       usersTable.innerHTML =  createTable(headTable, users);
+      rows = document.getElementById('rows');
     },
     error: function(){
       usersTable.innerHTML =  createTable(headTable, []);
@@ -118,5 +169,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   });
   sortableButtons = document.getElementsByClassName('sortable-button');
+});
 
+deleteButton.addEventListener('click', () =>{
+  $.ajax({
+    type: 'POST',
+    url: '../php/deleteUser.php',
+    data: {'deleteUser': deleteButton.value},
+    success: function (response){
+      let res = JSON.parse(response);
+
+      if(res.exito)
+        location.reload();
+      else
+        alert(res.error);
+    }
+  })
 });

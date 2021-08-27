@@ -1,11 +1,10 @@
 <?php
-session_start();
 
 require_once "dataBaseLogin.php";
 require_once "phpFunctions.php";
 
-$id_user = $_SESSION['Id'];
-$operation = $_SESSION['Button'];
+$id_user = $_COOKIE['Id'];
+$operation = $_COOKIE['Button'];
 
 $username = $_POST['user'];
 $pass = $_POST['pass'];
@@ -53,7 +52,7 @@ else
     echo json_encode(array(
       'input'=>'user',
       'type'=>'mail_error',
-      'error'=>'Este usuario ya ha sido registrado'
+      'error'=>"Este usuario ya ha sido registrado"
     ));
   }
   else
@@ -128,7 +127,7 @@ else
           ));
         }
         else
-          if($operation == "Actualizar")
+          if($operation == "Editar")
           {
             /* Actualizamos Usuario */
             $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
