@@ -27,7 +27,7 @@ function createRows(cols){
         table += '<td>-</td>';
 
       if(user.Contraseña)
-        table += '<td>'+user.Usuario+'</td>';
+        table += '<td>'+user.Contraseña+'</td>';
       else
         table += '<td>-</td>';
 

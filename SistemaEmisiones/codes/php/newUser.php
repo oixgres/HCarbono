@@ -14,16 +14,11 @@ $checkmail = mysqli_query($connection, "SELECT * FROM Usuario WHERE Correo='".$e
 
 if(mysqli_num_rows($checkmail) == 0)
 {
-  /*Verificamos que no se repita la empresa*/
-  $query = mysqli_query($connection, "SELECT * FROM Empresa WHERE Nombre='".$company."'");
-  $nr = mysqli_num_rows($query);
-
-  /*Si no existe la empresa la registramos*/
-  if($nr == 0)
-    mysqli_query($connection, "INSERT INTO Empresa(Nombre) VALUES ('$company')");
+  /* Registramos la empresa */
+  mysqli_query($connection, "INSERT INTO Empresa(Nombre) VALUES ('$company')");
 
   /* Obtenemos el ID de la compañia */
-  $id_company = getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company);
+  $id_company = mysqli_insert_id($connection);
 
   /* Registramos al usuario */
   $query = "INSERT INTO Usuario(Nombre, Ciudad, Correo, Telefono, Empresa_idEmpresa) VALUES ('$name', '$city', '$email', '$phone', '$id_company')";

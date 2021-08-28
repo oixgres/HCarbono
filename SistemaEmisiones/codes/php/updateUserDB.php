@@ -43,8 +43,8 @@ else
   $nru = $nru + mysqli_num_rows($query_result);
 
   /* Verificamos que la empresa a actualizar exista */
-  $query = mysqli_query($connection, "SELECT * FROM Empresa WHERE Nombre='".$company."'");
-  $nrc = mysqli_num_rows($query);
+  // $query = mysqli_query($connection, "SELECT * FROM Empresa WHERE Nombre='".$company."'");
+  // $nrc = mysqli_num_rows($query);
 
   /* Si el username esta registrado y si es diferente de si mismo */
   if($nru > 0 && $username != $pastUsername && $username!='')
@@ -76,21 +76,12 @@ else
       /* Creamos Usuario */
       if ($operation == "Crear")
       {
-        /* Verificamos que no se repita la empresa */
-        $query = "SELECT * FROM Empresa WHERE Nombre='".$company."'";
-        $res_query = mysqli_query($connection, $query);
-        $nr = mysqli_num_rows($res_query);
-        
-        /*Si no existe la empresa la registramos*/
-        if($nr == 0)
-        {
-          /*Registramos compañia*/
-          $query = "INSERT INTO Empresa(Nombre) VALUES ('$company')";
-          mysqli_query($connection, $query);
-        }
+        /*Registramos compañia*/
+        $query = "INSERT INTO Empresa(Nombre) VALUES ('$company')";
+        mysqli_query($connection, $query);
 
         /* Obtenemos el id de la empresa */
-        $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
+        $id_company = mysqli_insert_id($connection);
 
         /* Creamos el usuario */
         $query = "INSERT INTO Usuario(Username, Password, Nombre, Ciudad, Correo, Telefono, Aprobado, Empresa_idEmpresa) VALUES ('$username', '$pass', '$name', '$city', '$email', '$phone', '$admitted', '$id_company')";
@@ -112,62 +103,61 @@ else
           
           sendMail($email, "Nueva Cuenta hcarbono", $message);
         }
-        //header("Location: adminPage.php");
         echo json_encode(array(
           'location'=> 'adminPage.php'
         ));
       }
+      // else
+      //   if($nrc != 1)
+      //   {
+      //     echo json_encode(array(
+      //       'input'=>'company',
+      //       'type'=>'input_error',
+      //       'error'=>'La compañia no esta registrada'
+      //     ));
+      //   }
       else
-        if($nrc != 1)
+        if($operation == "Editar")
         {
+          /* Actualizamos Usuario */
+          $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
+          $query = "UPDATE Usuario SET Username='".$username."', Password='".$pass."', Nombre='".$name."', Ciudad='".$city."', Correo='".$email."', Telefono='".$phone."', Aprobado='".$admitted."', Empresa_idEmpresa='".$id_company."' WHERE idUsuario='".$id_user."'";
+          mysqli_query($connection, $query);
+          
+          /* Actualizamos dispositivo */
+          $id_device = intval(getFirstQueryElement($connection, "Dispositivo", "idDispositivo", "Usuario_idUsuario", $id_user));
+          mysqli_query($connection, "UPDATE Dispositivo SET Codigo='".$device."' WHERE idDispositivo='".$id_device."'");
+          
+          /* Enviamos correo */
+          if(!empty($_POST["sendMail"]))
+          {
+            /* Correo de usuario aceptado */
+            if($pastAdmitted == "No Aprobado" && $admitted == "Aprobado")
+            {
+              $message = "Saludos de parte de hcarbono! \n\r";
+              $message.= "Su solicitud de cuenta a sido aprobada.  \n\r";
+              $message.= "Su username es: ".$username."\n";
+              $message.= "Su contraseña es: ".$pass."\n\r";
+              
+              sendMail($email, "Cuenta aprobada hcarbono", $message);
+            }
+            else
+            if($pastAdmitted == "Aprobado" && $admitted == "Aprobado")
+            {
+              $message = "Saludos de parte de hcarbono! \n\r";
+              $message.= "Se han realizado modificaciones a sus datos. \n\r";
+              $message.= "Su username es: ".$username."\n";
+              $message.= "Su contraseña es: ".$pass."\n\r";
+              
+              sendMail($email, "Modificación de datos hcarbono", $message);
+            }
+          }
           echo json_encode(array(
-            'input'=>'company',
-            'type'=>'input_error',
-            'error'=>'La compañia no esta registrada'
+            'location'=> 'adminPage.php'
           ));
         }
         else
-          if($operation == "Editar")
-          {
-            /* Actualizamos Usuario */
-            $id_company = intval(getFirstQueryElement($connection, "Empresa", "idEmpresa", "Nombre", $company));
-            $query = "UPDATE Usuario SET Username='".$username."', Password='".$pass."', Nombre='".$name."', Ciudad='".$city."', Correo='".$email."', Telefono='".$phone."', Aprobado='".$admitted."', Empresa_idEmpresa='".$id_company."' WHERE idUsuario='".$id_user."'";
-            mysqli_query($connection, $query);
-            
-            /* Actualizamos dispositivo */
-            $id_device = intval(getFirstQueryElement($connection, "Dispositivo", "idDispositivo", "Usuario_idUsuario", $id_user));
-            mysqli_query($connection, "UPDATE Dispositivo SET Codigo='".$device."' WHERE idDispositivo='".$id_device."'");
-            
-            /* Enviamos correo */
-            if(!empty($_POST["sendMail"]))
-            {
-              /* Correo de usuario aceptado */
-              if($pastAdmitted == "No Aprobado" && $admitted == "Aprobado")
-              {
-                $message = "Saludos de parte de hcarbono! \n\r";
-                $message.= "Su solicitud de cuenta a sido aprobada.  \n\r";
-                $message.= "Su username es: ".$username."\n";
-                $message.= "Su contraseña es: ".$pass."\n\r";
-                
-                sendMail($email, "Cuenta aprobada hcarbono", $message);
-              }
-              else
-              if($pastAdmitted == "Aprobado" && $admitted == "Aprobado")
-              {
-                $message = "Saludos de parte de hcarbono! \n\r";
-                $message.= "Se han realizado modificaciones a sus datos. \n\r";
-                $message.= "Su username es: ".$username."\n";
-                $message.= "Su contraseña es: ".$pass."\n\r";
-                
-                sendMail($email, "Modificación de datos hcarbono", $message);
-              }
-            }
-            echo json_encode(array(
-              'location'=> 'adminPage.php'
-            ));
-          }
-          else
-            echo "No se pudo realizar ninguna operacion"; 
+          echo "No se pudo realizar ninguna operacion"; 
     }
   }
 }

@@ -30,6 +30,7 @@ checkSession('user', "../../index.html");
 
     <!-- Originales -->
     <link rel="stylesheet" href="../css/pageStyle.css">
+    <link rel="stylesheet" href="../css/popupStyle.css">
   </head>
 
   <body class="background-color">
@@ -37,7 +38,7 @@ checkSession('user', "../../index.html");
       require_once "dataBaseLogin.php";
 
       /* Se solicita la informacion de la base de datos */
-      $result = mysqli_query($connection, "SELECT Fecha, Hora, Humedad, Temperatura, CO, CO2, O2, Velocidad FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha, Hora");
+      $result = mysqli_query($connection, "SELECT * FROM Estadisticas WHERE Usuario_idUsuario='".$_COOKIE["idUsuario"]."' ORDER BY Fecha, Hora");
 
       /* Las variables se convierten en arreglos para obtener los datos */
       $hum=array();
@@ -45,23 +46,25 @@ checkSession('user', "../../index.html");
       $CO=array();
       $CO2=array();
       $O2=array();
-      $vel=array();
+      $H2=array();
+      $pres=array();
 
       /* Se almacenan los datos obtenidos en nuestras variables */
-      while($row=mysqli_fetch_row($result))
+      while($row=mysqli_fetch_assoc($result))
       {
-        $date[]=$row[0];
-        $time[]=$row[1];
-        $hum[]=$row[2];
-        $temp[]=$row[3];
-        $CO[]=$row[4];
-        $CO2[]=$row[5];
-        $O2[]=$row[6];
-        $vel[]=$row[7];
+        $date[]=$row['Fecha'];
+        $time[]=$row['Hora'];
+        $hum[]=$row['Humedad'];
+        $temp[]=$row['Temperatura'];
+        $pres[]=$row['Presion'];
+        $CO[]=$row['CO'];
+        $CO2[]=$row['CO2'];
+        $O2[]=$row['O2'];
+        $H2[]=$row['H2'];
       }
 
       /* Juntamos todos los arreglos en uno solo */
-      $row = array($hum, $temp, $CO, $CO2, $O2, $vel);
+      $row = array($hum, $temp, $pres,$O2, $H2, $CO, $CO2);
 
       /* Creamos un arreglo auxiliar */
       $auxRow  = $row;
@@ -71,10 +74,11 @@ checkSession('user', "../../index.html");
       $timeX = json_encode($time);
       $traceHum=json_encode($hum);
       $traceTem=json_encode($temp);
+      $tracePres=json_encode($pres);
       $traceCO=json_encode($CO);
       $traceCO2=json_encode($CO2);
       $traceO2=json_encode($O2);
-      $traceVel=json_encode($vel);
+      $traceH2=json_encode($H2);
     ?>
 
     <!-- Navegador de la pagina -->
@@ -83,7 +87,8 @@ checkSession('user', "../../index.html");
         <a class="navbar-brand" href="#">H.CARBONO</a>
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
-        <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
+        <a class="btn btn-sm config-button-danger nav-size-danger me-2" onclick="togglePopup('popup-delete-data')">Eliminar Registros</a>
+        <a class="btn btn-sm config-button nav-size "href="logout.php">Salir</a>
       </div>
     </nav>
 
@@ -92,27 +97,31 @@ checkSession('user', "../../index.html");
       <div class="col-xl-6 col-md-4 col-sm-4 mt-5">
         <!-- Calendario -->
         <div>
-          <!-- Fecha inicial -->
-          <label for="startDate">Fecha Inicial: </label>
-          <input
-            type="date"
-            id="startDate"
-            class="me-2 mb-2"
-            value="<?php echo $date[0]; ?>"
-            min="<?php echo $date[0]; ?>"
-            max="<?php echo date('Y-m-d'); ?>"
-          >
-
+          <div style="display: inline-block;">
+            <!-- Fecha inicial -->
+            <label for="startDate">Fecha Inicial: </label>
+            <input
+              type="date"
+              id="startDate"
+              class="me-2 mb-2"
+              value="<?php echo $date[0]; ?>"
+              min="<?php echo $date[0]; ?>"
+              max="<?php echo date('Y-m-d'); ?>"
+            >
+          </div>
+          
           <!-- Fecha final -->
-          <label for="endDate">Fecha Final: </label>
-          <input
-            type="date"
-            id="endDate"
-            class="ms-xl-0 ms-md-2 ms-sm-0"
-            value="<?php echo date('Y-m-d'); ?>"
-            min="<?php echo $date[0]; ?>"
-            max="<?php echo date('Y-m-d'); ?>"
-          >
+          <div style="display: inline-block;">
+            <label for="endDate">Fecha Final: </label>
+            <input
+              type="date"
+              id="endDate"
+              class="ms-xl-0 ms-md-2 ms-sm-0"
+              value="<?php echo date('Y-m-d'); ?>"
+              min="<?php echo $date[0]; ?>"
+              max="<?php echo date('Y-m-d'); ?>"
+            >
+          </div>
         </div>
         
         <!-- Lista de checkbox -->
@@ -142,6 +151,42 @@ checkSession('user', "../../index.html");
           </div>
 
           <div class="form-check mt-3">
+            <!-- Checkbox Presion -->
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              name="graph[]"
+              id="pres"
+            >
+            <label class="form-check-label" for="pres">Presion</label>
+          </div>
+
+          <div class="form-check mt-3">
+            <!-- Checkbox O2 -->
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              name="graph[]"
+              id="o2"
+            >
+            <label class="form-check-label" for="o2">O2</label>
+          </div>
+
+          <div class="form-check mt-3">
+            <!-- Checkbox H2 -->
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              name="graph[]"
+              id="h2"
+            >
+            <label class="form-check-label" for="h2">H2</label>
+          </div>
+
+          <div class="form-check mt-3">
             <!-- Checkbox CO -->
             <input
               class="form-check-input"
@@ -163,30 +208,6 @@ checkSession('user', "../../index.html");
               id="co2"
             >
             <label class="form-check-label" for="co2">CO2</label>
-          </div>
-
-          <div class="form-check mt-3">
-            <!-- Checkbox O2 -->
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              name="graph[]"
-              id="o2"
-            >
-            <label class="form-check-label" for="o2">O2</label>
-          </div>
-
-          <div class="form-check mt-3">
-            <!-- Checkbox Velocidad -->
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              name="graph[]"
-              id="vel"
-            >
-            <label class="form-check-label" for="vel">Velocidad</label>
           </div>
         </div>
         <!-- Boton para desplegar grafica -->
@@ -238,6 +259,23 @@ checkSession('user', "../../index.html");
       </form>
     </div>
 
+    <!-- Popup eliminar usuarios -->
+    <div class="popup" id="popup-delete-data">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-button" onclick="togglePopup('popup-delete-data')">&times;</div>
+        <h1 class="danger-text">ADVERTENCIA</h1>
+        <p>Una vez eliminados los registros se perderan para siempre.</p>
+        <p>¿Desea continuar?</p>
+        <a
+          class="btn config-button-danger"
+          style="min-width: 150px;"
+          href="deleteData.php"
+        >Eliminar datos</a>
+      </div>
+    </div>
+    <script src="../js/popup.js"></script>
+
     <!-- Archivos para facilitar el despliegue de la grafica -->
     <script src="../js/jsonConvert.js"></script>
     <script src="../js/graph.js"></script>
@@ -254,10 +292,11 @@ checkSession('user', "../../index.html");
           '<?php echo $timeX; ?>',
           '<?php echo $traceHum; ?>',
           '<?php echo $traceTem; ?>',
-          '<?php echo $traceCO; ?>',
-          '<?php echo $traceCO2 ?>',
+          '<?php echo $tracePres; ?>',
           '<?php echo $traceO2; ?>',
-          '<?php echo $traceVel; ?>'
+          '<?php echo $traceH2; ?>',
+          '<?php echo $traceCO; ?>',
+          '<?php echo $traceCO2 ?>'
         );
 
         var data = [];
@@ -271,7 +310,6 @@ checkSession('user', "../../index.html");
         Plotly.newPlot('grafico', data);
       }
     </script>
-
     <script type="text/javascript">
       sessionStorage.removeItem('error');
     </script>

@@ -35,32 +35,113 @@ checkSession('admin', '../../index.html');
   </head>
 
   <body>
+    <!-- Navegador de la pagina -->
+    <nav class="navbar navbar-dark config-color">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">H.CARBONO</a>
+        <ul class="navbar-nav me-auto justify-content-end">
+        </ul>
+        <a class="btn btn-sm config-button-navbar "href="logout.php">Salir</a>
+      </div>
+    </nav>
+
     <!-- Buscador de usuarios -->
     <div class="searchbox-config">
       <div class="input-group">
-        <input id="search-input" type="text" placeholder="Buscar Usuario" class="form-control">
-        <!-- <button class="btn config-button" id="search-button" style="z-index:0;">
-          <img src="../../images/search-white.svg" alt="">
-        </button> -->
+        <!-- Entrada de la busqueda -->
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Buscar Usuario"
+          class="form-control"
+        >
+
+        <!-- Boton para cambiar el tipo de busqueda -->
         <div class="dropdown">
           <button 
             class="btn dropdown-toggle config-button-search"
             type="button"
             id="search-button"
             data-bs-toggle="dropdown"
-            aria-expanded="false">
-          Nombre</button>
-        <ul class="dropdown-menu" aria-labelledby="search-button">
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Usuario</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Contraseña</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Nombre</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Ciudad</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Correo</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Telefono</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Empresa</button></li>
-          <li><button class="dropdown-item" onclick="changeSearch(this);" type="button">Dispositivo</button></li>
-        </ul>
-</div>
+            aria-expanded="false"
+            style="z-index:0;"
+          >Nombre</button>
+
+          <!-- Posibles opciones del buscador -->
+          <ul class="dropdown-menu" aria-labelledby="search-button">
+            <!-- Usuario -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Usuario</button>
+            </li>
+
+            <!-- Contraseña -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Contraseña</button>
+            </li>
+
+            <!-- Nombre -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Nombre</button>
+            </li>
+
+            <!-- Ciudad -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Ciudad</button>
+            </li>
+
+            <!-- Correo -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Correo</button>
+            </li>
+
+            <!-- Telefono -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Telefono</button>
+            </li>
+
+            <!-- Empresa -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Empresa</button>
+            </li>
+
+            <!-- Dispositivo -->
+            <li>
+              <button
+                class="dropdown-item"
+                onclick="changeSearch(this);"
+                type="button"
+              >Dispositivo</button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 

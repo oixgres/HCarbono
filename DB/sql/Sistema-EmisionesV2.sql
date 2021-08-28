@@ -10,7 +10,7 @@ CREATE TABLE Administrador (
   Password VARCHAR(45) NOT NULL,
   PRIMARY KEY (idAdministrador)
 );
-ALTER TABLE Administrador AUTO_INCREMENT = 1000;
+ALTER TABLE Administrador AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Empresa
@@ -21,7 +21,7 @@ CREATE TABLE Empresa (
   Nombre VARCHAR(45) NULL,
   PRIMARY KEY (idEmpresa)
 );
-ALTER TABLE Empresa AUTO_INCREMENT = 1000;
+ALTER TABLE Empresa AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Dispositivo
@@ -36,7 +36,7 @@ CREATE TABLE Dispositivo(
   REFERENCES Usuario(idUsuario)
   ON DELETE CASCADE
 );
-ALTER TABLE Dispositivo AUTO_INCREMENT=1000;
+ALTER TABLE Dispositivo AUTO_INCREMENT=1;
 
 -- -----------------------------------------------------
 -- Niveles Emisiones
@@ -45,6 +45,7 @@ DROP TABLE IF EXISTS Estadisticas;
 CREATE TABLE Estadisticas(
   idEmisiones INT NOT NULL AUTO_INCREMENT,
   Fecha DATE NOT NULL,
+  Hora TIME NOT NULL,
   Humedad FLOAT,
   Latitud FLOAT,
   Longitud FLOAT,
@@ -62,13 +63,13 @@ CREATE TABLE Estadisticas(
   ON DELETE CASCADE,
   FOREIGN KEY (Empresa_idEmpresa)
   REFERENCES Empresa(idEmpresa)
-  ON DELETE SET NULL,
+  ON DELETE CASCADE,
   FOREIGN KEY (Dispositivo_idDispositivo)
   REFERENCES Dispositivo(idDispositivo)
   ON DELETE SET NULL,
   PRIMARY KEY (idEmisiones)
 );
-ALTER TABLE Estadisticas AUTO_INCREMENT=1000;
+ALTER TABLE Estadisticas AUTO_INCREMENT=1;
 
 -- -----------------------------------------------------
 -- Usuario
@@ -89,7 +90,7 @@ CREATE TABLE Usuario (
   ON DELETE SET NULL,
   PRIMARY KEY (idUsuario)
 );
-ALTER TABLE Usuario AUTO_INCREMENT = 1000;
+ALTER TABLE Usuario AUTO_INCREMENT = 1;
 
 
 SET FOREIGN_KEY_CHECKS = 1;

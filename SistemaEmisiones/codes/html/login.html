@@ -114,7 +114,7 @@
           <!-- Campo para recuperar contraseña -->
           <a
             class="mt-4 mb-3 d-flex justify-content-center clickable"
-            onclick="togglePasswordPopup()"
+            onclick="togglePopup('popup-password')"
           >¿Olvidaste tu contraseña?</a>
         </div>
       </div>
@@ -124,7 +124,7 @@
     <div class="popup" id="popup-password">
       <div class="overlay"></div>
       <div class="content">
-        <div class="close-button" onclick="togglePasswordPopup()">&times;</div>
+        <div class="close-button" onclick="togglePopup('popup-password')">&times;</div>
         
         <!-- Titulo de la forma -->
         <h1 class="mt-4">Recupere su contraseña</h1>

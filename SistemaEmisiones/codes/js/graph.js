@@ -4,7 +4,7 @@ var checks = document.getElementsByClassName('form-check-input');
 /* Se crea una grafica vacia por default al cargar la pagina */
 Plotly.newPlot('grafico', []);
 
-function prepareGraphic(dataX, timeX, traceHum, traceTem, traceCO, traceCO2, traceO2, traceVel){
+function prepareGraphic(dataX, timeX, traceHum, traceTem, tracePres, traceO2, traceH2, traceCO, traceCO2){
   /* Obtenemos las fechas */
   var edDate = document.getElementById('endDate').value;
   var stDate = document.getElementById('startDate').value;
@@ -15,10 +15,11 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, traceCO, traceCO2, tra
   axisY = [
     jsonContains(traceHum),
     jsonContains(traceTem),
-    jsonContains(traceCO),
-    jsonContains(traceCO2),
+    jsonContains(tracePres),
     jsonContains(traceO2),
-    jsonContains(traceVel)
+    jsonContains(traceH2),
+    jsonContains(traceCO),
+    jsonContains(traceCO2)
   ];
 
 
@@ -37,7 +38,7 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, traceCO, traceCO2, tra
       i--;
     }
     else
-      if(axisX[i] > edDate)
+      if(axisX[i] > edDate+" 23:59:59")
       {
         timeX.splice(i, 1);
         axisX.splice(i, 1);
@@ -65,30 +66,38 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, traceCO, traceCO2, tra
   var data3 = {
     x: axisX,
     y: axisY[2],
-    name: 'CO',
+    name: 'Presion',
     type: "scatter"
   };
-
+  
   var data4 = {
     x: axisX,
     y: axisY[3],
-    name: 'CO2',
+    name: 'O2',
     type: "scatter"
   };
 
   var data5 = {
     x: axisX,
     y: axisY[4],
-    name: 'O2',
+    name: 'H2',
     type: "scatter"
   };
+
 
   var data6 = {
     x: axisX,
     y: axisY[5],
-    name: 'Velocidad',
+    name: 'CO',
     type: "scatter"
   };
 
-  return [data1, data2, data3, data4, data5, data6];
+  var data7 = {
+    x: axisX,
+    y: axisY[6],
+    name: 'CO2',
+    type: "scatter"
+  };
+
+  return [data1, data2, data3, data4, data5, data6, data7];
 }

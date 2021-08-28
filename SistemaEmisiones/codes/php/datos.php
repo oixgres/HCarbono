@@ -1,5 +1,6 @@
 <?php
 
+
 require_once 'dataBaseLogin.php';
 require_once 'phpFunctions.php';
 
@@ -14,16 +15,19 @@ $vCO =$_POST["vCO"];  // valor de Monóxido de carbono CO
 $vCO2 =$_POST["vCO2"]; // valor de dióxido de carbono CO2
 
 /* Obtenemos el id del usuario */
-$idUser = getFirstQueryElement($connection, 'Usuario', 'idUsuario', 'Empresa_idEmpresa', $id);
+$idUser = getFirstQueryElement($connection, 'Usuario', 'idUsuario', 'Empresa_idEmpresa', $idCompany);
 
 /* Obtenemos el id del dispositivo */
 $idDevice = getFirstQueryElement($connection,'Dispositivo','idDispositivo','Usuario_idUsuario',$idUser);
 
-/* Obtenemos la fecha de la emision */
-$date = getdate();
+/* Obtenemos la fecha  y hora de la emision */
+$date = date("Y-m-d");
+$time = date("H:i:s");
 
-$query = "INSERT INTO Estadisticas(Fecha,Humedad,Latitud,Longitud,Temperatura,Presion,O2,H2,CO,CO2,Usuario_idUsuario,Empresa_idEmpresa,Dispositivo_idDispositivo) VALUES ('$date',0,'$vLat','$vLon','$vTem','$vPres','$vO2','$vH2','$vCO','$vCO2','$idUser','$idCompany','$idDevice')";
+$query = "INSERT INTO Estadisticas(Fecha,Hora,Humedad,Latitud,Longitud,Temperatura,Presion,O2,H2,CO,CO2,Usuario_idUsuario,Empresa_idEmpresa,Dispositivo_idDispositivo) VALUES ('$date','$time',0,'$vLat','$vLon','$vTem','$vPres','$vO2','$vH2','$vCO','$vCO2','$idUser','$idCompany','$idDevice')";
 mysqli_query($connection,$query);
 
-echo ("valores  ". $idCompany ." " .$vLat." " .$vLon. " ".$vTem. " ". $vPres. " ".$vO2 ." ". $vH2. " ". $vCO. " ". $vCO2);  
+
+echo json_encode(array('prueba' => "'$date','$time',0,'$vLat','$vLon','$vTem','$vPres','$vO2','$vH2','$vCO','$vCO2','$idUser','$idCompany','$idDevice'"));
+//echo ("valores  ". $idCompany ." " .$vLat." " .$vLon. " ".$vTem. " ". $vPres. " ".$vO2 ." ". $vH2. " ". $vCO. " ". $vCO2);  
 ?>
