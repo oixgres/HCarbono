@@ -24,9 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.clear();
     }
   }
-  else{
+  else
     sessionStorage.removeItem('error');
-  }  
 });
 
 sessionForm.addEventListener('submit', (e)=>{
@@ -46,8 +45,7 @@ sessionForm.addEventListener('submit', (e)=>{
         password.classList.add('error')
         errorSessionMessage[1].classList.add('error');
       }
-    }
-    
+    }  
     e.preventDefault()
   }
   else

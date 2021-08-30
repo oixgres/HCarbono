@@ -1,4 +1,4 @@
-
+/* Popup especial para borrar usuarios */
 function toggleDeletePopup(deleteItem){
   const deleteButton = document.getElementById('popup-delete-button');
   const popup = document.getElementById('popup-delete');
@@ -11,6 +11,7 @@ function toggleDeletePopup(deleteItem){
   popup.classList.toggle("active");
 }
 
+/* Popup general */
 function togglePopup(id){
   const popup = document.getElementById(id);
 

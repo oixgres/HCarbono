@@ -1,6 +1,17 @@
 const usersTable = document.getElementById('users-table');
 const deleteButton = document.getElementById('popup-delete-button');
-const headTable  = ['Usuario','Contraseña','Nombre','Ciudad','Correo','Telefono','Estado','Empresa','Dispositivo','Accion'];
+const headTable  = [
+  'Usuario',
+  'Contraseña',
+  'Nombre',
+  'Ciudad',
+  'Correo',
+  'Telefono',
+  'Estado',
+  'Empresa',
+  'Dispositivo',
+  'Accion'
+];
 
 var users;
 var filteredUsers;
@@ -53,8 +64,7 @@ function createRows(cols){
       table +='</div></td>';
       table += '</tr>';
     });
-
-    table += bodyTableEnd;
+  table += bodyTableEnd;
 
   return table; 
 }

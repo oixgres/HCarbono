@@ -18,19 +18,19 @@ formForgetPassword.addEventListener('submit', (e)=>{
         }
         else{
           forgetErrorMessage.setAttribute('data-error', json.message);
-          addErrorClass(forgetInput, forgetErrorMessage, 'error');
+          addClass(forgetInput, forgetErrorMessage, 'error');
         }
       }
     })
   }
   else
   {
-    addErrorClass(forgetInput, forgetErrorMessage, 'error');
+    addClass(forgetInput, forgetErrorMessage, 'error');
   }
   
   e.preventDefault();
 });
 
 forgetInput.addEventListener('input', (e)=>{
-  removeErrorClass(forgetInput, forgetErrorMessage, 'error');
+  removeClass(forgetInput, forgetErrorMessage, 'error');
 })

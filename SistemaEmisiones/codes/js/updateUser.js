@@ -8,7 +8,7 @@ form.addEventListener('submit', (e)=>{
   {
     if (input[i].value === '' || input[i].value == null){
       errorMessage[i].setAttribute('data-error', 'Esta campo debe ser llenado');
-      addErrorClass(input[i], errorMessage[i], 'error');
+      addClass(input[i], errorMessage[i], 'error');
     }
     else{
       validateInputs(input[i], errorMessage[i]);
@@ -24,7 +24,7 @@ form.addEventListener('submit', (e)=>{
     if(mailRequirements[i].value  === '' || mailRequirements[i].value == null ||(mailRequirements[i].type == "checkbox" && mailRequirements[i].checked == false)){
       if(sendMail.checked){
         errorMailMessage[i].setAttribute('data-error', 'Campo requerido para enviar correo')
-        addErrorClass(mailRequirements[i], errorMailMessage[i], 'error');
+        addClass(mailRequirements[i], errorMailMessage[i], 'error');
         checkFlag = true;
       }
     }
@@ -55,11 +55,11 @@ form.addEventListener('submit', (e)=>{
         else{
           if(json.type == 'input_error'){
             errorMessage.namedItem(json.input).setAttribute('data-error', json.error);
-            addErrorClass(input.namedItem(json.input), errorMessage.namedItem(json.input), 'error');
+            addClass(input.namedItem(json.input), errorMessage.namedItem(json.input), 'error');
           }
           else{
             errorMailMessage.namedItem(json.input).setAttribute('data-error', json.error);
-            addErrorClass(mailRequirements.namedItem(json.input), errorMailMessage.namedItem(json.input), 'error');
+            addClass(mailRequirements.namedItem(json.input), errorMailMessage.namedItem(json.input), 'error');
           }
         }
       }

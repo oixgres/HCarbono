@@ -5,6 +5,7 @@ session_destroy();
 /*  Eliminamos el contenido de las cookies */
 setcookie("token", "",time()-1, "/");
 setcookie("idUsuario", "", time()-1,"/");
+setcookie("idAdmin", "", time()-1,"/");
 setcookie("Nombre", "", time()-1,"/");
 setcookie("Correo", "", time()-1,"/");
 setcookie("Device", "", time()-1,"/");

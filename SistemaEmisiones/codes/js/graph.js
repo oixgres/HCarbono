@@ -22,7 +22,6 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, tracePres, traceO2, tr
     jsonContains(traceCO2)
   ];
 
-
   /* Se eliminan los datos cuyas fechas no fueron seleccionadas */
   for(var i = 0; i < axisX.length; i++)
   {
@@ -49,6 +48,8 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, tracePres, traceO2, tr
         i--;
       }
   }
+
+  /* Datos a graficar */
   var data1 = {
     x: axisX,
     y: axisY[0],
@@ -83,7 +84,6 @@ function prepareGraphic(dataX, timeX, traceHum, traceTem, tracePres, traceO2, tr
     name: 'H2',
     type: "scatter"
   };
-
 
   var data6 = {
     x: axisX,

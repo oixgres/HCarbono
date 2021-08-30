@@ -7,7 +7,7 @@ form.addEventListener('submit', (e)=>{
   {
     if (input[i].value === '' || input[i].value == null){
       errorMessage[i].setAttribute('data-error', 'Esta campo debe ser llenado');
-      addErrorClass(input[i], errorMessage[i], 'error');
+      addClass(input[i], errorMessage[i], 'error');
     }
     else{
       validateInputs(input[i], errorMessage[i]);
@@ -31,7 +31,7 @@ form.addEventListener('submit', (e)=>{
         if(response == 'CORREO UTILIZADO'){
           console.log(response);
           errorMessage.namedItem('email').setAttribute('data-error', 'Este correo ya ha sido registrado')
-          addErrorClass(input.namedItem('email'), errorMessage.namedItem('email'), 'error');
+          addClass(input.namedItem('email'), errorMessage.namedItem('email'), 'error');
         }
         else{
           sessionStorage.setItem('new', 'new');

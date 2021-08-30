@@ -49,7 +49,7 @@ $user = mysqli_fetch_assoc($data);
         <ul class="navbar-nav me-auto justify-content-end">
         </ul>
         <a
-          class="btn btn-sm config-button-navbar"
+          class="btn btn-sm config-button nav-size"
           href="adminPage.php"
         >Regresar</a>
       </div>

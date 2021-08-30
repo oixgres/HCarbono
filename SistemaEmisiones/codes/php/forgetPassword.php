@@ -1,5 +1,4 @@
 <?php 
-
 require_once 'dataBaseLogin.php';
 require_once 'phpFunctions.php';
 
@@ -12,11 +11,26 @@ $result = mysqli_query($connection, $query);
 
 if(mysqli_num_rows($result) > 0)
 {
-  $username = getFirstQueryElement($connection, 'Usuario', 'Username', 'Correo', $identifier);
-  $password = getFirstQueryElement($connection, 'Usuario', 'Password', 'Correo', $identifier);
+  $username = getFirstQueryElement(
+    $connection,
+    'Usuario',
+    'Username',
+    'Correo',
+    $identifier
+  );
   
-  $message = "Saludos desde H.Carbono!!"."\n\r"."Se ha solicitado el reenvio de su usuario y contraseña."."\n\r"."Su usuario es: $username"."\n"."Su contraseña es: $password";
-
+  $password = getFirstQueryElement(
+    $connection,
+    'Usuario',
+    'Password',
+    'Correo',
+    $identifier
+  );
+  
+  /* Mensaje de reenvio de datos al usuario */
+  $message="Saludos desde H.Carbono!!"."\n\r";
+  $message.="Se ha solicitado el reenvio de su usuario y contraseña."."\n\r";
+  $message.="Su usuario es: $username"."\n"."Su contraseña es: $password";
   sendMail($identifier, "Recuperación de contraseña hcarbono", $message);
 
   echo json_encode(array(
